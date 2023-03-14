@@ -8,12 +8,12 @@ export class Preload extends Phaser.Scene {
 
 	preload() {
         // Car
-        this.load.image("carBody", `${process.env.PUBLIC_URL}/assets/car/car.png`);
-        this.load.image("carTire", `${process.env.PUBLIC_URL}/assets/car/tire.png`);
-        this.load.json('carMeshe', `${process.env.PUBLIC_URL}/assets/car/car.json`);
+		this.load.svg("carBody",`${process.env.PUBLIC_URL}/assets/car/body.svg`)
+		this.load.svg("carTire",`${process.env.PUBLIC_URL}/assets/car/tire.svg`)
+		this.load.svg("carBag",`${process.env.PUBLIC_URL}/assets/car/bag.svg`)
+		this.load.svg("carBoy",`${process.env.PUBLIC_URL}/assets/car/boy.svg`)
 
-        //ground
-        this.load.image("ground", `${process.env.PUBLIC_URL}/assets/road/ground.png`);
+        this.load.json('carMeshe', `${process.env.PUBLIC_URL}/assets/car/car.json`);
 
 		//tbilisi builds
 		this.load.image("tbilisi-build-1", `${process.env.PUBLIC_URL}/assets/tbilisi/tbilisi-build-1.png`);

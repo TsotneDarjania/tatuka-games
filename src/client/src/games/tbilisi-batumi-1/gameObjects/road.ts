@@ -1,34 +1,61 @@
-import Matter from "matter-js";
+
+export interface roadData {    
+    image : string,
+    x:number,
+    y:number,
+    path:string
+}
+
 
 export class Road extends Phaser.GameObjects.GameObject {
+
+    roadData! : roadData
+    x! : number
+    y! : number
     
-    constructor(scene: Phaser.Scene, path: Phaser.Curves.Path) {
+    constructor(scene: Phaser.Scene, roadData:object) {
         super(scene, 'road');
-        
-        // Create graphics object and draw road along path
-        const graphics = this.scene.add.graphics();
-        graphics.lineStyle(30, 0xffffff, 1);
-        graphics.strokePoints(path.getPoints());
 
-        // Convert path to Matter.js body
-        const vertices = path.getPoints().map((point) => {
-            return { x: point.x, y: point.y};
-        });
-        const body = this.scene.matter.add.gameObject(this, {
-            shape: {
-                type: 'fromVerts',
-                verts:vertices
-            },
-            render: {
-                lineThickness:5,
-                lineColor:0x5C79B7,
-                fillColor:0x5C79B7,
-                strokeStyle: '0xffffff'
-                
-            },
-            isStatic: false,
-        });
+        this.roadData = roadData as roadData;
 
+        this.x = this.roadData.x;
+        this.y = this.roadData.y;
+
+        this.scene.add.existing(this)
+        this.init();
     }
 
+    init(){
+        const PATH = this.roadData.path;
+
+        let pathElement = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        pathElement.setAttributeNS(null, 'd', PATH);
+        pathElement.setAttributeNS(null, 'id', 'path3780');
+        
+        const verts = this.scene.matter.svg.pathToVertices(pathElement, 35);
+
+        const collider = this.scene.matter.add.fromVertices(
+            this.x,
+            this.y, 
+            verts,
+            {
+                isStatic: true,
+                collisionFilter: {
+                    category: 0x0001,
+                    mask: 0x0002
+                },
+                isSensor: false,
+                slop: 0 // increased slop value
+            }
+        );
+
+        const polygon =  this.scene.add.polygon(
+            this.x - collider.centerOffset.x,
+            this.y - collider.centerOffset.y + 4,
+            verts,
+            0x0A1024).
+            setOrigin(0)
+            .setStrokeStyle(7,0x194254,1)       
+    }
+    
 }

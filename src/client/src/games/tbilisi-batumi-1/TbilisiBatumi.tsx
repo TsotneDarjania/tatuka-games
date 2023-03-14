@@ -6,36 +6,45 @@ import { GamePlay } from './scenes/gamePlay';
 //@ts-ignore
 import style from './style.module.css';
 
+import "pathseg"
+
 
 export const TbilisiBatumi: React.FC = () => {
 
-    const canvas = useRef<HTMLDivElement>(null);
+    const canvasContainer = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (canvas.current) {
+    if (!canvasContainer.current) return; 
+
         const game = new Phaser.Game({
             physics: {
                 default: 'matter',
                 matter: {
-                    debug: true,
+                    debug: false,
                     gravity: {
-                        y: 0.5
+                        y: 0.27
                     },
                 }
             },
-            parent: canvas.current,
+            parent: canvasContainer.current,
             type: Phaser.AUTO,
             width: 1600,
             height: 900,
             backgroundColor: '#19053B',
             scene: [Preload, GamePlay]
         });
-    }
-  }, []);
+    
+        return () => {
+            game.destroy(true,false)
+        }
 
+
+    
+  }, [canvasContainer]);
+//
   return(
     <div className={style.game}>
-        <div ref={canvas} className={style.canvas}></div>;
+        <div ref={canvasContainer} className={style.canvas}></div>;
     </div>
   )
 };

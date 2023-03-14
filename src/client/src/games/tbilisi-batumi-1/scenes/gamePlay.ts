@@ -1,31 +1,37 @@
+import Matter from "matter-js";
 import { Car } from "../gameObjects/car"
 import { MapBackground } from "../gameObjects/mapBackground";
-import { Road } from "../gameObjects/road";
+import { Road, roadData } from "../gameObjects/road";
 
+import roadJson from "../data/roadData.json"
 
 export class GamePlay extends Phaser.Scene{
 
     car!: Car
     road! : Road;
 
-    camera_z_index : number = 1.0;
+    camera_z_index : number = 1.3;
     min_zoom: number = 1.0;
-    max_zoom: number = 1.0;
+    max_zoom: number = 1.3;
     zoom_factor: number = 0.001;
     followOffsetX = 260;
 
     tbilisi! : MapBackground;
 
+
+
+    roadCurve!: Phaser.Curves.Spline;
+
     constructor(){
         super("GamePlay")
     }
 
-    preload(){
-        
-    }
-
     create(){
-        this.car = new Car(this,0,640)
+        this.road = new Road(this,roadJson.tbilisi[1])
+        // this.road = new Road(this,roadJson.tbilisi[2])
+        // this.road = new Road(this,roadJson.tbilisi[3])
+
+        this.car = new Car(this,0,500)
 
         this.tbilisi = new MapBackground(this,0,300,
             [ 
@@ -38,25 +44,9 @@ export class GamePlay extends Phaser.Scene{
                 {x:900,y:200,key:"tbilisi-build-4", scrollFactor : 0.01, scale : 0.5},
                 {x:660,y:310,key:"tbilisi-build-2", scrollFactor : 0.01, scale : 0.3},
                 {x:900,y:270,key:"tbilisi-build-3", scrollFactor : 0.01, scale : 0.35},
-                {x:300,y:200,key:"tbilisi-build-1", scrollFactor : 0.01, scale : 0.4},
-                
+                {x:300,y:200,key:"tbilisi-build-1", scrollFactor : 0.01, scale : 0.4},   
             ]
-        )
-
-
-        this.road = new Road(this, <Phaser.Curves.Path>(<unknown>new Phaser.Curves.Spline([
-            new Phaser.Math.Vector2(-700, 700),
-            new Phaser.Math.Vector2(-150, 730),
-            new Phaser.Math.Vector2(-110, 60),
-        ])));
-
-
-        this.matter.add.image(-4000, 800, 'ground', undefined, 
-        {
-             restitution: 0.4, 
-             isStatic: true 
-        })
-        .setDisplaySize(105000,60)
+        ).setScale(0.4)
 
         this.setCameraSettings();
     }
@@ -72,11 +62,8 @@ export class GamePlay extends Phaser.Scene{
         // Set initial follow offset
         const initialFollowOffset = new Phaser.Math.Vector2(0, 0);
         this.cameras.main.setFollowOffset(initialFollowOffset.x, initialFollowOffset.y);
-
         this.cameras.main.setBounds(-Infinity,0,Infinity,900);
-
         this.cameras.main.startFollow(this.car.carBody,false,0.1,0.08);
-
         this.cameras.main.setZoom(this.camera_z_index);
     }
 
