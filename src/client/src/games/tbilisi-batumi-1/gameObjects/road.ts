@@ -26,18 +26,22 @@ export class Road extends Phaser.GameObjects.GameObject {
     }
 
     init(){
-        const PATH = this.roadData.path;
+        // const PATH = this.roadData.path;
 
-        let pathElement = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-        pathElement.setAttributeNS(null, 'd', PATH);
-        pathElement.setAttributeNS(null, 'id', 'path3780');
+        // let pathElement = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        // pathElement.setAttributeNS(null, 'd', PATH);
+        // pathElement.setAttributeNS(null, 'id', 'path3780');
+
+        // console.time("calculatingVerts");
+        // const verts = this.scene.matter.svg.pathToVertices(pathElement, 70);
+        // console.log(JSON.stringify(verts))
+        // console.timeEnd("calculatingVerts")
         
-        const verts = this.scene.matter.svg.pathToVertices(pathElement, 35);
 
         const collider = this.scene.matter.add.fromVertices(
             this.x,
             this.y, 
-            verts,
+            this.roadData.path,
             {
                 isStatic: true,
                 collisionFilter: {
@@ -52,10 +56,12 @@ export class Road extends Phaser.GameObjects.GameObject {
         const polygon =  this.scene.add.polygon(
             this.x - collider.centerOffset.x,
             this.y - collider.centerOffset.y + 4,
-            verts,
+            this.roadData.path,
             0x0A1024).
             setOrigin(0)
-            .setStrokeStyle(7,0x194254,1)       
+            .setStrokeStyle(7,0x194254,1)    
+        
+        
     }
     
 }

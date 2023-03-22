@@ -1,0 +1,116 @@
+.gameContainer{
+    position: relative;
+    width: 48%;
+    height: 48%;
+}
+
+.gameBackgroundImage{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+
+    opacity: 0.3;
+    z-index: 0;
+
+}
+
+.miniGameBackgroundImage-1{
+    background-image: url("../../../images/games/miniGames/wallpapers/1.jpg");
+}
+
+.openButton{
+    position: absolute;
+    width: 170px;
+    height: 65px;
+    z-index: 10;
+    bottom: 40px;
+    right: 40px;
+
+    cursor: pointer;
+    color: rgb(0, 3, 64);
+    font-size: 34px;
+    font-weight: bold;
+    font-family: 'Geo', sans-serif;
+    background-color: rgb(0, 255, 157);
+    transition: 0.3s;
+}
+
+.openButton:hover{
+    background-color: rgb(0, 22, 14);
+    color: rgb(238, 239, 255);
+}
+
+.likeIcon{
+    position: absolute;
+    color: rgb(94, 255, 177);
+    font-size: 50px;
+    left: 30px;
+    bottom: 0px;
+    cursor: pointer;
+}
+
+.likeNumber{
+    position: absolute;
+    color: rgb(94, 255, 177);
+
+    font-family: 'Geo', sans-serif;
+    font-size: 60px;
+    left: 80px;
+    bottom: 36px; 
+}
+
+.deslikeIcon{
+    position: absolute;
+    color: rgb(248, 96, 76);
+    font-size: 50px;
+    left: 140px;
+    bottom: 0px;
+    cursor: pointer;
+
+    transform: rotate(180deg);
+}
+
+.deslikeNumber{
+    position: absolute;
+    color: rgb(248, 96, 76);
+
+    font-family: 'Geo', sans-serif;
+    font-size: 60px;
+    left:191px;
+    bottom: 36px; 
+}
+
+.shortDescription{
+    position: absolute;
+    color: white;
+    font-family: 'Geo', sans-serif;
+    width: 90%;
+    left: 30px;
+    top: 50px;
+
+    font-size: 22px;
+}
+
+.name{
+    position: absolute;
+    color: rgb(89, 219, 231);
+    font-family: 'Geo', sans-serif;
+    width: 90%;
+    left: 30px;
+    top: 20px;
+
+    font-size: 22px;
+}
+
+.commentIcon{
+    position: absolute;
+    color: rgb(94, 255, 177);
+    font-size: 35px;
+    bottom: 10px;
+    left: 260px;
+    cursor: pointer;
+}

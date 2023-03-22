@@ -3,7 +3,8 @@ export interface buildData {
     y : number,
     key : string,
     scrollFactor : number,
-    scale : number
+    scale : number,
+    tint : number
 }
 
 

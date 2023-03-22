@@ -115,8 +115,11 @@ export class Car{
         });
 
         this.scene.events.on('update', () => {
-          if(this.carBody.rotation < -0.7 || this.carBody.rotation > 0.7 
-            || this.onGround === false) return;
+          if(this.carBody.rotation < -0.7 || this.carBody.rotation > 0.8 
+            || this.onGround === false) {
+              this.isMoving=false; 
+              return;
+            }
 
           if (isAcceleratingLeft && this.carBody.body.velocity.x > -maxSpeed) {
               const force = new Phaser.Math.Vector2(-accelerationRate, 0);
@@ -246,8 +249,8 @@ export class Car{
             // Check if the colliders in this pair belong to the leftTire sprite
             if (pair.bodyA === this.rightTire.body || pair.bodyB === this.rightTire.body) {
 
-              console.log(this.carBody.rotation)
-              if(this.carBody.rotation > 0.15){
+              // console.log(this.carBody.rotation)
+              if(this.carBody.rotation < -0.2){
                 this.onGround= false;
               }
               // 

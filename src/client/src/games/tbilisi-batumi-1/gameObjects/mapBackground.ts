@@ -22,8 +22,9 @@ export class MapBackground extends Phaser.GameObjects.Container{
             const buildItem = this.scene.add.image(build.x,build.y,build.key)
             .setOrigin(0.5)
             .setScrollFactor(build.scrollFactor,1)
-            .setScale(build.scale);
-
+            .setScale(build.scale)
+            .setTint(build.tint);
+            
             this.add(buildItem);
             
         });

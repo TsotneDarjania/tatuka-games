@@ -4,12 +4,16 @@ import { MapBackground } from "../gameObjects/mapBackground";
 import { Road, roadData } from "../gameObjects/road";
 
 import roadJson from "../data/roadData.json"
+import buildsData from "../data/buildsData.json"
+import { GamePlayMenu } from "../ui/menu/gamePlayMenu";
+import { Angel } from "../gameObjects/angel";
 
 export class GamePlay extends Phaser.Scene{
 
+    // GameObjects
     car!: Car
-    road! : Road;
 
+    // Camera
     camera_z_index : number = 1.3;
     min_zoom: number = 1.0;
     max_zoom: number = 1.3;
@@ -18,35 +22,29 @@ export class GamePlay extends Phaser.Scene{
 
     tbilisi! : MapBackground;
 
-
-
-    roadCurve!: Phaser.Curves.Spline;
+    //ui
+    menu! : GamePlayMenu
 
     constructor(){
         super("GamePlay")
     }
 
     create(){
-        this.road = new Road(this,roadJson.tbilisi[1])
-        // this.road = new Road(this,roadJson.tbilisi[2])
-        // this.road = new Road(this,roadJson.tbilisi[3])
+        new Angel(this,0,0)
 
-        this.car = new Car(this,0,500)
+        new Road(this,roadJson.tbilisi[1])
+        new Road(this,roadJson.tbilisi[2])
+        new Road(this,roadJson.tbilisi[3])
+        new Road(this,roadJson.tbilisi[4])
+        new Road(this,roadJson.tbilisi[5])
 
-        this.tbilisi = new MapBackground(this,0,300,
-            [ 
-                {x:480,y:140,key:"tbilisi-build-8", scrollFactor : 0.01, scale : 0.3},
-                {x:-700,y:280,key:"tbilisi-build-2", scrollFactor : 0.01, scale : 0.4},
-                {x:-300,y:210,key:"tbilisi-build-4", scrollFactor : 0.01, scale : 0.3},
-                {x:-250,y:300,key:"tbilisi-build-7", scrollFactor : 0.01, scale : 0.4},
-                {x:1400,y:140,key:"tbilisi-build-6", scrollFactor : 0.01, scale : 0.56},
-                {x:90,y:110,key:"tbilisi-build-5", scrollFactor : 0.01, scale : 0.37},
-                {x:900,y:200,key:"tbilisi-build-4", scrollFactor : 0.01, scale : 0.5},
-                {x:660,y:310,key:"tbilisi-build-2", scrollFactor : 0.01, scale : 0.3},
-                {x:900,y:270,key:"tbilisi-build-3", scrollFactor : 0.01, scale : 0.35},
-                {x:300,y:200,key:"tbilisi-build-1", scrollFactor : 0.01, scale : 0.4},   
-            ]
-        ).setScale(0.4)
+        this.createMenu();
+
+        // this.car = new Car(this,-45700,800)
+        this.car = new Car(this,0,380)
+
+        this.tbilisi = new MapBackground(this,0,500,buildsData.tbilisi).
+        setScale(0.7)
 
         this.setCameraSettings();
     }
@@ -58,11 +56,15 @@ export class GamePlay extends Phaser.Scene{
        this.cameras.main.setFollowOffset(followOffset.x, followOffset.y);
     }
 
+    createMenu(){
+        this.menu = new GamePlayMenu(this,0,0);
+    }
+
     setCameraSettings(){
         // Set initial follow offset
         const initialFollowOffset = new Phaser.Math.Vector2(0, 0);
         this.cameras.main.setFollowOffset(initialFollowOffset.x, initialFollowOffset.y);
-        this.cameras.main.setBounds(-Infinity,0,Infinity,900);
+        this.cameras.main.setBounds(-Infinity,0,Infinity,1500);
         this.cameras.main.startFollow(this.car.carBody,false,0.1,0.08);
         this.cameras.main.setZoom(this.camera_z_index);
     }

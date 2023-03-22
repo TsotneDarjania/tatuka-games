@@ -3,11 +3,7 @@ import Phaser from 'phaser';
 import { Preload } from './scenes/preload';
 import { GamePlay } from './scenes/gamePlay';
 
-//@ts-ignore
 import style from './style.module.css';
-
-import "pathseg"
-
 
 export const TbilisiBatumi: React.FC = () => {
 
@@ -37,9 +33,6 @@ export const TbilisiBatumi: React.FC = () => {
         return () => {
             game.destroy(true,false)
         }
-
-
-    
   }, [canvasContainer]);
 //
   return(

@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Inline&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Geo&display=swap');
+
+.games{
+    width: 100vw;
+    height: 100vh;
+
+    background-color: rgb(6, 0, 32);
+    font-family: 'Bungee Inline', cursive;
+}
+
+.headZone{
+    display: flex;
+    width: 100vw;
+    height: 10vh;
+    position: absolute;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 30px;
+
+    top: 0;
+
+    /* background-color: rgb(33, 0, 65); */
+}
+
+.headZoneItem{
+    color: rgb(0, 74, 101);
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: 0.3s;
+    text-align: center;
+}
+.headZoneItem:hover{
+    color: rgb(1, 228, 168);
+}
+
+.select-item{
+    color: rgb(1, 228, 168);
+}
+
+.latestGame{
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    opacity: 0;
+
+    top: 100vh;
+
+    transition: 1s;
+}
+
+.showLatestGame{
+    top: 0;
+    opacity: 1;
+}
+
+.miniGames{
+    transition: 1s;
+    position: absolute;
+
+    left: -100vw;
+    opacity: 0;
+}
+
+.showMiniGames{
+    left: 0;
+    opacity: 1;
+}
+
+
+
+
+
+

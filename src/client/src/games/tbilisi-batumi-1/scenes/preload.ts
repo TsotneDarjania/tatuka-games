@@ -7,23 +7,36 @@ export class Preload extends Phaser.Scene {
 	}
 
 	preload() {
-        // Car
-		this.load.svg("carBody",`${process.env.PUBLIC_URL}/assets/car/body.svg`)
-		this.load.svg("carTire",`${process.env.PUBLIC_URL}/assets/car/tire.svg`)
-		this.load.svg("carBag",`${process.env.PUBLIC_URL}/assets/car/bag.svg`)
-		this.load.svg("carBoy",`${process.env.PUBLIC_URL}/assets/car/boy.svg`)
+		
+		
+		this.load.setPath(`${process.env.PUBLIC_URL}/assets`);
 
-        this.load.json('carMeshe', `${process.env.PUBLIC_URL}/assets/car/car.json`);
+		//Angel
+		this.load.image("angelHead","angel/head.png")
+
+		//Menu
+		this.load.image("speedometer",`menu/gamePlay/dsa.png`)
+
+		// Car
+		this.load.svg("carBody",`car/body.svg`)
+		this.load.svg("carTire",`car/tire.svg`)
+		this.load.svg("carBag",`car/bag.svg`)
+		this.load.svg("carBoy",`car/boy.svg`)
+
+        this.load.json('carMeshe', `car/car.json`);
 
 		//tbilisi builds
-		this.load.image("tbilisi-build-1", `${process.env.PUBLIC_URL}/assets/tbilisi/tbilisi-build-1.png`);
-		this.load.image("tbilisi-build-2", `${process.env.PUBLIC_URL}/assets/tbilisi/tbilisi-build-2.png`);
-		this.load.image("tbilisi-build-3", `${process.env.PUBLIC_URL}/assets/tbilisi/tbilisi-build-3.png`);
-		this.load.image("tbilisi-build-4", `${process.env.PUBLIC_URL}/assets/tbilisi/tbilisi-build-4.png`);
-		this.load.image("tbilisi-build-5", `${process.env.PUBLIC_URL}/assets/tbilisi/build-5.png`);
-		this.load.image("tbilisi-build-6", `${process.env.PUBLIC_URL}/assets/tbilisi/build-6.png`);
-		this.load.image("tbilisi-build-7", `${process.env.PUBLIC_URL}/assets/tbilisi/build-7.png`);
-		this.load.image("tbilisi-build-8", `${process.env.PUBLIC_URL}/assets/tbilisi/build-8.png`);
+		this.load.image("tbilisi-build-1", `tbilisi/tbilisi-build-1.png`);
+		this.load.image("tbilisi-build-2", `tbilisi/tbilisi-build-2.png`);
+		this.load.image("tbilisi-build-3", `tbilisi/tbilisi-build-3.png`);
+		this.load.image("tbilisi-build-4", `tbilisi/tbilisi-build-4.png`);
+		this.load.image("tbilisi-build-5", `tbilisi/build-5.png`);
+		this.load.image("tbilisi-build-6", `tbilisi/build-6.png`);
+		this.load.image("tbilisi-build-7", `tbilisi/build-7.png`);
+		this.load.image("tbilisi-build-8", `tbilisi/build-8.png`);
+		this.load.image("tbilisi-build-9", `tbilisi/build-9.png`);
+		this.load.image("tbilisi-build-10", `tbilisi/build-10.png`);
+		this.load.image("tbilisi-build-11", `tbilisi/build-11.png`);
 	}
 
 	create() {
