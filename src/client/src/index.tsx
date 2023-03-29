@@ -7,7 +7,6 @@ import App from './App';
 import {BrowserRouter as Router, Route,Routes} from "react-router-dom"
 import {TbilisiBatumi} from './games/tbilisi-batumi-1/TbilisiBatumi';
 
-
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );

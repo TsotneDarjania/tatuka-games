@@ -11,11 +11,29 @@ export class Preload extends Phaser.Scene {
 		
 		this.load.setPath(`${process.env.PUBLIC_URL}/assets`);
 
+		//asteroid Animation
+		this.load.spritesheet("asteroid","spritesheets/asteroid.png",{
+			frameWidth: 152,
+			frameHeight: 150
+		})
+
 		//Angel
 		this.load.image("angelHead","angel/head.png")
+		this.load.image("angelWing","angel/wing.png")
+		this.load.image("angelBody","angel/body.png")
+		this.load.image("angelCircle","angel/circle.png")
 
-		//Menu
-		this.load.image("speedometer",`menu/gamePlay/dsa.png`)
+		//Demon
+		this.load.image("demonHead","demon/head.png")
+		this.load.image("demonBody","demon/body.png")
+		this.load.image("demonWing","demon/wing.png")
+
+		//GamePlay Menu
+		this.load.image("speedometer",`menu/gamePlay/speedometer.png`)
+		this.load.image("gamePlayMenuIcon",`menu/gamePlay/menuIcon.png`)
+		this.load.image("gameplayMenuContinueButton",`menu/gamePlay/continue.png`)
+		this.load.image("gameplayBackToMainMenuButton",`menu/gamePlay/mainMenu.png`)
+		this.load.image("gameplayRecordsIcon",`menu/gamePlay/recordsIcon.png`)
 
 		// Car
 		this.load.svg("carBody",`car/body.svg`)

@@ -18,11 +18,14 @@
     justify-content: center;
     align-items: center;
 
+    transition: 0.3s;
+
     gap: 30px;
-
     top: 0;
+}
 
-    /* background-color: rgb(33, 0, 65); */
+.hideHeadZone{
+    opacity: 0;
 }
 
 .headZoneItem{
@@ -69,6 +72,34 @@
 .showMiniGames{
     left: 0;
     opacity: 1;
+}
+
+.personalButton{
+    font-family: 'Bungee Inline', cursive;
+
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+
+    width: 240px;
+    height: 70px;
+
+    cursor: pointer;
+    transition: 0.25s;
+    border: none;
+    color: white;
+    background-color: rgb(8, 84, 112);
+    box-shadow: 7px 7px 0px 0px rgb(6, 40, 55);
+    font-size: 24px;
+    bottom: 40px;
+}
+
+.personalButton:hover{
+    color: rgb(1, 41, 31);
+    background-color: rgb(1, 228, 168);
+    box-shadow: -7px -7px 0px 0px rgb(2, 108, 79);  
 }
 
 

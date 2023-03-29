@@ -4,6 +4,7 @@ import { Preload } from './scenes/preload';
 import { GamePlay } from './scenes/gamePlay';
 
 import style from './style.module.css';
+import { GamePlayMenu } from './ui/menu/gamePlayMenu';
 
 export const TbilisiBatumi: React.FC = () => {
 
@@ -13,6 +14,7 @@ export const TbilisiBatumi: React.FC = () => {
     if (!canvasContainer.current) return; 
 
         const game = new Phaser.Game({
+            dom : { createContainer : true},
             physics: {
                 default: 'matter',
                 matter: {
@@ -27,7 +29,7 @@ export const TbilisiBatumi: React.FC = () => {
             width: 1600,
             height: 900,
             backgroundColor: '#19053B',
-            scene: [Preload, GamePlay]
+            scene: [Preload, GamePlay, GamePlayMenu]
         });
     
         return () => {

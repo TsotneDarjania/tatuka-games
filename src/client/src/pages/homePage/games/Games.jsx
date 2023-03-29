@@ -7,7 +7,12 @@ import LatestGame from './latestGame/LatestGame'
 import MiniGames from './miniGames/MiniGames'
 
 
-const Games = () => {
+import {MdDoubleArrow} from "react-icons/md"
+import Transition from '../../../components/Transition'
+import Personal from './personal/Personal'
+
+
+const Games = (props) => {
 
   const [gamesState, setGamesState] = useState("latest")
 
@@ -18,10 +23,13 @@ const Games = () => {
   const[showLatestGame, setShowLatestGame] = useState("showLatestGame")
   const[showMiniGames, setShowMiniGames] = useState("")
 
+  const[headZoneClass, setHeadZoneClass] = useState("")
+
   useEffect( () => {
     if(gamesState === "latest"){
       setLatestGamesClass("select-item")
       setShowLatestGame("showLatestGame")
+      setHeadZoneClass("");
       setShowMiniGames("")
 
       setMiniGamesClass("")
@@ -33,13 +41,19 @@ const Games = () => {
 
       setMiniGamesClass("select-item")
     }
+    if(gamesState === "personal"){
+      setLatestGamesClass("")
+      setShowLatestGame("")
+      setHeadZoneClass("hideHeadZone")
+    }
 
   },[gamesState])
 
+  const [ transitionAnimationState, setTransitionAnimationState] = useState("")
 
   return (
     <div className={style.games}>
-      <div className={style.headZone}> 
+      <div className={style.headZone + " " +style[headZoneClass]}> 
           <h2 className={style.headZoneItem + " " + style[miniGamesClass] } onClick={ () => {
             setGamesState("mini")
           }}> Mini Games </h2>
@@ -54,8 +68,20 @@ const Games = () => {
       <div className={style.miniGames + " " + style[showMiniGames] }>
         <MiniGames />
       </div>
-      
+      {
+        gamesState === "latest" && <button onClick={ () => {
+          setTransitionAnimationState("Play")
+          setTimeout(() => {
+            setGamesState("personal")
+          }, (600));
+        }} className={style.personalButton}> Personal </button>
+      }
+      {
+        gamesState === "personal" && <Personal setIsLogin={props.setIsLogin} isLogin={props.isLogin} setGamesState={setGamesState} />
+      }
 
+      <Transition setAnimationState={setTransitionAnimationState} animationState={transitionAnimationState} />
+    
     </div>
   )
 }

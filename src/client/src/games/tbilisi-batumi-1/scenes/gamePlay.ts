@@ -7,6 +7,8 @@ import roadJson from "../data/roadData.json"
 import buildsData from "../data/buildsData.json"
 import { GamePlayMenu } from "../ui/menu/gamePlayMenu";
 import { Angel } from "../gameObjects/angel";
+import { Demon } from "../gameObjects/demon";
+import { Asteroid } from "../gameObjects/asteroid";
 
 export class GamePlay extends Phaser.Scene{
 
@@ -25,12 +27,41 @@ export class GamePlay extends Phaser.Scene{
     //ui
     menu! : GamePlayMenu
 
+    menuScale : number = 1;
+
     constructor(){
         super("GamePlay")
     }
 
     create(){
-        new Angel(this,0,0)
+        new Angel(this,-2600,120, [
+            "Hello Player", 
+            "May god watches over you",
+            "and keeps you safe on your travels"
+        ])
+
+        new Demon(this,-46800,290, [
+            "This game is crap.", 
+            "Let's get the hell out of here"
+        ])
+
+        new Asteroid(this,-46500,0);
+
+        setTimeout(() => {
+            new Asteroid(this,-47500,0);
+        }, 2000);
+        setTimeout(() => {
+            new Asteroid(this,-47900,0);
+        }, 3000);
+        setTimeout(() => {
+            new Asteroid(this,-48100,0);
+        }, 3500);
+        setTimeout(() => {
+            new Asteroid(this,-48600,0);
+        }, 4200);
+        setTimeout(() => {
+            new Asteroid(this,-49600,0);
+        }, 500);
 
         new Road(this,roadJson.tbilisi[1])
         new Road(this,roadJson.tbilisi[2])
@@ -38,15 +69,24 @@ export class GamePlay extends Phaser.Scene{
         new Road(this,roadJson.tbilisi[4])
         new Road(this,roadJson.tbilisi[5])
 
-        this.createMenu();
-
-        // this.car = new Car(this,-45700,800)
-        this.car = new Car(this,0,380)
+        this.car = new Car(this,-45700,800)
+        // this.car = new Car(this,0,380)
 
         this.tbilisi = new MapBackground(this,0,500,buildsData.tbilisi).
         setScale(0.7)
 
         this.setCameraSettings();
+
+        //Create UI Scene for Menu UI Elements
+        this.scene.launch("UI");
+    }
+
+    pauseScene(){
+        this.scene.pause();
+    }
+
+    continueScene(){
+        this.scene.resume();
     }
 
     update(){
@@ -54,10 +94,6 @@ export class GamePlay extends Phaser.Scene{
 
        const followOffset = new Phaser.Math.Vector2(this.followOffsetX, 0);
        this.cameras.main.setFollowOffset(followOffset.x, followOffset.y);
-    }
-
-    createMenu(){
-        this.menu = new GamePlayMenu(this,0,0);
     }
 
     setCameraSettings(){
@@ -77,6 +113,7 @@ export class GamePlay extends Phaser.Scene{
                 this.camera_z_index += this.zoom_factor;
                 this.followOffsetX -= 0.1;
                 this.cameras.main.setZoom(this.camera_z_index);
+                this.menuScale -= 0.0006;
             }
         }else{
             // Zoom out
@@ -84,6 +121,7 @@ export class GamePlay extends Phaser.Scene{
                 this.camera_z_index -= this.zoom_factor;
                 this.followOffsetX += 0.1;
                 this.cameras.main.setZoom(this.camera_z_index);
+                this.menuScale += 0.0006;
             }
         }
     }
