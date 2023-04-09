@@ -9,8 +9,17 @@ import { GamePlayMenu } from "../ui/menu/gamePlayMenu";
 import { Angel } from "../gameObjects/angel";
 import { Demon } from "../gameObjects/demon";
 import { Asteroid } from "../gameObjects/asteroid";
+import { GameLogic } from "../gameLogic";
+import { MapInformationIcon } from "../gameObjects/mapInformationIcon";
+import { BonFire } from "../gameObjects/bonFire";
+import MusicPlayer from "../musicPlayer";
+
+const camera_save_x : number = 500;
+const camera_save_y : number = 0;
 
 export class GamePlay extends Phaser.Scene{
+
+    backgroundColor! : Phaser.GameObjects.Image;
 
     // GameObjects
     car!: Car
@@ -23,18 +32,26 @@ export class GamePlay extends Phaser.Scene{
     followOffsetX = 260;
 
     tbilisi! : MapBackground;
+    roadToGori! : MapBackground;
 
     //ui
     menu! : GamePlayMenu
 
     menuScale : number = 1;
 
+    gameLogic! : GameLogic;
+
+    musicPlayer! : MusicPlayer;
+
     constructor(){
         super("GamePlay")
     }
 
     create(){
-        new Angel(this,-2600,120, [
+
+        // this.musicPlayer = new MusicPlayer(this)
+
+        new Angel(this,-6200,40, [
             "Hello Player", 
             "May god watches over you",
             "and keeps you safe on your travels"
@@ -45,40 +62,71 @@ export class GamePlay extends Phaser.Scene{
             "Let's get the hell out of here"
         ])
 
-        new Asteroid(this,-46500,0);
-
-        setTimeout(() => {
-            new Asteroid(this,-47500,0);
-        }, 2000);
-        setTimeout(() => {
-            new Asteroid(this,-47900,0);
-        }, 3000);
-        setTimeout(() => {
-            new Asteroid(this,-48100,0);
-        }, 3500);
-        setTimeout(() => {
-            new Asteroid(this,-48600,0);
-        }, 4200);
-        setTimeout(() => {
-            new Asteroid(this,-49600,0);
-        }, 500);
-
         new Road(this,roadJson.tbilisi[1])
         new Road(this,roadJson.tbilisi[2])
         new Road(this,roadJson.tbilisi[3])
         new Road(this,roadJson.tbilisi[4])
         new Road(this,roadJson.tbilisi[5])
+        new Road(this,roadJson.tbilisi[6])
+        new Road(this,roadJson.tbilisi[7])
+        new Road(this,roadJson.tbilisi[8])
+        new Road(this,roadJson.tbilisi[9])
 
-        this.car = new Car(this,-45700,800)
-        // this.car = new Car(this,0,380)
+        // this.car = new Car(this,-45900,780)
+        //  this.car = new Car(this,-59200,900)
+        this.car = new Car(this,-100,368)
+        
+    
+        new BonFire(this,-58100,1230,4);
+        new BonFire(this,-60400,1340,2.6);
+        
+
+        new MapInformationIcon(this,-7200,570,"map-information-icon",
+        [   
+            " The objective of this game is",
+            "to safely reach Batumi. "
+        ])
+
+        new MapInformationIcon(this,-16000,600,"map-information-icon",
+        [  
+            "open_radio"
+        ],)
+
 
         this.tbilisi = new MapBackground(this,0,500,buildsData.tbilisi).
         setScale(0.7)
+        this.roadToGori = new MapBackground(this,-800,0,buildsData.roadToGori)
+        .setDepth(-100)
 
         this.setCameraSettings();
 
         //Create UI Scene for Menu UI Elements
         this.scene.launch("UI");
+
+        this.gameLogic = new GameLogic(this)
+
+        this.backgroundColor = this.add.image(0,0,"white")
+        .setScale(9)
+        .setScrollFactor(0,0)
+        .setDepth(-1000)
+        .setOrigin(0)
+        .setTint(0xFF3C52)
+        .setAlpha(0)
+    }
+
+    resetCamera(){
+        this.cameras.main.fadeOut(400);
+        this.cameras.main.once('camerafadeoutcomplete', () => {
+            setTimeout(() => {
+                this.cameras.main.fadeIn(1500);
+            }, 1000);
+        });
+
+        this.cameras.main.once('camerafadeincomplete', () => {
+            const gamePlayScene = this.scene.get('UI'); 
+            //@ts-ignore
+            gamePlayScene.showCarIndicators();
+        });
     }
 
     pauseScene(){
@@ -115,7 +163,7 @@ export class GamePlay extends Phaser.Scene{
                 this.cameras.main.setZoom(this.camera_z_index);
                 this.menuScale -= 0.0006;
             }
-        }else{
+        } else {
             // Zoom out
             if(this.camera_z_index > this.min_zoom){
                 this.camera_z_index -= this.zoom_factor;

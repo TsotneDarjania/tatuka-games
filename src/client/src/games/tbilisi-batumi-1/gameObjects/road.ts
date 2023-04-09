@@ -26,7 +26,7 @@ export class Road extends Phaser.GameObjects.GameObject {
     }
 
     init(){
-        // const PATH = this.roadData.path;
+        const PATH = this.roadData.path;
 
         // let pathElement = document.createElementNS('http://www.w3.org/2000/svg', 'path');
         // pathElement.setAttributeNS(null, 'd', PATH);
@@ -59,7 +59,9 @@ export class Road extends Phaser.GameObjects.GameObject {
             this.roadData.path,
             0x0A1024).
             setOrigin(0)
-            .setStrokeStyle(7,0x194254,1)    
+            .setStrokeStyle(7,0x194254,1)  
+            
+   
         
         
     }

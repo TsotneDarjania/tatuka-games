@@ -7,14 +7,31 @@ export class Preload extends Phaser.Scene {
 	}
 
 	preload() {
-		
+		console.log("preload scene")
 		
 		this.load.setPath(`${process.env.PUBLIC_URL}/assets`);
+        this.load.webFont("mainFont","https://fonts.gstatic.com/s/pressstart2p/v14/e3t4euO8T-267oIAQAu6jDQyK3nVivM.woff2")
+
+		this.load.image("white","white.png")
+
+		//Load Songs
+		this.load.audio('mtawmindaSong', [ 'music/songs/mtawminda.mp3' ]);
+		this.load.audio('rock-1', [ 'music/songs/rock-1.mp3' ]);
 
 		//asteroid Animation
 		this.load.spritesheet("asteroid","spritesheets/asteroid.png",{
 			frameWidth: 152,
 			frameHeight: 150
+		})
+		//bonFire Animation
+		this.load.spritesheet("bonfire","spritesheets/bonfire.png",{
+			frameWidth: 300,
+			frameHeight: 150.5
+		})
+		//car Explotion
+		this.load.spritesheet("carExplosion","spritesheets/car-explosion.png",{
+			frameWidth: 300,
+			frameHeight: 300
 		})
 
 		//Angel
@@ -30,10 +47,13 @@ export class Preload extends Phaser.Scene {
 
 		//GamePlay Menu
 		this.load.image("speedometer",`menu/gamePlay/speedometer.png`)
+		this.load.image("speedometer-arrow",`menu/gamePlay/speedometer-arrow.png`)
 		this.load.image("gamePlayMenuIcon",`menu/gamePlay/menuIcon.png`)
 		this.load.image("gameplayMenuContinueButton",`menu/gamePlay/continue.png`)
 		this.load.image("gameplayBackToMainMenuButton",`menu/gamePlay/mainMenu.png`)
 		this.load.image("gameplayRecordsIcon",`menu/gamePlay/recordsIcon.png`)
+		this.load.image("radioGreenButton",`menu/gamePlay/radio-green-button.png`)
+		this.load.image("radioRedButton",`menu/gamePlay/radio-red-button.png`)
 
 		// Car
 		this.load.svg("carBody",`car/body.svg`)
@@ -55,6 +75,19 @@ export class Preload extends Phaser.Scene {
 		this.load.image("tbilisi-build-9", `tbilisi/build-9.png`);
 		this.load.image("tbilisi-build-10", `tbilisi/build-10.png`);
 		this.load.image("tbilisi-build-11", `tbilisi/build-11.png`);
+
+		//roadToGori
+		this.load.image("meadow","roadToGori/meadow.png")
+		this.load.image("hill","roadToGori/hill.png")
+		this.load.image("mountain-1","roadToGori/mountain-1.png")
+		this.load.image("mountain-2","roadToGori/mountain-2.png")
+		this.load.image("village-house-1","roadToGori/village-house-1.png")
+		this.load.image("georgia-flag","roadToGori/georgia-flag.png")
+
+		//Map Assets
+		this.load.image("map-information-icon","map/assets/info.png")
+		this.load.image("map-money-icon","map/assets/money-icon.png")
+		
 	}
 
 	create() {

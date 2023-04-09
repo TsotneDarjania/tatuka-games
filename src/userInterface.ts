@@ -50,10 +50,6 @@ export function login(userName : string, password : string, res: any){
   )
 }
 
-
-
-
-
 function insertNewUser(userName : string, password: string, res : any){
   db.query(
     "INSERT INTO users (name, password) VALUES(?,?)",
@@ -62,7 +58,7 @@ function insertNewUser(userName : string, password: string, res : any){
       if(err) {
         res.send(  { 
           responseMessage : "Server Error",
-          statusCode : 1,
+          statusCode : -1,
           statusMessage : "Failed",
         })
       };

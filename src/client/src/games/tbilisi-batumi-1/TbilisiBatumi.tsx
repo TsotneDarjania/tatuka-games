@@ -6,6 +6,12 @@ import { GamePlay } from './scenes/gamePlay';
 import style from './style.module.css';
 import { GamePlayMenu } from './ui/menu/gamePlayMenu';
 
+
+import "pathseg"
+import "./helper/WebFontLoader";
+import { StartScene } from './scenes/start';
+import { Menu } from './scenes/menu';
+
 export const TbilisiBatumi: React.FC = () => {
 
     const canvasContainer = useRef<HTMLDivElement>(null);
@@ -29,7 +35,7 @@ export const TbilisiBatumi: React.FC = () => {
             width: 1600,
             height: 900,
             backgroundColor: '#19053B',
-            scene: [Preload, GamePlay, GamePlayMenu]
+            scene: [Menu,StartScene, Preload, GamePlay,GamePlayMenu]
         });
     
         return () => {

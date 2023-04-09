@@ -1,0 +1,9 @@
+{
+    "lastGame" : {
+        "name" : "Batumisken",
+        "publishData" : "02.34.2023",
+        "shortDescription" : "short description text which comes from json file",
+        "url" : "/games/batumisken/"
+    }
+
+}

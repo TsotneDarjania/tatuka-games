@@ -29,8 +29,24 @@
         {"x":-1000,"y":370,"key":"tbilisi-build-4", "scrollFactor" : 0.04, "scale" : 0.25,"tint" : 4210750},
         {"x":-1000,"y":480,"key":"tbilisi-build-7", "scrollFactor" : 0.04, "scale" : 0.35,"tint" : 16777215},
         {"x":-1600,"y":720,"key":"tbilisi-build-2", "scrollFactor" : 0.04, "scale" : 0.40,"tint" : 12837741}, 
+        {"x":-1900,"y":820,"key":"tbilisi-build-2", "scrollFactor" : 0.04, "scale" : 0.30,"tint" : 7663600}, 
         {"x":-900,"y":690,"key":"tbilisi-build-2", "scrollFactor" : 0.04, "scale" : 0.25,"tint" : 7663600}, 
+        {"x":-1500,"y":990,"key":"tbilisi-build-2", "scrollFactor" : 0.04, "scale" : 0.4,"tint" : 7663600}, 
         {"x":-1200,"y":740,"key":"tbilisi-build-1", "scrollFactor" : 0.04, "scale" : 0.28,"tint" : 16777215},
-        {"x":-800,"y":840,"key":"tbilisi-build-2", "scrollFactor" : 0.04, "scale" : 0.35,"tint" : 12837741} 
+        {"x":-1800,"y":1200,"key":"tbilisi-build-1", "scrollFactor" : 0.04, "scale" : 0.48,"tint" : 16777215},
+        {"x":-2060,"y":1150,"key":"tbilisi-build-1", "scrollFactor" : 0.04, "scale" : 0.5,"tint" : 7663600},
+        {"x":-800,"y":840,"key":"tbilisi-build-2", "scrollFactor" : 0.04, "scale" : 0.35,"tint" : 12837741},
+        {"x":-1200,"y":1140,"key":"tbilisi-build-2", "scrollFactor" : 0.04, "scale" : 0.55,"tint" : 12837741} 
+    ],
+    "roadToGori" : [
+        {"x":-1600,"y":940,"key":"mountain-2", "scrollFactor" : 0.04, "scale" : 0.35,"tint" : 16777215},
+        {"x":-800,"y":740,"key":"mountain-1", "scrollFactor" : 0.04, "scale" : 0.5,"tint" :16777215},
+        {"x":0,"y":740,"key":"hill", "scrollFactor" : 0.04, "scale" : 0.8,"tint" : 7663600},
+        {"x":-1700,"y":1040,"key":"meadow", "scrollFactor" : 0.04, "scale" : 0.8,"tint" : 7663600},
+        {"x":0,"y":1040,"key":"meadow", "scrollFactor" : 0.04, "scale" : 0.8,"tint" : 7663600},
+        {"x":-1280,"y":1140,"key":"georgia-flag", "scrollFactor" : 0.04, "scale" : 0.25,"tint" : 16117175},
+        {"x":-1200,"y":1150,"key":"village-house-1", "scrollFactor" : 0.04, "scale" : 0.23,"tint" : 5273330},
+        {"x":-1140,"y":1190,"key":"village-house-1", "scrollFactor" : 0.04, "scale" : 0.2,"tint" : 5273330},
+        {"x":-1280,"y":1180,"key":"village-house-1", "scrollFactor" : 0.04, "scale" : 0.25,"tint" : 5273330}
     ]
 }

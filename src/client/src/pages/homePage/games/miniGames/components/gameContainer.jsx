@@ -17,11 +17,13 @@ const GameContainer = () => {
             wdiuqwdh qiwudhqiwudhqiwduhqd qdwuhd iudhwiqudhqd iwuw wudhwd iuwhdiuwhdiqwuh
             qiwudhqiwud qiduqwiduhd diuwhdw wiudh diuwhdwqdqwuidhd q,dwoasidad
         </p>
-        <div className={style.likeIcon}> <AiFillLike /> </div>
-        <div className={style.likeNumber}> 0 </div>
-        <div className={style.deslikeIcon}> <AiFillLike /> </div>
-        <div className={style.deslikeNumber}> 0 </div>
-        <div className={style.commentIcon}> <FaCommentAlt /> </div>
+        <div className={style.indicators}>
+          <div className={style.likeIcon}> <AiFillLike /> </div>
+          <div className={style.likeNumber}> 0 </div>
+          <div className={style.deslikeIcon}> <AiFillLike /> </div>
+          <div className={style.deslikeNumber}> 0 </div>
+          <div className={style.commentIcon}> <FaCommentAlt /> </div>
+        </div>
     </div>
   )
 }

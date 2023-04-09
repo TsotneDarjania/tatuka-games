@@ -14,7 +14,7 @@ root.render(
   <Router>
     <Routes>
         <Route path='/' element={ <App /> }  />
-        <Route path='/games/tbilisi-batumi-1' element={ <TbilisiBatumi /> }  />
+        <Route path='/games/batumisken' element={ <TbilisiBatumi /> }  />
     </Routes>
   </Router>
 );

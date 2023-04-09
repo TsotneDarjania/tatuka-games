@@ -9,7 +9,6 @@ dotenv.config()
 const app = express();
 const port = process.env.PORT || 3000;
 
-
 //App Settings
 app.use(express.static('src/client/build'));
 app.use(cors({
@@ -42,5 +41,12 @@ app.post('/user-login',  (req,res) => {
   login(userName,userPassword,res)
 
 });
+
+app.post('/save-game', (req,res) => {
+  const username = req.body.username;
+  const data = req.body.data;
+
+  console.log(data)
+})
 
 
