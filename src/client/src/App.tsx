@@ -1,8 +1,7 @@
-import React from 'react';
+import React from "react";
 
-import "./index"
-import { HomePage } from './pages/homePage/HomePage';
-
+import "./index";
+import { HomePage } from "./pages/homePage/HomePage";
 
 function App() {
   return (

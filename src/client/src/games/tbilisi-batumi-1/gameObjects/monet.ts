@@ -1,62 +1,74 @@
-import { GamePlayMenu } from "../ui/menu/gamePlayMenu";
+import { GameMenu } from "../ui/menu/gameMenu";
 
+export class Monet extends Phaser.GameObjects.Image {
+  gamePlayMenuScene!: Phaser.Scene;
+  value!: number;
 
-export class Monet extends Phaser.GameObjects.Image{
+  soundEffect!: Phaser.Sound.BaseSound;
 
-    gamePlayMenuScene! : Phaser.Scene;
+  constructor(
+    scene: Phaser.Scene,
+    x: number,
+    y: number,
+    key: string,
+    value: number,
+    gameplayMenuScene: GameMenu
+  ) {
+    super(scene, x, y, key);
+    this.scene.add.existing(this);
+    this.gamePlayMenuScene = gameplayMenuScene;
+    this.value = value;
 
+    this.init();
+  }
 
-    constructor(scene: Phaser.Scene, x: number, y: number, key : string){
-        super(scene,x,y,key)
-        this.scene.add.existing(this)
+  init() {
+    this.setScale(0.09);
 
-        this.init();
-    }
+    this.addZone();
+    this.addAnimation();
+    this.addSoundEffect();
+  }
 
-    init(){
-        
-        this.setScale(0.6)
+  addSoundEffect() {
+    this.soundEffect = this.scene.sound.add("monetSound", { volume: 0.7 });
+  }
 
-        this.addZone();
-        this.addAnimation();
-    }
+  addAnimation() {
+    this.scene.tweens.add({
+      targets: this,
+      scale: 0.094,
+      duration: 200,
+      repeat: Infinity,
+      yoyo: true,
+    });
+  }
 
-    addAnimation(){
-        this.scene.tweens.add({
-            targets: this,
-            scale : 0.31,
-            duration:200,
-            repeat : Infinity,
-            yoyo:true
-        })
-    }
+  addZone() {
+    const zone = this.scene.matter.add.circle(this.x, this.y, 25, {
+      ignoreGravity: true,
+      collisionFilter: {
+        category: 0x0001,
+        mask: 0x0002,
+      },
+      isSensor: true,
+    });
 
-    addZone(){
-        const zone = this.scene.matter.add.circle(this.x,this.y,30,{
-            ignoreGravity:true,
-            collisionFilter: {
-                category: 0x0001,
-                mask: 0x0002
-            },
-            isSensor:true
-        })
+    this.scene.matter.world.on("collisionstart", (event: any) => {
+      event.pairs.forEach((pair: any) => {
+        if (pair.bodyB === zone) {
+          this.soundEffect.play();
+          //@ts-ignore
+          this.gamePlayMenuScene.increaseMoney(this.value);
 
-        this.scene.matter.world.on('collisionstart', (event : any) => {
-            event.pairs.forEach((pair : any) => {
-            if (pair.bodyB === zone) {
-               
-                    this.scene.matter.world.remove(zone)
-                    this.showInformation();
-                    
-                }
-            });
-        });
-    }
+          if (this.scene === undefined) return;
+          if (this.scene.matter === undefined) return;
+          if (this.scene.matter.world.remove(zone) === undefined) return;
 
-    showInformation(){
-        this.gamePlayMenuScene = this.scene.scene.get("UI") as GamePlayMenu;
-        //@ts-ignore
-        this.gamePlayMenuScene.showInformationOnMap(this.showtext);
-        this.destroy(true)
-    }
+          this.scene.matter.world.remove(zone);
+          this.destroy(true);
+        }
+      });
+    });
+  }
 }

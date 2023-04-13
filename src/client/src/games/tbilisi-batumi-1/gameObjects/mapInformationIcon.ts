@@ -1,68 +1,70 @@
-import { GamePlayMenu } from "../ui/menu/gamePlayMenu";
+import { GameMenu } from "../ui/menu/gameMenu";
 
+export class MapInformationIcon extends Phaser.GameObjects.Image {
+  isShow: boolean = false;
+  gamePlayMenuScene!: Phaser.Scene;
 
-export class MapInformationIcon extends Phaser.GameObjects.Image{
+  showtext!: Array<string>;
 
-    isShow : boolean = false;
-    gamePlayMenuScene! : Phaser.Scene;
+  constructor(
+    scene: Phaser.Scene,
+    x: number,
+    y: number,
+    key: string,
+    showText: Array<string>
+  ) {
+    super(scene, x, y, key);
+    this.scene.add.existing(this);
+    this.showtext = showText;
 
-    showtext!: Array<string>
+    this.init();
+  }
 
-    constructor(scene: Phaser.Scene, x: number, y: number, key : string,
-        showText:  Array<string>){
-        super(scene,x,y,key)
-        this.scene.add.existing(this)
-        this.showtext = showText;
+  init() {
+    this.setScale(0.3);
 
-        this.init();
-    }
+    this.addZone();
+    this.addAnimation();
+  }
 
-    init(){
-        
-        this.setScale(0.3)
+  addAnimation() {
+    this.scene.tweens.add({
+      targets: this,
+      scale: 0.31,
+      duration: 200,
+      repeat: Infinity,
+      yoyo: true,
+    });
+  }
 
-        this.addZone();
-        this.addAnimation();
-    }
+  addZone() {
+    const zone = this.scene.matter.add.circle(this.x, this.y, 30, {
+      ignoreGravity: true,
+      collisionFilter: {
+        category: 0x0001,
+        mask: 0x0002,
+      },
+      isSensor: true,
+    });
 
-    addAnimation(){
-        this.scene.tweens.add({
-            targets: this,
-            scale : 0.31,
-            duration:200,
-            repeat : Infinity,
-            yoyo:true
-        })
-    }
+    this.scene.matter.world.on("collisionstart", (event: any) => {
+      event.pairs.forEach((pair: any) => {
+        if (pair.bodyB === zone) {
+          if (this.isShow === false) {
+            // this.setVisible(false)
+            this.isShow = true;
+            this.scene.matter.world.remove(zone);
+            this.showInformation();
+          }
+        }
+      });
+    });
+  }
 
-    addZone(){
-        const zone = this.scene.matter.add.circle(this.x,this.y,30,{
-            ignoreGravity:true,
-            collisionFilter: {
-                category: 0x0001,
-                mask: 0x0002
-            },
-            isSensor:true
-        })
-
-        this.scene.matter.world.on('collisionstart', (event : any) => {
-            event.pairs.forEach((pair : any) => {
-            if (pair.bodyB === zone) {
-                    if(this.isShow === false){
-                        // this.setVisible(false)
-                        this.isShow = true;
-                        this.scene.matter.world.remove(zone)
-                        this.showInformation();
-                    }
-                }
-            });
-        });
-    }
-
-    showInformation(){
-        this.gamePlayMenuScene = this.scene.scene.get("UI") as GamePlayMenu;
-        //@ts-ignore
-        this.gamePlayMenuScene.showInformationOnMap(this.showtext);
-        this.destroy(true)
-    }
+  showInformation() {
+    this.gamePlayMenuScene = this.scene.scene.get("GameMenu") as GameMenu;
+    //@ts-ignore
+    this.gamePlayMenuScene.showInformationOnMap(this.showtext);
+    this.destroy(true);
+  }
 }
