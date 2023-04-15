@@ -182,6 +182,7 @@ export class GameMenu extends Phaser.Scene {
       .image(modalContainer.width / 2, 368, "ok-button")
       .setInteractive()
       .on(Phaser.Input.Events.POINTER_DOWN, () => {
+        this.gamePlayScene.buttonSound.play();
         this.hideMenu();
         modalContainer.destroy(true);
       });
@@ -284,6 +285,7 @@ export class GameMenu extends Phaser.Scene {
 
     //Add Events
     this.menuButton.on(Phaser.Input.Events.POINTER_DOWN, () => {
+      this.gamePlayScene.buttonSound.play();
       this.showMenu();
     });
 
@@ -325,6 +327,7 @@ export class GameMenu extends Phaser.Scene {
       .setInteractive()
       .on(Phaser.Input.Events.POINTER_DOWN, () => {
         this.hideMenu();
+        this.gamePlayScene.buttonSound.play();
       })
       .on(Phaser.Input.Events.POINTER_OVER, () => {
         continueButton.setScale(0.55);

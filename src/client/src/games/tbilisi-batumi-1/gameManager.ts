@@ -1,5 +1,6 @@
 import { gameZonesData } from "./data/gameZones";
 import { Asteroid } from "./gameObjects/asteroid";
+import { Car } from "./gameObjects/car";
 import { getRandomFloat } from "./helper/tatukaMath";
 import { GamePlay } from "./scenes/gamePlay";
 import { GameMenu } from "./ui/menu/gameMenu";
@@ -8,11 +9,15 @@ let radioIsAccess = false;
 let speedometerIsAccess = false;
 let moneyIsAccess = false;
 
-// let save_x = -100;
-// let save_y = 368;
+// x: -45900,
+//           y: 910,
 
-let save_x = -45900;
-let save_y = 910;
+interface SaveZoneData {
+  carPositions: {
+    x: number;
+    y: number;
+  };
+}
 
 const showScreenTexts: Record<number, { title: string; text: string }> = {
   1: {
@@ -26,6 +31,9 @@ export class GameManager {
   gameMenu!: GameMenu;
   carBody!: Phaser.GameObjects.Sprite;
 
+  saveZonesData: Array<SaveZoneData> = [];
+  saveZoneIndex = 0;
+
   backgroundImage!: Phaser.GameObjects.Image;
 
   asteroids: Array<Asteroid> = [];
@@ -37,17 +45,48 @@ export class GameManager {
 
   init() {
     this.gameMenu = this.gamePlay.scene.get("GameMenu") as GameMenu;
-    this.carBody = this.gamePlay.car.carBody;
 
+    this.saveZonesData = [
+      {
+        carPositions: {
+          x: -100,
+          y: 386,
+        },
+      },
+      {
+        carPositions: {
+          x: -40200,
+          y: 770,
+        },
+      },
+    ];
+
+    this.initCar();
     this.createGameZones();
     this.createBackgroundImage();
     this.createAsteroids();
   }
 
+  initCar() {
+    this.gamePlay.car = new Car(
+      this.gamePlay,
+      this.saveZonesData[this.saveZoneIndex].carPositions.x,
+      this.saveZonesData[this.saveZoneIndex].carPositions.y
+    );
+    this.carBody = this.gamePlay.car.carBody;
+  }
+
+  saveGame(index: number) {
+    this.saveZoneIndex = index;
+  }
+
   createBackgroundImage() {
     this.backgroundImage = this.gamePlay.add
       .image(0, 0, "white")
-      .setScale(9)
+      .setDisplaySize(
+        this.gamePlay.game.canvas.width,
+        this.gamePlay.game.canvas.height
+      )
       .setScrollFactor(0, 0)
       .setDepth(-1000)
       .setOrigin(0)
@@ -71,7 +110,10 @@ export class GameManager {
 
     //time when camera is dark
     setTimeout(() => {
-      this.gamePlay.car.resetCar(save_x, save_y);
+      this.gamePlay.car.resetCar(
+        this.saveZonesData[this.saveZoneIndex].carPositions.x,
+        this.saveZonesData[this.saveZoneIndex].carPositions.y
+      );
     }, 400);
 
     setTimeout(() => {
@@ -115,6 +157,8 @@ export class GameManager {
       },
       4: {
         enter: () => {
+          this.gamePlay.musicPlayer.stopRadio();
+          this.gamePlay.musicPlayer.playObstacleSong(0);
           this.startFallingAsteroids();
           this.changeColorToGameBackground(0x730d31, 1, 9000);
         },

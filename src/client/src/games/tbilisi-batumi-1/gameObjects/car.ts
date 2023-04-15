@@ -1,3 +1,4 @@
+import { getRandomFloat } from "../helper/tatukaMath";
 import { GamePlay } from "../scenes/gamePlay";
 
 export class Car {
@@ -9,11 +10,10 @@ export class Car {
   isMoving = false;
   onGround = true;
   canMoving = true;
-  isExplosive = false;
+  isCarExplosion = false;
   isUpsideDown = false;
   stopUpdateProcess = false;
 
-  isCarExplosion = false;
   looseWaitTime = 300;
 
   allObjects: Array<Phaser.Physics.Matter.Sprite> = [];
@@ -26,6 +26,9 @@ export class Car {
   isAcceleratingLeft = false;
   isAcceleratingRight = false;
 
+  explosionSound!: Phaser.Sound.BaseSound;
+  evilLaughSound!: Phaser.Sound.BaseSound;
+
   constructor(scene: GamePlay, x: number, y: number) {
     this.scene = scene;
     this.x = x;
@@ -34,7 +37,8 @@ export class Car {
     this.carMeshe = this.scene.cache.json.get("carMeshe");
 
     this.init();
-    this.rotate();
+    // becouse default car image is rotat to Right
+    this.rotateToLeft();
   }
 
   init() {
@@ -43,6 +47,16 @@ export class Car {
     this.addBags();
     this.addController();
     this.addBoy();
+    this.addSoundEffects();
+  }
+
+  addSoundEffects() {
+    this.explosionSound = this.scene.sound.add("carExplotionSound", {
+      volume: 1,
+    });
+    this.evilLaughSound = this.scene.sound.add("evilLaughSound", {
+      volume: 1,
+    });
   }
 
   addBoy() {
@@ -79,7 +93,7 @@ export class Car {
     );
   }
 
-  rotate() {
+  rotateToLeft() {
     let scaleX = this.carBody.scaleX;
     this.carBody.setScale(-scaleX, 1);
   }
@@ -159,8 +173,6 @@ export class Car {
   addController() {
     let accelerationRate = 0.004;
     let maxSpeed = 25;
-
-    const scene = this.scene as GamePlay;
 
     this.scene.input.keyboard.on("keydown-LEFT", () => {
       this.isAcceleratingLeft = true;
@@ -362,17 +374,33 @@ export class Car {
         object.setVisible(false);
       });
 
+      this.explosionSound.play();
+      this.evilLaughSound.play();
+
       this.stopUpdateProcess = true;
 
-      const carExplotion = this.scene.add.sprite(
-        this.carBody.x,
-        this.carBody.y,
-        "carExplotion"
-      );
-      carExplotion.play("carExplotion");
+      // play 5 explosion animations during each touch
+      let carExplosions: Array<Phaser.GameObjects.Sprite> = [];
+      for (let i = 0; i < 5; i++) {
+        let x = this.carBody.x;
+        let y = this.carBody.y;
+        let time = 0;
+        const explotion = this.scene.add
+          .sprite(
+            x + getRandomFloat(-80, 80),
+            y + getRandomFloat(-50, 50),
+            "carExplotion"
+          )
+          .setScale(getRandomFloat(0.1, 1.7));
+        carExplosions.push(explotion);
+        explotion.play("car_explotion");
+      }
 
-      carExplotion.on("animationcomplete", () => {
-        carExplotion.destroy(true);
+      carExplosions[4].on("animationcomplete", () => {
+        carExplosions.forEach((explotion) => {
+          explotion.destroy(true);
+        });
+
         this.isCarExplosion = true;
         this.checkLoose();
       });

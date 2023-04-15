@@ -29,6 +29,11 @@ export class Preload extends Phaser.Scene {
 
     //Sound Effects
     this.load.audio("monetSound", ["music/effects/monet.mp3"]);
+    this.load.audio("plugSound", ["music/effects/plug.mp3"]);
+    this.load.audio("buttonSound", ["music/effects/button.mp3"]);
+    this.load.audio("carExplotionSound", ["music/effects/car-explotion.mp3"]);
+    this.load.audio("applauseSound", ["music/effects/applause.mp3"]);
+    this.load.audio("evilLaughSound", ["music/effects/evil-laugh.mp3"]);
 
     //asteroid Animation
     this.load.spritesheet("asteroid", "spritesheets/asteroid.png", {
@@ -114,9 +119,17 @@ export class Preload extends Phaser.Scene {
     this.load.image("flower-4", "map/assets/flower-4.png");
     this.load.image("grass-1", "map/assets/grass-1.png");
     this.load.image("tree-1", "map/assets/tree-1.png");
+    this.load.image("small-traparet", "map/assets/small-traparet.png");
+
+    //Load Menu
+    this.load.image("menuBackground", "menu/menuScene/background.png");
+    this.load.svg("menuCarBody", "menu/menuScene/carBody.svg");
+    this.load.svg("menuCarTire", "menu/menuScene/tire.svg");
+    this.load.image("plug", "menu/menuScene/plug.png");
+    this.load.image("menuButton", "menu/menuScene/button.png");
   }
 
   create() {
-    this.scene.start("GamePlay");
+    this.scene.start("Menu");
   }
 }

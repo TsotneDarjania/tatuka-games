@@ -16,16 +16,6 @@ export class BonFire {
   }
 
   init() {
-    this.scene.anims.create({
-      key: "bonfire_idle",
-      frameRate: 13,
-      frames: this.scene.anims.generateFrameNumbers("bonfire", {
-        start: 0,
-        end: 53,
-      }),
-      repeat: -1,
-    });
-
     const bonfire = this.scene.add
       .sprite(this.x, this.y, "bonfire")
       .setTint(0xecff59)
