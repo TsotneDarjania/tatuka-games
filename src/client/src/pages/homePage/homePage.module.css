@@ -1,2 +1,36 @@
-@import url('https://fonts.googleapis.com/css2?family=Bungee+Inline&display=swap');
 
+.personal{
+    width: 100vw;
+    height: 100vh;
+
+    background-color: rgb(255, 251, 251);
+}
+
+.backButton{
+    font-family: 'Bungee Inline', cursive;
+
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+
+    width: 240px;
+    height: 70px;
+
+    bottom: 100px;
+
+    cursor: pointer;
+    transition: 0.25s;
+    border: none;
+    color: white;
+    background-color: rgb(8, 84, 112);
+    box-shadow: 7px 7px 0px 0px rgb(6, 40, 55);
+    font-size: 24px;
+}
+
+.backButton:hover{
+    color: rgb(1, 41, 31);
+    background-color: rgb(1, 228, 168);
+    box-shadow: -7px -7px 0px 0px rgb(2, 108, 79);  
+}

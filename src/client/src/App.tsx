@@ -1,12 +1,12 @@
 import React from "react";
 
 import "./index";
-import { HomePage } from "./pages/homePage/HomePage";
+import { HomeMenu } from "./pages/homeMenu/HomeMenu";
 
 function App() {
   return (
     <div className="App">
-      <HomePage />
+      <HomeMenu />
     </div>
   );
 }

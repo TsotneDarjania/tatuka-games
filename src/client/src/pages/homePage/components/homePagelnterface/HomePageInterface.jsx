@@ -1,20 +1,21 @@
-import React, { useEffect, useState } from 'react'
-import style from './personalInterface.module.css'
+import React, { useEffect, useState } from "react";
+import style from "./homePageInterface.module.css";
 
-import image from "../personalInterface/user.png"
-import { deleteCookies, getCookie } from '../../../../../../helper/cookie'
+import image from "./user.png";
+import { deleteCookies, getCookie } from "../../../../helper/cookie";
 
 const PersonalInterface = (props) => {
-
-  const [userName, setUserName] = useState(JSON.parse(getCookie("loginSession")).userName);
+  const [userName, setUserName] = useState(
+    JSON.parse(getCookie("loginSession")).userName
+  );
   console.log(userName);
 
-  useEffect( () => {
+  useEffect(() => {
     console.log(userName);
 
-    console.log(JSON.parse(getCookie("loginSession")))
-    console.log(JSON.parse(getCookie("loginSession")).userName)
-  },[])
+    console.log(JSON.parse(getCookie("loginSession")));
+    console.log(JSON.parse(getCookie("loginSession")).userName);
+  }, []);
 
   return (
     <div className={style.personalInterface}>
@@ -24,10 +25,16 @@ const PersonalInterface = (props) => {
           <div className={style.userFeatures}>
             <p className={style.userName}> {userName} </p>
             <p className={style.userName}> Save Device : Yes </p>
-            <button onClick={ () => {
-              props.setIsLogin(false)
-              deleteCookies();
-            }} className={style.logOut}> Log Out </button>
+            <button
+              onClick={() => {
+                props.setIsLogin(false);
+                deleteCookies();
+              }}
+              className={style.logOut}
+            >
+              {" "}
+              Log Out{" "}
+            </button>
             <button className={style.logOut}> Settings </button>
           </div>
         </div>
@@ -39,7 +46,7 @@ const PersonalInterface = (props) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default PersonalInterface
+export default PersonalInterface;
