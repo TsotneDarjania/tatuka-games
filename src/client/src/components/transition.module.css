@@ -1,33 +1,18 @@
+/* Top Part */
+.transition :nth-child(1) {
+  position: absolute;
+  width: 100vw;
+  height: 50vh;
+  background-color: rgb(255, 219, 193);
 
-
-.part_1{
-    position: absolute;
-    width: 100vw;
-    height: 50vh;
-
-    background-color: rgb(255, 219, 193);
-    transition: 0.5s;
-    z-index: 100;
-
-    top: -50vh;
+  z-index: 100;
 }
+/* Bottom Part */
+.transition :nth-child(2) {
+  position: absolute;
+  width: 100vw;
+  height: 50vh;
+  background-color: rgb(255, 219, 193);
 
-.toBottom{
-    top:0;
-}
-
-.part_2{
-    position: absolute;
-    width: 100vw;
-    height: 50vh;
-
-    background-color: rgb(255, 219, 193);
-    transition: 0.5s;
-    z-index: 100;
-
-    bottom: -50vh;
-}
-
-.toTop{
-    bottom:0vh;
+  z-index: 100;
 }

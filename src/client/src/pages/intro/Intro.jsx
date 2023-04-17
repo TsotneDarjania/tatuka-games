@@ -1,10 +1,11 @@
-import React, { useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Phaser from "phaser";
 
 import style from "./intro.module.css";
 import { Home } from "../intro/scenes/home";
+import TransitionAnimation from "../../components/Transition";
 
-export const Intro = (props) => {
+export const Intro = ({ setRequestedPage, setTransitionPlayAnimation }) => {
   const canvasContainer = useRef(null);
 
   useEffect(() => {
@@ -38,10 +39,8 @@ export const Intro = (props) => {
       <div ref={canvasContainer} className={style.canvas}></div>
       <button
         onClick={() => {
-          props.setTransitionAnimationState("Play");
-          setTimeout(() => {
-            props.setComponentState("games");
-          }, 600);
+          setTransitionPlayAnimation(true);
+          setRequestedPage("homeMenu");
         }}
         className={style.openButton}
       >

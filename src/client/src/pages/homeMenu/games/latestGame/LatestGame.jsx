@@ -1,38 +1,45 @@
-import React from 'react'
-
-import style from "./latestGame.module.css"
-
-import latestGameVideo from "../../videos/1.mp4"
-
-import gamesInfo from "../../../../data/gamesInfo.json"
+import React from "react";
+import style from "./latestGame.module.css";
+import latestGameVideo from "../../videos/1.mp4";
+import gamesInfo from "../../../../data/gamesInfo.json";
 
 const LatestGame = () => {
   return (
-     <div className={style.latestGameContainer}>
-        <div className={style.latestGameContainerBackgroundImage}></div>
-        <div className={style.leftContainer}>
-          <div className={style.leftContainerBackground}> </div>
-          <div className={style.leftContainerInsideBox}>
-              <div> <h3> <span> Name : </span> {gamesInfo.lastGame.name} </h3></div>
-              <div> <h3> <span> Publish Date : </span> : {gamesInfo.lastGame.publishData} </h3></div>
-              <div> 
-                  <h3>
-                    <span> Short Description : </span> 
-                    {gamesInfo.lastGame.shortDescription}
-                  </h3>
-              </div>
-          </div>
-          <button onClick={ () => {
-            window.open("http://localhost:3000"+gamesInfo.lastGame.url)
-          }} className={style.playButton}> Play </button>
+    <div className={style.latestGameContainer}>
+      <div className={style.latestGameContainerBackgroundImage}></div>
+      <div className={style.leftContainer}>
+        <div>
+          <h3>
+            <span> Name : </span> {gamesInfo.lastGame.name}
+          </h3>
         </div>
-        <div className={style.rightContainer}>
-          <video className={style.lastGameVideo} loop autoPlay>
-            <source src={latestGameVideo} type="video/mp4" />
-          </video>
+        <div>
+          <h3>
+            <span> Publish Date : </span> {gamesInfo.lastGame.publishData}{" "}
+          </h3>
         </div>
+        <div>
+          <h3>
+            <span> Short Description : </span>
+            {gamesInfo.lastGame.shortDescription}
+          </h3>
+        </div>
+        <button
+          onClick={() => {
+            window.open("http://localhost:3000" + gamesInfo.lastGame.url);
+          }}
+          className={style.playButton}
+        >
+          Play
+        </button>
       </div>
-  )
-}
+      <div className={style.rightContainer}>
+        <video className={style.lastGameVideo} loop autoPlay>
+          <source src={latestGameVideo} type="video/mp4" />
+        </video>
+      </div>
+    </div>
+  );
+};
 
-export default LatestGame
+export default LatestGame;
