@@ -6,3 +6,59 @@
 
   background-color: #0c0616;
 }
+
+.header {
+  width: 100vw;
+  height: 12vh;
+
+  display: flex;
+  font-weight: bold;
+  font-family: "Geo", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  gap: 30px;
+}
+
+.menu-li {
+  cursor: pointer;
+  color: rgb(62, 92, 90);
+  transition: 0.3s;
+
+  font-size: 21px;
+  padding: 20px;
+  border: 2px solid rgb(48, 116, 125);
+}
+.menu-li:hover {
+  color: rgb(16, 180, 180);
+}
+
+.selected-li {
+  font-size: 30px;
+  border: 2px solid rgb(16, 180, 180);
+  color: rgb(16, 180, 180);
+}
+
+.menu-item {
+  transition: 0.4s;
+  opacity: 0;
+}
+
+.show-item {
+  opacity: 1;
+}
+
+@media screen and (max-width: 700px) {
+  .menu-li {
+    font-size: 17px;
+    padding: 7px;
+    border: 2px solid rgb(48, 116, 125);
+  }
+
+  .selected-li {
+    font-size: 21px;
+    border: 2px solid rgb(16, 180, 180);
+    color: rgb(16, 180, 180);
+  }
+}

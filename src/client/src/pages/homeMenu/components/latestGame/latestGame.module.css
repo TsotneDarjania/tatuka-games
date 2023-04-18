@@ -41,7 +41,7 @@
   flex-direction: column;
   padding: 20px;
 
-  backdrop-filter: brightness(30%);
+  /* backdrop-filter: hue-rotate(120deg); */
   font-family: "Geo", sans-serif;
 }
 
@@ -57,13 +57,13 @@
 }
 
 .leftContainer div {
-  color: rgb(57, 143, 186);
+  color: rgb(136, 240, 244);
   font-size: 23px;
 }
 .leftContainer span {
   font-size: 33px;
   font-weight: bold;
-  color: rgb(1, 48, 74);
+  color: rgb(69, 140, 179);
 }
 
 .lastGameVideo {
@@ -126,10 +126,10 @@
   }
 
   .leftContainer div {
-    font-size: 18px;
+    font-size: 15px;
   }
   .leftContainer span {
-    font-size: 22px;
+    font-size: 19px;
     font-weight: bold;
   }
 
