@@ -6,6 +6,7 @@ import "./index";
 import { Intro } from "./pages/intro/Intro";
 import { HomeMenu } from "./pages/homeMenu/HomeMenu";
 import TransitionAnimation from "./components/Transition";
+import HomePage from "./pages/homePage/HomePage";
 
 function App() {
   const [isloading, setIsLoading] = useState(true);
@@ -63,7 +64,13 @@ function App() {
           setTransitionPlayAnimation={setTransitionPlayAnimation}
         />
       )}
-      {page === "homeMenu" && <HomeMenu />}
+      {page === "homeMenu" && (
+        <HomeMenu
+          setRequestedPage={setRequestedPage}
+          setTransitionPlayAnimation={setTransitionPlayAnimation}
+        />
+      )}
+      {page === "homePage" && <HomePage />}
 
       <TransitionAnimation
         isTransitionPlayAnimation={isTransitionPlayAnimation}

@@ -45,7 +45,7 @@ export const Intro = ({ setRequestedPage, setTransitionPlayAnimation }) => {
         className={style.openButton}
       >
         {" "}
-        Open{" "}
+        Open
       </button>
     </div>
   );

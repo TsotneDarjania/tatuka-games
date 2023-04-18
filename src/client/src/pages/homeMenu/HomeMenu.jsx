@@ -4,7 +4,7 @@ import style from "./homeMenu.module.css";
 import LatestGame from "./components/latestGame/LatestGame";
 import MiniGames from "./components/miniGames/MiniGames";
 
-export const HomeMenu = () => {
+export const HomeMenu = ({ setRequestedPage, setTransitionPlayAnimation }) => {
   const [menuMode, setMenuMode] = useState("latest-game");
 
   const [menuClasses, setMenuClasses] = useState({
@@ -74,6 +74,16 @@ export const HomeMenu = () => {
       >
         <MiniGames />
       </div>
+      <button
+        onClick={() => {
+          setTransitionPlayAnimation(true);
+          setRequestedPage("homePage");
+        }}
+        type="button"
+        className={style.homeButton}
+      >
+        Home
+      </button>
     </div>
   );
 };
