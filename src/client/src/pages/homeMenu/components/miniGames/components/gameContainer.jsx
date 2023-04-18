@@ -23,11 +23,11 @@ const GameContainer = () => {
       <div className={style.indicators}>
         <ul>
           <li className={style.likeIcon}>
-            <AiFillLike /> <li className={style.number}> 0 </li>
+            <AiFillLike /> <span className={style.number}> 0 </span>
           </li>
 
           <li className={style.deslikeIcon}>
-            <li className={style.number}> 0 </li>
+            <span className={style.number}> 0 </span>
             <AiFillLike />
           </li>
 

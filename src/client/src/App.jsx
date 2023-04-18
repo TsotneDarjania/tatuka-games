@@ -70,7 +70,12 @@ function App() {
           setTransitionPlayAnimation={setTransitionPlayAnimation}
         />
       )}
-      {page === "homePage" && <HomePage />}
+      {page === "homePage" && (
+        <HomePage
+          setRequestedPage={setRequestedPage}
+          setTransitionPlayAnimation={setTransitionPlayAnimation}
+        />
+      )}
 
       <TransitionAnimation
         isTransitionPlayAnimation={isTransitionPlayAnimation}
