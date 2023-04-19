@@ -1,84 +1,103 @@
-@import url('https://fonts.googleapis.com/css2?family=Bungee+Inline&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Geo&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Bungee+Inline&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Geo&display=swap");
 
+.warning {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
 
-.warning{
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
+  z-index: 50;
 
-    z-index: 50;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
-.shadow{
-    position: absolute;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgb(0, 0, 0);
-    opacity: 0.9;
+.shadow {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(0, 0, 0);
+  opacity: 0.9;
 
-    animation-name: show-anim;
-    animation-fill-mode: forwards;
-    animation-duration: 0.3s;
+  animation-name: show-anim;
+  animation-fill-mode: forwards;
+  animation-duration: 0.3s;
 }
 @keyframes show-anim {
-    from{
-        opacity: 0;
-    }
-    to{
-        opacity: 0.9;
-    } 
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.9;
+  }
 }
 
-.content{
-    animation-name: show-anim;
-    animation-fill-mode: forwards;
-    animation-duration: 0.3s;
+.content {
+  animation-name: show-anim;
+  animation-fill-mode: forwards;
+  animation-duration: 0.3s;
 
-    position: relative;
-    width: 900px;
-    padding: 30px;
-    background-color: rgb(255, 173, 233);
-    z-index: 55;
-    text-align: center;
-    border-radius: 10px;
-    border: 7px solid rgb(161, 33, 120);
+  position: relative;
+  width: 900px;
+  padding: 30px;
+  background-color: rgb(255, 212, 174);
+  z-index: 55;
+  text-align: center;
+  border-radius: 10px;
+  border: 7px solid rgb(161, 73, 33);
 }
 
-.title{
-    color: rgb(144, 0, 0);
-    font-size: 30px;
-    letter-spacing: 1px;
-    font-family: 'Bungee Inline', cursive;
+.title {
+  color: rgb(235, 98, 0);
+  font-size: 30px;
+  letter-spacing: 1px;
+  font-family: "Bungee Inline", cursive;
 }
 
-.text{
-    color: rgb(32, 0, 62);
-    font-family: 'Bungee Inline', cursive;
-    font-size: 20px;
+.text {
+  color: rgb(193, 86, 10);
+  font-family: "Bungee Inline", cursive;
+  font-size: 20px;
 }
 
-.okButton{
-    width: 80px;
-    height: 80px;
-    border-radius: 20px;
-    z-index: 70;
-    margin-top: 20px;
-    font-family: 'Bungee Inline', cursive;
-    background-color: rgb(251, 219, 255);
-    border: 7px solid rgb(161, 33, 120);
-    color: rgb(1, 22, 40);
-    font-size: 20px;
-    transition: 0.3s;
-    cursor: pointer;
+.okButton {
+  width: 80px;
+  height: 80px;
+  border-radius: 20px;
+  z-index: 70;
+  margin-top: 20px;
+  font-family: "Bungee Inline", cursive;
+  background-color: rgb(255, 212, 174);
+  border: 7px solid rgb(161, 73, 33);
+  color: rgb(243, 94, 8);
+  font-size: 20px;
+  transition: 0.3s;
+  cursor: pointer;
 }
 
-.okButton:hover{
-    background-color: black;
-    color: white;
+.okButton:hover {
+  background-color: black;
+  color: white;
+}
+
+@media screen and (max-width: 980px) {
+  .content {
+    width: 700px;
+    padding: 20px;
+  }
+}
+
+@media screen and (max-width: 757px) {
+  .content {
+    width: 90vw;
+    padding: 10px;
+  }
+  .text {
+    color: rgb(193, 86, 10);
+    font-family: "Bungee Inline", cursive;
+    font-size: 17px;
+    line-height: 25px;
+  }
 }

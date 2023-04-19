@@ -1,0 +1,109 @@
+@import url("https://fonts.googleapis.com/css2?family=Bungee+Inline&display=swap");
+
+.homeMenu {
+  width: 100vw;
+  height: 100vh;
+
+  background-color: #0c0616;
+}
+
+.header {
+  width: 100vw;
+  height: 12vh;
+
+  display: flex;
+  font-weight: bold;
+  font-family: "Geo", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  gap: 30px;
+}
+
+.menu-li {
+  cursor: pointer;
+  color: rgb(62, 92, 90);
+  transition: 0.3s;
+
+  font-size: 21px;
+  padding: 20px;
+  border: 2px solid rgb(48, 116, 125);
+}
+.menu-li:hover {
+  color: rgb(16, 180, 180);
+}
+
+.selected-li {
+  font-size: 30px;
+  border: 2px solid rgb(16, 180, 180);
+  color: rgb(16, 180, 180);
+}
+
+.menu-item {
+  transition: 0.4s;
+  opacity: 0;
+}
+
+.show-item {
+  opacity: 1;
+}
+
+.homeButton {
+  width: 200px;
+  height: 50px;
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+
+  transition: 0.4s;
+  color: white;
+  font-size: 32px;
+  cursor: pointer;
+  font-weight: bold;
+  border: none;
+  box-shadow: 4px 4px 0px 0px rgb(249, 165, 119);
+  font-family: "Geo", sans-serif;
+  background-color: rgb(219, 113, 8);
+}
+
+.homeButton:hover {
+  box-shadow: -4px -4px 0px 0px rgb(249, 165, 119);
+}
+
+@media screen and (max-width: 900px) {
+  .homeButton {
+    width: 120px;
+    height: 40px;
+    position: absolute;
+    bottom: 10px;
+    right: 0;
+    left: 0;
+    margin-left: auto;
+    margin-right: auto;
+
+    transition: 0.4s;
+    color: white;
+    font-size: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    border: none;
+    box-shadow: 4px 4px 0px 0px rgb(249, 165, 119);
+    font-family: "Geo", sans-serif;
+    background-color: rgb(219, 113, 8);
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .menu-li {
+    font-size: 17px;
+    padding: 7px;
+    border: 2px solid rgb(48, 116, 125);
+  }
+
+  .selected-li {
+    font-size: 21px;
+    border: 2px solid rgb(16, 180, 180);
+    color: rgb(16, 180, 180);
+  }
+}
