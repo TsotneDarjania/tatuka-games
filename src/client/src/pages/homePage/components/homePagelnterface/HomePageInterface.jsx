@@ -6,13 +6,14 @@ import { deleteCookies, getCookie } from "../../../../helper/cookie";
 
 import { CgMenuGridR } from "react-icons/cg";
 
-const HomePageInterface = (props) => {
-  // const [userName, setUserName] = useState(
-  //   JSON.parse(getCookie("loginSession")).userName
-  // );
+const HomePageInterface = ({ setIsLogin }) => {
+  const [userName, setUserName] = useState(
+    JSON.parse(getCookie("loginSession")).userName
+  );
 
   const logOut = () => {
     deleteCookies();
+    setIsLogin(false);
   };
 
   const [menuClassName, setMenuClassName] = useState("");
@@ -32,8 +33,14 @@ const HomePageInterface = (props) => {
 
       <div className={style["menu"] + " " + style[menuClassName]}>
         <ul>
-          <li> {"asdiuahdiuh"} </li>
-          <li onClick={logOut}> Log Out</li>
+          <li> {userName} </li>
+          <li
+            onClick={() => {
+              logOut();
+            }}
+          >
+            Log Out
+          </li>
         </ul>
       </div>
 

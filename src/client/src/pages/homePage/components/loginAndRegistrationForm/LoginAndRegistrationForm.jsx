@@ -3,7 +3,7 @@ import Warning from "../../../../components/Warning";
 import { deleteCookies, setCookie } from "../../../../helper/cookie";
 import style from "./loginAndRegistrationForm.module.css";
 
-const LoginAndRegistrationForm = (props) => {
+const LoginAndRegistrationForm = ({ setIsLogin }) => {
   const [userName, setUserName] = useState("");
   const [userPassword, setUserPassword] = useState("");
 
@@ -109,7 +109,7 @@ const LoginAndRegistrationForm = (props) => {
       }),
       2100
     );
-    props.setIsLogin(true);
+    setIsLogin(true);
   };
 
   return (
@@ -200,8 +200,7 @@ const LoginAndRegistrationForm = (props) => {
             type="button"
             className={style.submitButton}
           >
-            {" "}
-            Registration{" "}
+            Registration
           </button>
         </div>
       </div>

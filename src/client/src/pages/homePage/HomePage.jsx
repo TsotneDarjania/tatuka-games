@@ -5,10 +5,19 @@ import LoginAndRegistrationForm from "./components/loginAndRegistrationForm/Logi
 import style from "./homePage.module.css";
 import HomePageInterface from "./components/homePagelnterface/HomePageInterface";
 
-const HomePage = ({ setRequestedPage, setTransitionPlayAnimation }) => {
+const HomePage = ({
+  isLogin,
+  setIsLogin,
+  setRequestedPage,
+  setTransitionPlayAnimation,
+}) => {
   return (
     <div className={style.homePage}>
-      {1 === 2 ? <LoginAndRegistrationForm /> : <HomePageInterface />}
+      {isLogin === false ? (
+        <LoginAndRegistrationForm setIsLogin={setIsLogin} />
+      ) : (
+        <HomePageInterface setIsLogin={setIsLogin} />
+      )}
       <button
         onClick={() => {
           setTransitionPlayAnimation(true);

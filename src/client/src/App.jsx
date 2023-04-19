@@ -13,7 +13,7 @@ function App() {
   const [isLogin, setIsLogin] = useState(false);
 
   useEffect(() => {
-    // checkIfLogin();
+    checkIfLogin();
   }, []);
 
   const checkIfLogin = () => {
@@ -72,6 +72,8 @@ function App() {
       )}
       {page === "homePage" && (
         <HomePage
+          isLogin={isLogin}
+          setIsLogin={setIsLogin}
           setRequestedPage={setRequestedPage}
           setTransitionPlayAnimation={setTransitionPlayAnimation}
         />
