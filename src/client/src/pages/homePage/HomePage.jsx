@@ -1,13 +1,14 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import PersonalInterface from "./components/homePagelnterface/HomePageInterface";
+
 import LoginAndRegistrationForm from "./components/loginAndRegistrationForm/LoginAndRegistrationForm";
 import style from "./homePage.module.css";
+import HomePageInterface from "./components/homePagelnterface/HomePageInterface";
 
 const HomePage = ({ setRequestedPage, setTransitionPlayAnimation }) => {
   return (
-    <div className={style.personal}>
-      {1 === 1 ? <LoginAndRegistrationForm /> : <PersonalInterface />}
+    <div className={style.homePage}>
+      {1 === 2 ? <LoginAndRegistrationForm /> : <HomePageInterface />}
       <button
         onClick={() => {
           setTransitionPlayAnimation(true);

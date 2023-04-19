@@ -1,100 +1,258 @@
 @import url("https://fonts.googleapis.com/css2?family=Bungee+Inline&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Geo&display=swap");
 
-.personalInterface {
+.homePageInterface {
   width: 100vw;
   height: 100vh;
+
+  background-color: rgb(255, 241, 224);
+}
+
+.gameHistoryContainer {
   position: absolute;
-}
+  width: 50vw;
+  height: 40vh;
 
-.userAvatarImage {
-  width: 330px;
-  height: 330px;
-}
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
 
-.content {
+  margin-top: auto;
+  margin-bottom: auto;
+  top: 0;
+  bottom: 0;
+  font-family: "Geo", sans-serif;
+
   display: flex;
-  width: 100vw;
-  justify-content: center;
+  justify-content: start;
+  align-items: center;
+  flex-direction: column;
 }
 
-.contentBox {
-  position: relative;
-  width: 50%;
+.gameHistoryContainer h2 {
+  text-align: center;
+  font-size: 40px;
+  color: rgb(172, 104, 41);
+}
 
+.gamesContainer {
+  list-style: none;
   padding: 20px;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.gamesItem {
+  height: 100px;
+}
+
+.gamesItem ul {
+  list-style: none;
   display: flex;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+
   gap: 20px;
 }
 
-.userFeatures {
-  display: flex;
-
-  flex-direction: column;
-  justify-content: left;
-}
-
-.userName {
-  color: rgb(92, 91, 91);
-  font-size: 24px;
-  letter-spacing: 1px;
-  font-family: "Geo", sans-serif;
-}
-
-.logOut {
-  width: 150px;
-  height: 40px;
-
-  margin-top: 5px;
-  transition: 0.3s;
-  cursor: pointer;
+.gamesItem ul li {
+  color: rgb(226, 138, 5);
+  font-size: 30px;
   font-weight: bold;
-  font-size: 22px;
-  color: white;
-  border: none;
-  background-color: rgb(89, 88, 88);
-  font-family: "Geo", sans-serif;
-}
-
-.logOut:hover {
-  background-color: rgb(32, 32, 32);
-}
-
-.lastGameBackground {
-  position: absolute;
-  width: 95.7%;
-  height: 100%;
-
-  background-image: url("../../../homeMenu//images//games//wallpapers/1.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  opacity: 0.5;
-  background-color: rgb(13, 1, 23);
-}
-
-.latestGameContent {
-  position: absolute;
-  width: 95.7%;
-  height: 100%;
 }
 
 .continueButton {
-  position: absolute;
-  width: 240px;
-  height: 65px;
+  width: 200px;
+  height: 40px;
+  background-color: rgb(244, 132, 53);
+  color: white !important;
+  text-align: center;
+  cursor: pointer;
 
-  background-color: rgb(80, 80, 80);
-  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s;
+}
+.continueButton:hover {
+  background-color: #6b3c00;
+}
+
+.homeIcon {
+  position: absolute;
+
+  margin-top: auto;
+  margin-bottom: auto;
+  top: 0;
   bottom: 0;
 
-  border: none;
-  font-family: "Geo", sans-serif;
-  color: white;
-  font-size: 30px;
+  width: min-content;
+  height: min-content;
+  font-size: 70px;
   cursor: pointer;
+  color: #e15a07;
+
+  z-index: 50;
+
+  left: 10px;
   transition: 0.3s;
 }
 
-.continueButton:hover {
-  background-color: black;
+.homeIcon:hover {
+  color: #f9bb6b;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #6b3c00;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #ffd39a;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #dc783e;
+}
+
+.menu {
+  position: absolute;
+  left: 92px;
+  z-index: 20;
+  width: 0;
+  transition: 0.5s;
+  width: 280px;
+  height: 100vh;
+
+  opacity: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.showMenu {
+  opacity: 1;
+  display: flex;
+  background-color: rgb(50, 27, 0);
+}
+
+.menu ul {
+  list-style: none;
+  color: white;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.menu ul li {
+  text-align: center;
+  font-family: "Geo", sans-serif;
+  font-weight: bold;
+  font-size: 25px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.menu ul li:hover {
+  color: #ec931e;
+}
+
+@media screen and (max-width: 1325px) {
+  .menu {
+    width: 220px;
+    height: 100vh;
+  }
+}
+@media screen and (max-width: 1137px) {
+  .gameHistoryContainer {
+    position: absolute;
+    width: 40vw;
+    height: 60vh;
+  }
+  .continueButton {
+    width: 140px;
+    height: 30px;
+    font-size: 20px !important;
+  }
+  .gamesItem ul li {
+    font-size: 20px;
+  }
+  .gamesItem {
+    height: 70px;
+  }
+
+  .menu ul li {
+    font-size: 25px;
+  }
+}
+@media screen and (max-width: 519px) {
+  .menu {
+    width: 82.5%;
+    left: 17.5%;
+    height: 100vh;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .gameHistoryContainer {
+    position: absolute;
+    height: 60vh;
+    width: 70vw;
+  }
+  .homeIcon {
+    position: absolute;
+
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+
+    margin-top: inherit;
+    margin-bottom: inherit;
+    bottom: inherit;
+
+    top: 10px;
+
+    font-size: 70px;
+  }
+  .continueButton {
+    width: 100px;
+    height: 30px;
+    font-size: 20px !important;
+  }
+  .gameHistoryContainer h2 {
+    text-align: center;
+    font-size: 30px;
+  }
+  .gamesItem ul li {
+    font-size: 17px;
+  }
+  .gamesItem {
+    height: 70px;
+  }
+
+  .menu ul li {
+    font-size: 25px;
+  }
+
+  .menu {
+    width: 100%;
+    left: 0%;
+    top: 0vh;
+    height: 100vh;
+  }
 }
