@@ -31,10 +31,10 @@ export const TbilisiBatumi: React.FC = () => {
       },
       parent: canvasContainer.current,
       type: Phaser.AUTO,
-      width: 1600,
-      height: 900,
+      width: window.innerWidth + 10,
+      height: window.innerHeight + 10,
       backgroundColor: 0x19053b,
-      scene: [Boot, Menu, StartScene, Preload, GamePlay, GameMenu],
+      scene: [StartScene, Boot, Menu, Preload, GamePlay, GameMenu],
     });
 
     return () => game.destroy(true, false);
