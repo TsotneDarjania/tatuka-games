@@ -9,9 +9,6 @@ let radioIsAccess = false;
 let speedometerIsAccess = false;
 let moneyIsAccess = false;
 
-// x: -45900,
-//           y: 910,
-
 interface SaveZoneData {
   carPositions: {
     x: number;

@@ -1,5 +1,5 @@
 import { RegistrationModal } from "../../common/registrationModal";
-// import { API } from "../api";
+import { API } from "../api";
 
 interface initResponse {
   statusCode: number;
@@ -8,7 +8,7 @@ interface initResponse {
 
 export class StartScene extends Phaser.Scene {
   initResponse!: any;
-  //   api!: API;
+  api!: API;
 
   constructor() {
     super("Start");
@@ -28,21 +28,19 @@ export class StartScene extends Phaser.Scene {
   }
 
   create() {
-    // this.api = new API();
-    // this.initialization();
-
-    this.showLoginModal();
+    this.api = new API();
+    this.initialization();
   }
 
-  //   async initialization() {
-  //     try {
-  //       this.initResponse = await this.api.init();
-  //       console.log("Init response:", this.initResponse);
-  //       this.checkSession();
-  //     } catch (error) {
-  //       console.error("Error while initializing:", error);
-  //     }
-  //   }
+  async initialization() {
+    try {
+      this.initResponse = await this.api.init();
+      console.log("Init response:", this.initResponse);
+      this.checkSession();
+    } catch (error) {
+      console.error("Error while initializing:", error);
+    }
+  }
 
   checkSession() {
     if (this.initResponse.statusCode === 1) {

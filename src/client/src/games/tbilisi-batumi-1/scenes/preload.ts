@@ -121,7 +121,7 @@ export class Preload extends Phaser.Scene {
     this.load.image("tree-1", "map/assets/tree-1.png");
     this.load.image("small-traparet", "map/assets/small-traparet.png");
 
-    //Load Menu
+    //Menu Scene
     this.load.image("menuBackground", "menu/menuScene/background.png");
     this.load.svg("menuCarBody", "menu/menuScene/carBody.svg");
     this.load.svg("menuCarTire", "menu/menuScene/tire.svg");

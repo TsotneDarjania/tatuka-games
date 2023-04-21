@@ -1,0 +1,66 @@
+{
+  "extraWidth": {
+    "canvas": {
+      "width": 1500,
+      "height": 850
+    },
+    "gameMenu": {
+      "menuIcon": {
+        "positions": {
+          "x": -50,
+          "y": 50
+        },
+        "scale": 0.5
+      }
+    },
+    "menu": {
+      "touchScreenText": {
+        "text": ["Touch To Scren For Open Menu"],
+        "fontSize": 50
+      },
+      "plug": {
+        "positions": {
+          "x": -108,
+          "y": 300
+        },
+        "scale": {
+          "width": 200,
+          "height": 30
+        }
+      },
+      "playButton": {
+        "positions": {
+          "x": 0,
+          "y": -120
+        },
+        "scale": 1.5
+      },
+      "playText": {
+        "fontSize": 35,
+        "padding": 14
+      },
+      "mapButton": {
+        "positions": {
+          "x": 0,
+          "y": 0
+        },
+        "scale": 1.5
+      },
+      "mapText": {
+        "fontSize": 35,
+        "padding": 14
+      },
+      "informationButton": {
+        "positions": {
+          "x": 0,
+          "y": 120
+        },
+        "scale": 1.5
+      },
+      "informationText": {
+        "fontSize": 35,
+        "padding": 14
+      }
+    }
+  }
+}

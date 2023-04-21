@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Phaser from "phaser";
 import { Preload } from "./scenes/preload";
 import { GamePlay } from "./scenes/gamePlay";
@@ -12,8 +12,13 @@ import { StartScene } from "./scenes/start";
 import { Menu } from "./scenes/menu";
 import { Boot } from "./scenes/boot";
 
-export const TbilisiBatumi: React.FC = () => {
-  const canvasContainer = useRef<HTMLDivElement>(null);
+import { screenSize } from "./config/getScreenSize";
+import responsiveData from "./config/layoutConfig.json";
+
+export const TbilisiBatumi = () => {
+  const canvasContainer = useRef(null);
+  const size = useRef(20);
+  console.log(screenSize());
 
   useEffect(() => {
     if (!canvasContainer.current) return;
@@ -31,18 +36,20 @@ export const TbilisiBatumi: React.FC = () => {
       },
       parent: canvasContainer.current,
       type: Phaser.AUTO,
-      width: window.innerWidth + 10,
-      height: window.innerHeight + 10,
+      scale: {
+        autoCenter: Phaser.Scale.CENTER_BOTH,
+        // width: responsiveData[screenSize()].canvas.width,
+        // height: responsiveData[screenSize()].canvas.height,
+        width: window.innerWidth,
+        height: window.innerHeight,
+      },
+
       backgroundColor: 0x19053b,
-      scene: [StartScene, Boot, Menu, Preload, GamePlay, GameMenu],
+      scene: [Boot, Menu, Preload, GamePlay, GameMenu, StartScene],
     });
 
     return () => game.destroy(true, false);
   }, []);
 
-  return (
-    <div className={style.game}>
-      <div ref={canvasContainer} className={style.canvas}></div>;
-    </div>
-  );
+  return <div ref={canvasContainer} className={style.canvas}></div>;
 };

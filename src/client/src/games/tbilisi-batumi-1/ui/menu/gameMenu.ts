@@ -1,6 +1,8 @@
 import MusicPlayer from "../../musicPlayer";
 import { GamePlay } from "../../scenes/gamePlay";
 
+import { screenSize } from "../../config/getScreenSize";
+
 export class GameMenu extends Phaser.Scene {
   layer!: Phaser.GameObjects.Layer;
   speedometerContainer!: Phaser.GameObjects.Container;
@@ -35,11 +37,18 @@ export class GameMenu extends Phaser.Scene {
   moneyText!: Phaser.GameObjects.Text;
   moneyContainer!: Phaser.GameObjects.Container;
 
+  screenWidth!: number;
+  screenHeight!: number;
+
   constructor() {
     super("GameMenu");
   }
 
   create() {
+    //Initil Canvas Screen Sizes
+    this.screenWidth = this.game.canvas.width;
+    this.screenHeight = this.game.canvas.height;
+
     this.gamePlayScene = this.scene.get("GamePlay") as GamePlay;
 
     this.menuButtonsContainer = this.add.container(0, 0);
@@ -278,8 +287,12 @@ export class GameMenu extends Phaser.Scene {
 
   addMenuIcon() {
     this.menuButton = this.add
-      .image(1530, 50, "gamePlayMenuIcon")
-      .setScale(0.5)
+      .image(
+        this.screenWidth + screenSize().gameMenu.menuIcon.positions.x,
+        screenSize().gameMenu.menuIcon.positions.y,
+        "gamePlayMenuIcon"
+      )
+      .setScale(screenSize().gameMenu.menuIcon.scale)
       .setAlpha(0.5)
       .setInteractive();
 

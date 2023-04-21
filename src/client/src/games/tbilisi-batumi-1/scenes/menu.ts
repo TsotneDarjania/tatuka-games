@@ -1,8 +1,15 @@
+import { calculatePercentage } from "../helper/tatukaMath";
+import config from "../config/layoutConfig.json";
+import { Responsivedata } from "../config/interfaces";
+
+import { screenSize } from "../config/getScreenSize";
+
 export class Menu extends Phaser.Scene {
   backgroundZone!: Phaser.GameObjects.Image;
   touchToScreenText!: Phaser.GameObjects.Text;
   touchScreenTextTween!: Phaser.Tweens.Tween;
   plug!: Phaser.GameObjects.Image;
+  configData: Responsivedata = config;
 
   isMenuOff = true;
 
@@ -38,80 +45,128 @@ export class Menu extends Phaser.Scene {
       .setDepth(100);
 
     const playButton = this.add
-      .text(0, -200, "Play", {
-        fontFamily: "mainFont",
-        color: "#FFF5D7",
-        backgroundColor: "#D4700D",
-        fontSize: "35px",
-        align: "center",
-      })
+      .image(
+        screenSize().menu.playButton.positions.x,
+        screenSize().menu.playButton.positions.y,
+        "menuButton"
+      )
       .setOrigin(0.5)
-      .setDepth(100)
-      .setShadow(3, 3, "#D4930D")
-      .setPadding(14)
+      .setScale(screenSize().menu.playButton.scale)
       .setInteractive({ cursor: "pointer" })
       .on(Phaser.Input.Events.POINTER_OVER, () => {
-        playButton.setScale(1.1);
-        playButton.setBackgroundColor("#402204");
+        playButton.setTint(0x143bfc);
+        playText.setScale(1.2);
       })
       .on(Phaser.Input.Events.POINTER_OUT, () => {
-        playButton.setScale(1);
-        playButton.setBackgroundColor("#D4700D");
+        playButton.setTint(0xffffff);
+        playText.setScale(1);
       })
       .on(Phaser.Input.Events.POINTER_DOWN, () => {
         this.buttonSound.play();
         this.playGame();
       });
 
-    const mapButton = this.add
-      .text(0, -100, "Map", {
-        fontFamily: "mainFont",
-        color: "#FFF5D7",
-        backgroundColor: "#D4700D",
-        fontSize: "35px",
-        align: "center",
-      })
+    const playText = this.add
+      .text(
+        screenSize().menu.playButton.positions.x,
+        screenSize().menu.playButton.positions.y,
+        "Play",
+        {
+          fontFamily: "mainFont",
+          color: "#FFF5D7",
+          fontSize: `${screenSize().menu.playText.fontSize}px`,
+          align: "center",
+        }
+      )
       .setOrigin(0.5)
+      .setDepth(100)
       .setShadow(3, 3, "#D4930D")
-      .setPadding(14)
+      .setPadding(screenSize().menu.playText.padding);
+
+    const mapButton = this.add
+      .image(
+        screenSize().menu.mapButton.positions.x,
+        screenSize().menu.mapButton.positions.y,
+        "menuButton"
+      )
+      .setOrigin(0.5)
+      .setScale(screenSize().menu.mapButton.scale)
       .setInteractive({ cursor: "pointer" })
       .on(Phaser.Input.Events.POINTER_OVER, () => {
-        mapButton.setScale(1.1);
-        mapButton.setBackgroundColor("#402204");
+        mapButton.setTint(0x143bfc);
+        mapText.setScale(1.2);
       })
       .on(Phaser.Input.Events.POINTER_OUT, () => {
-        mapButton.setScale(1);
-        mapButton.setBackgroundColor("#D4700D");
+        mapButton.setTint(0xffffff);
+        mapText.setScale(1);
       })
       .on(Phaser.Input.Events.POINTER_DOWN, () => {
         this.buttonSound.play();
       });
+
+    const mapText = this.add
+      .text(
+        screenSize().menu.mapButton.positions.x,
+        screenSize().menu.mapButton.positions.y,
+        "Map",
+        {
+          fontFamily: "mainFont",
+          color: "#FFF5D7",
+          fontSize: `${screenSize().menu.mapText.fontSize}px`,
+          align: "center",
+        }
+      )
+      .setOrigin(0.5)
+      .setDepth(100)
+      .setShadow(3, 3, "#D4930D")
+      .setPadding(screenSize().menu.mapText.padding);
 
     const informationButton = this.add
-      .text(0, 0, "Game Information", {
-        fontFamily: "mainFont",
-        color: "#FFF5D7",
-        backgroundColor: "#D4700D",
-        fontSize: "35px",
-        align: "center",
-      })
+      .image(
+        screenSize().menu.informationButton.positions.x,
+        screenSize().menu.informationButton.positions.y,
+        "menuButton"
+      )
       .setOrigin(0.5)
-      .setShadow(3, 3, "#D4930D")
-      .setPadding(14)
+      .setScale(screenSize().menu.informationButton.scale)
       .setInteractive({ cursor: "pointer" })
       .on(Phaser.Input.Events.POINTER_OVER, () => {
-        informationButton.setScale(1.1);
-        informationButton.setBackgroundColor("#402204");
+        informationButton.setTint(0x143bfc);
+        informationText.setScale(1.2);
       })
       .on(Phaser.Input.Events.POINTER_OUT, () => {
-        informationButton.setScale(1);
-        informationButton.setBackgroundColor("#D4700D");
+        informationButton.setTint(0xffffff);
+        informationText.setScale(1);
       })
       .on(Phaser.Input.Events.POINTER_DOWN, () => {
         this.buttonSound.play();
       });
 
-    this.menuButtonsContainer.add([playButton, mapButton, informationButton]);
+    const informationText = this.add
+      .text(
+        screenSize().menu.informationButton.positions.x,
+        screenSize().menu.informationButton.positions.y,
+        "Info",
+        {
+          fontFamily: "mainFont",
+          color: "#FFF5D7",
+          fontSize: `${screenSize().menu.informationText.fontSize}px`,
+          align: "center",
+        }
+      )
+      .setOrigin(0.5)
+      .setDepth(100)
+      .setShadow(3, 3, "#D4930D")
+      .setPadding(screenSize().menu.informationText.padding);
+
+    this.menuButtonsContainer.add([
+      playButton,
+      playText,
+      mapButton,
+      mapText,
+      informationButton,
+      informationText,
+    ]);
 
     this.menuButtonsContainer.setScale(0);
   }
@@ -121,11 +176,11 @@ export class Menu extends Phaser.Scene {
       .text(
         this.game.canvas.width / 2,
         this.game.canvas.height / 2,
-        "Touch To Scren For Open Menu",
+        screenSize().menu.touchScreenText.text,
         {
           align: "center",
           fontFamily: "mainFont",
-          fontSize: "50px",
+          fontSize: `${screenSize().menu.touchScreenText.fontSize}px`,
         }
       )
       .setAlpha(0)
@@ -157,7 +212,12 @@ export class Menu extends Phaser.Scene {
   }
 
   addPlug() {
-    this.plug = this.add.image(1510, 300, "plug").setScale(0.8);
+    this.plug = this.add
+      .image(this.game.canvas.width - 108, 300, "plug")
+      .setDisplaySize(
+        calculatePercentage(4, this.game.canvas.width),
+        calculatePercentage(2, this.game.canvas.height)
+      );
   }
 
   addInteractiveZone() {
