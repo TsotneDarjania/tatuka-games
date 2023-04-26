@@ -42,7 +42,7 @@ export class SaveZone {
 
   addZone() {
     // add Dead Zone
-    const zone = this.scene.matter.add.rectangle(this.x, 0, 300, 2200, {
+    const zone = this.scene.matter.add.rectangle(this.x, 0, 300, 4200, {
       ignoreGravity: true,
       collisionFilter: {
         category: 0x0001,
@@ -54,6 +54,7 @@ export class SaveZone {
     this.scene.matter.world.on("collisionstart", (event: any) => {
       event.pairs.forEach((pair: any) => {
         if (pair.bodyB === zone) {
+          this.scene.gameMenu.radioOnn();
           //Check if this save zone already access
           if (this.saveZoneIndex <= this.scene.gameManager.saveZoneIndex)
             return;

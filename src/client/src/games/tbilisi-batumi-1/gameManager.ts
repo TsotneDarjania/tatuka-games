@@ -1,13 +1,10 @@
 import { gameZonesData } from "./data/gameZones";
 import { Asteroid } from "./gameObjects/asteroid";
 import { Car } from "./gameObjects/car";
+import { Rock } from "./gameObjects/rock";
 import { getRandomFloat } from "./helper/tatukaMath";
 import { GamePlay } from "./scenes/gamePlay";
 import { GameMenu } from "./ui/menu/gameMenu";
-
-let radioIsAccess = false;
-let speedometerIsAccess = false;
-let moneyIsAccess = false;
 
 interface SaveZoneData {
   carPositions: {
@@ -21,6 +18,10 @@ const showScreenTexts: Record<number, { title: string; text: string }> = {
     title: "BATUMISKEN",
     text: "Tbilisi Section",
   },
+  2: {
+    title: "Mission Complete",
+    text: "Road to Gori",
+  },
 };
 
 export class GameManager {
@@ -28,12 +29,17 @@ export class GameManager {
   gameMenu!: GameMenu;
   carBody!: Phaser.GameObjects.Sprite;
 
+  canRadioChange: boolean = false;
+
   saveZonesData: Array<SaveZoneData> = [];
-  saveZoneIndex = 0;
+  saveZoneIndex = 4;
 
   backgroundImage!: Phaser.GameObjects.Image;
 
   asteroids: Array<Asteroid> = [];
+  skyRocks: Array<Rock> = [];
+
+  isSkyRocksAlreadyFalling: boolean = false;
 
   constructor(scene: Phaser.Scene) {
     this.gamePlay = scene as GamePlay;
@@ -42,6 +48,11 @@ export class GameManager {
 
   init() {
     this.gameMenu = this.gamePlay.scene.get("GameMenu") as GameMenu;
+    //Initial Car Indicators
+    if (this.saveZoneIndex > 0) {
+      this.gameMenu.radioIsAccess = true;
+      this.gameMenu.moneyIsaccess = true;
+    }
 
     this.saveZonesData = [
       {
@@ -56,12 +67,37 @@ export class GameManager {
           y: 770,
         },
       },
+      {
+        carPositions: {
+          x: -73900,
+          y: 1180,
+        },
+      },
+      {
+        carPositions: {
+          x: -100500,
+          y: 970,
+        },
+      },
+      {
+        carPositions: {
+          x: -110090,
+          y: 1040,
+        },
+      },
+      {
+        carPositions: {
+          x: -117690,
+          y: 900,
+        },
+      },
     ];
 
     this.initCar();
     this.createGameZones();
     this.createBackgroundImage();
     this.createAsteroids();
+    this.createSkyRocks();
   }
 
   initCar() {
@@ -103,6 +139,7 @@ export class GameManager {
   replay() {
     this.gamePlay.resetCamera(400);
     this.gameMenu.stopUpdateProcess = true;
+    this.gameMenu.gameIndicatorsContainer.setVisible(false);
     this.stopFallingAsteroids();
 
     //time when camera is dark
@@ -119,7 +156,10 @@ export class GameManager {
     }, 500);
   }
 
-  cameraResetFinish() {}
+  cameraResetFinish() {
+    this.gameMenu.gameIndicatorsContainer.setVisible(true);
+    this.gameMenu.stopUpdateProcess = false;
+  }
 
   emptyFunction() {}
 
@@ -130,6 +170,7 @@ export class GameManager {
     > = {
       1: {
         enter: () => {
+          this.gamePlay.musicPlayer.playSpecialSong(0);
           this.showScreenText(1);
         },
         exit: () => {
@@ -154,14 +195,38 @@ export class GameManager {
       },
       4: {
         enter: () => {
-          this.gamePlay.musicPlayer.stopRadio();
-          this.gamePlay.musicPlayer.playObstacleSong(0);
+          if (this.gamePlay.musicPlayer.specialSongs[1].isPlaying === false) {
+            this.gamePlay.musicPlayer.stopAllSong();
+          }
+          this.gameMenu.radioOff();
+          this.gamePlay.musicPlayer.playSpecialSong(1);
           this.startFallingAsteroids();
           this.changeColorToGameBackground(0x730d31, 1, 9000);
         },
         exit: () => {
           this.stopFallingAsteroids();
           this.changeColorToGameBackground(0x730d31, 0, 9000);
+        },
+      },
+      5: {
+        enter: () => {
+          if (this.gamePlay.musicPlayer.specialSongs[2].isPlaying === false) {
+            this.gamePlay.musicPlayer.stopAllSong();
+          }
+          this.gamePlay.musicPlayer.playSpecialSong(2);
+          this.gameMenu.radioOnn();
+          this.showScreenText(2);
+        },
+        exit: () => {
+          this.emptyFunction();
+        },
+      },
+      6: {
+        enter: () => {
+          this.startFallingRocks();
+        },
+        exit: () => {
+          this.emptyFunction();
         },
       },
     };
@@ -205,27 +270,46 @@ export class GameManager {
   }
 
   createAsteroids() {
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < 2; i++) {
       this.asteroids.push(
         new Asteroid(
           this.gamePlay,
           this.carBody.x - 700 + getRandomFloat(0, 1400),
-          0
+          -700
         )
       );
     }
   }
 
+  createSkyRocks() {
+    for (let i = 0; i < 20; i++) {
+      const rock = new Rock(
+        this.gamePlay,
+        -108700 + getRandomFloat(-400, 0),
+        getRandomFloat(-300, -900)
+      );
+      rock.rockImage.setStatic(true);
+      this.skyRocks.push(rock);
+    }
+  }
+
+  startFallingRocks() {
+    if (this.isSkyRocksAlreadyFalling) return;
+    this.skyRocks.forEach((rock) => {
+      rock.rockImage.setStatic(false);
+    });
+    this.isSkyRocksAlreadyFalling = true;
+  }
+
   startFallingAsteroids() {
     this.asteroids.forEach((asteroid) => {
-      asteroid.isFalling = true;
       asteroid.startFalling();
     });
   }
 
   stopFallingAsteroids() {
     this.asteroids.forEach((asteroid) => {
-      asteroid.isFalling = false;
+      asteroid.stopFalling();
     });
   }
 }

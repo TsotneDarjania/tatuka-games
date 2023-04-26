@@ -1,8 +1,70 @@
+export interface MapInformationIconData {
+  x: number;
+  y: number;
+  text: Array<string>;
+}
+export interface BombsData {
+  x: number;
+  y: number;
+}
+export interface SaveZonesData {
+  x: number;
+  y: number;
+  icon: string;
+  text: Array<string>;
+  index: number;
+}
+export interface StarsData {
+  x: number;
+  y: number;
+  count: number;
+}
+export interface MusicIconsData {
+  x: number;
+  y: number;
+  key: string;
+  text: Array<string>;
+  musicKey: string;
+}
+
 export interface Responsivedata {
   extraWidth: {
     canvas: {
       width: number;
       height: number;
+    };
+    gameMenu: {
+      menuIcon: {
+        positions: {
+          x: number;
+          y: number;
+        };
+        scale: number;
+      };
+      speedometer: {
+        positions: {
+          y: number;
+        };
+      };
+      speedometerArrow: {
+        positions: {
+          y: number;
+        };
+      };
+      radioLeftButtons: {
+        positions: {
+          x: number;
+          y: number;
+        };
+        scale: number;
+      };
+      radioRightButtons: {
+        positions: {
+          x: number;
+          y: number;
+        };
+        scale: number;
+      };
     };
     menu: {
       touchScreenText: {

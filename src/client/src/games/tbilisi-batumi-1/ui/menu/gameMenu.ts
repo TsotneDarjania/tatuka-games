@@ -1,5 +1,6 @@
 import MusicPlayer from "../../musicPlayer";
 import { GamePlay } from "../../scenes/gamePlay";
+import layoutConfig from "../../config/layoutConfig.json";
 
 import { screenSize } from "../../config/getScreenSize";
 
@@ -72,6 +73,8 @@ export class GameMenu extends Phaser.Scene {
     this.addMenuIcon();
     this.addMenuButtons();
     this.creatScreenTexts();
+
+    this.openAccessIndicators();
   }
 
   openAccessIndicators() {
@@ -113,9 +116,17 @@ export class GameMenu extends Phaser.Scene {
   createRadioButtons() {
     // Green Buttons
     const radioLeftGreenButton = this.add
-      .image(650, 865, "radioGreenButton")
+      .image(
+        this.screenWidth / 2 +
+          screenSize().gameMenu.radioLeftButtons.positions.x,
+        this.screenHeight + screenSize().gameMenu.radioLeftButtons.positions.y,
+        "radioGreenButton"
+      )
       .setScale(1.2)
       .setInteractive()
+      .on(Phaser.Input.Events.POINTER_DOWN, () => {
+        this.gamePlayScene.musicPlayer.changeRadioToUp();
+      })
       .on(Phaser.Input.Events.POINTER_OVER, () => {
         radioLeftGreenButton.setScale(1.4);
       })
@@ -124,7 +135,12 @@ export class GameMenu extends Phaser.Scene {
       });
 
     const radioRightGreenButton = this.add
-      .image(945, 865, "radioGreenButton")
+      .image(
+        this.screenWidth / 2 +
+          screenSize().gameMenu.radioRightButtons.positions.x,
+        this.screenHeight + screenSize().gameMenu.radioRightButtons.positions.y,
+        "radioGreenButton"
+      )
       .setScale(1.2)
       .setFlipY(true)
       .setInteractive()
@@ -137,7 +153,12 @@ export class GameMenu extends Phaser.Scene {
 
     // Red Buttons
     const radioLeftRedButton = this.add
-      .image(650, 865, "radioRedButton")
+      .image(
+        this.screenWidth / 2 +
+          screenSize().gameMenu.radioLeftButtons.positions.x,
+        this.screenHeight + screenSize().gameMenu.radioLeftButtons.positions.y,
+        "radioRedButton"
+      )
       .setScale(1.2)
       .setInteractive()
       .on(Phaser.Input.Events.POINTER_OVER, () => {
@@ -148,7 +169,12 @@ export class GameMenu extends Phaser.Scene {
       });
 
     const radioRightRedButton = this.add
-      .image(945, 865, "radioRedButton")
+      .image(
+        this.screenWidth / 2 +
+          screenSize().gameMenu.radioRightButtons.positions.x,
+        this.screenHeight + screenSize().gameMenu.radioRightButtons.positions.y,
+        "radioRedButton"
+      )
       .setScale(1.2)
       .setFlipY(true)
       .setInteractive()
@@ -164,6 +190,8 @@ export class GameMenu extends Phaser.Scene {
 
     this.speedometerContainer.add(this.radioGreenButtons);
     this.speedometerContainer.add(this.radioRedButtons);
+
+    this.radioOff();
   }
 
   radioOnn() {
@@ -194,13 +222,15 @@ export class GameMenu extends Phaser.Scene {
         this.gamePlayScene.buttonSound.play();
         this.hideMenu();
         modalContainer.destroy(true);
-      });
+      })
+      .setScale(0.3)
+      .setTint(0xffd4ca);
 
     okButton.on(Phaser.Input.Events.POINTER_OVER, () => {
-      okButton.setScale(1.1);
+      okButton.setScale(0.32);
     });
     okButton.on(Phaser.Input.Events.POINTER_OUT, () => {
-      okButton.setScale(1);
+      okButton.setScale(0.3);
     });
 
     const txt = this.add
@@ -226,6 +256,58 @@ export class GameMenu extends Phaser.Scene {
       scale: 1,
       ease: Phaser.Math.Easing.Bounce.Out,
     });
+  }
+
+  showGovermentInformationOnMap(
+    iconKey: string,
+    text: string[],
+    price: number
+  ) {
+    const modalContainer = this.add.container(0, 0);
+
+    if (price === 0) {
+      const icon = this.add
+        .image(this.game.canvas.width / 2, 200, iconKey)
+        .setScale(0.8)
+        .setDepth(-1);
+
+      const modalBackground = this.add
+        .image(this.game.canvas.width / 2, 349, "white")
+        .setDisplaySize(400, 40)
+        .setOrigin(0.5)
+        .setTint(0x192e19);
+
+      const modalText = this.add
+        .text(this.game.canvas.width / 2, 400, text, {
+          fontSize: "27px",
+          color: "#D8FFBD",
+          backgroundColor: "#11140F",
+          align: "center",
+        })
+        .setPadding(20)
+        .setOrigin(0.5, 0);
+
+      const okButton = this.add
+        .image(this.game.canvas.width / 2, 598, "ok-button")
+        .setInteractive()
+        .on(Phaser.Input.Events.POINTER_DOWN, () => {
+          this.gamePlayScene.buttonSound.play();
+          this.hideMenu();
+          modalContainer.destroy(true);
+        })
+        .setScale(0.2)
+        .setTint(0x93ad80);
+
+      okButton.on(Phaser.Input.Events.POINTER_OVER, () => {
+        okButton.setScale(0.23);
+      });
+      okButton.on(Phaser.Input.Events.POINTER_OUT, () => {
+        okButton.setScale(0.2);
+      });
+
+      modalContainer.add([icon, modalBackground, modalText, okButton]);
+    } else {
+    }
   }
 
   creatScreenTexts() {
@@ -399,13 +481,21 @@ export class GameMenu extends Phaser.Scene {
 
   addSpeedometer() {
     this.speedometer = this.add
-      .image(this.game.canvas.width / 2, 760, "speedometer")
+      .image(
+        this.game.canvas.width / 2,
+        this.screenHeight + screenSize().gameMenu.speedometer.positions.y,
+        "speedometer"
+      )
       .setScale(0.4);
 
     this.speedometerContainer.add(this.speedometer);
 
     this.speedometerArrow = this.add
-      .image(this.game.canvas.width / 2 + 11, 810, "speedometer-arrow")
+      .image(
+        this.game.canvas.width / 2 + 11,
+        this.screenHeight + screenSize().gameMenu.speedometerArrow.positions.y,
+        "speedometer-arrow"
+      )
       .setScale(0.3)
       .setOrigin(0.5, 0.99)
       .setRotation(-1.5);

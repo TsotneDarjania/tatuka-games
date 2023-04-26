@@ -11,6 +11,10 @@ import {
   MapInformationIconData,
   mapInformationIconsData,
 } from "../data/mapInformationIconData";
+import bombsData from "../data/bombsData.json";
+import saveZonesData from "../data/saveZonesData.json";
+import starsData from "../data/starsData.json";
+import musicIconsData from "../data/musicIconsData.json";
 
 import { GameMenu } from "../ui/menu/gameMenu";
 import { Angel } from "../gameObjects/angel";
@@ -22,6 +26,16 @@ import MusicPlayer from "../musicPlayer";
 import { Monet } from "../gameObjects/monet";
 import { Flower } from "../gameObjects/flower";
 import { SaveZone } from "../gameObjects/saveZone";
+import { Stars } from "../gameObjects/stars";
+import { MusicIcon } from "../gameObjects/musicIcon";
+import { GovermentStation } from "../gameObjects/govermentStation";
+import {
+  BombsData,
+  MusicIconsData,
+  SaveZonesData,
+  StarsData,
+} from "../config/interfaces";
+import { Bomb } from "../gameObjects/bomb";
 
 export class GamePlay extends Phaser.Scene {
   gameMenu!: GameMenu;
@@ -71,19 +85,28 @@ export class GamePlay extends Phaser.Scene {
 
     this.musicPlayer = new MusicPlayer(this);
 
-    new SaveZone(
-      this,
-      -40300,
-      890,
-      "small-traparet",
-      ["23 Rustaveli", "Ave"],
-      1
-    );
+    new GovermentStation(this, -118880, 1160);
+
+    this.addBombs();
+
+    this.addStars();
+
+    this.addMusicMapIcons();
+
+    this.addSaveZones();
 
     new Angel(this, -6200, 40, [
       "Hello Player",
       "May god watches over you",
       "and keeps you safe on your travels",
+    ]);
+    new Angel(this, -62200, 600, [
+      "Praying for your strength",
+      "and resilience",
+    ]);
+    new Angel(this, -70100, 670, [
+      "Mtskheta is the city of God",
+      "you are safe here",
     ]);
 
     new Demon(this, -46800, 290, [
@@ -91,11 +114,18 @@ export class GamePlay extends Phaser.Scene {
       "Let's get the hell out of here",
     ]);
 
+    new Demon(this, -108000, 830, [
+      "Fool, I have a surprise",
+      "for you on the way",
+    ]);
+
     this.addRoads();
     this.addFlowers();
 
-    new BonFire(this, -58100, 1230, 4);
-    new BonFire(this, -60400, 1340, 2.6);
+    new BonFire(this, -58100, 1230, 900, 700);
+    new BonFire(this, -60400, 1340, 900, 700);
+    new BonFire(this, -63400, 1340, 900, 700);
+    new BonFire(this, -66000, 1380, 900, 700);
 
     this.addMapInformationIcons();
 
@@ -115,6 +145,30 @@ export class GamePlay extends Phaser.Scene {
 
     //Create UI Scene for Menu UI Elements
     this.scene.launch("GameMenu");
+  }
+
+  addMusicMapIcons() {
+    Object.values(musicIconsData).forEach((data: MusicIconsData) => {
+      new MusicIcon(this, data.x, data.y, data.key, data.text, data.musicKey);
+    });
+  }
+
+  addStars() {
+    Object.values(starsData).forEach((data: StarsData) => {
+      new Stars(this, data.x, data.y, data.count);
+    });
+  }
+
+  addBombs() {
+    Object.values(bombsData).forEach((data: BombsData) => {
+      new Bomb(this, data.x, data.y);
+    });
+  }
+
+  addSaveZones() {
+    Object.values(saveZonesData).forEach((data: SaveZonesData) => {
+      new SaveZone(this, data.x, data.y, data.icon, data.text, data.index);
+    });
   }
 
   addMapInformationIcons() {
@@ -142,13 +196,16 @@ export class GamePlay extends Phaser.Scene {
 
   addRoads() {
     Object.keys(roadJson).forEach((regionKey) => {
-      Object.keys(regionKey).forEach((key) => {
-        const index = Number(key) + 1;
+      //@ts-ignore
+      Object.keys(roadJson[regionKey]).forEach((key) => {
+        console.log("regionKey is : " + regionKey + " key is : " + key);
         //@ts-ignore
-        const road = new Road(this, roadJson[regionKey][index]);
+        const road = new Road(this, roadJson[regionKey][key]);
         this.roads.push(road);
       });
     });
+
+    // new Road(this, roadJson.roadToGori[3]);
   }
 
   addFlowers() {

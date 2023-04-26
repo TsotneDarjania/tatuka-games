@@ -1,17 +1,13 @@
 import { GamePlay } from "../scenes/gamePlay";
 
 export class BonFire {
-  scene!: Phaser.Scene;
-  x!: number;
-  y!: number;
-  scale!: number;
-
-  constructor(scene: Phaser.Scene, x: number, y: number, scale: number) {
-    this.scene = scene;
-    this.x = x;
-    this.y = y;
-    this.scale = scale;
-
+  constructor(
+    public scene: Phaser.Scene,
+    public x: number,
+    public y: number,
+    public width: number,
+    public height: number
+  ) {
     this.init();
   }
 
@@ -20,15 +16,15 @@ export class BonFire {
       .sprite(this.x, this.y, "bonfire")
       .setTint(0xecff59)
       .setDepth(-5)
-      .setScale(this.scale);
+      .setDisplaySize(this.width, this.height);
     bonfire.play("bonfire_idle");
 
     // add Dead Zone
     const deadZone = this.scene.matter.add.rectangle(
       this.x,
-      this.y + 280,
-      bonfire.width * this.scale,
-      bonfire.height * this.scale,
+      this.y + this.width / 2,
+      this.width,
+      this.height,
       {
         ignoreGravity: true,
         collisionFilter: {

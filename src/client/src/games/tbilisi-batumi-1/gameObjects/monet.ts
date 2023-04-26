@@ -45,7 +45,7 @@ export class Monet extends Phaser.GameObjects.Image {
   }
 
   addZone() {
-    const zone = this.scene.matter.add.circle(this.x, this.y, 25, {
+    const zone = this.scene.matter.add.circle(this.x, this.y, 20, {
       ignoreGravity: true,
       collisionFilter: {
         category: 0x0001,

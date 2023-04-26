@@ -1,52 +1,502 @@
 {
-    "tbilisi" : [
-        {"x":-700,"y":-150,"key":"tbilisi-build-9", "scrollFactor" : 0.04, "scale" : 1, "tint" : 16777215},
-        {"x":1200,"y":100,"key":"tbilisi-build-2", "scrollFactor" : 0.04, "scale" : 0.2, "tint" : 16777215},
-        {"x":1000,"y":10,"key":"tbilisi-build-6", "scrollFactor" : 0.04, "scale" : 0.4,"tint" : 16777215},
-        {"x":1300,"y":110,"key":"tbilisi-build-4", "scrollFactor" : 0.04, "scale" : 0.2,"tint" : 16777215},
-        {"x":0,"y":260,"key":"tbilisi-build-3", "scrollFactor" : 0.04, "scale" : 0.27,"tint" : 16777215},  
-        {"x":-600,"y":440,"key":"tbilisi-build-1", "scrollFactor" : 0.04, "scale" : 0.26,"tint" : 16777215},
-        {"x":-170,"y":380,"key":"tbilisi-build-2", "scrollFactor" : 0.04, "scale" : 0.23,"tint" : 4210750}, 
-        {"x":60,"y":580,"key":"tbilisi-build-4", "scrollFactor" : 0.04, "scale" : 0.4,"tint" : 16777215},
-        {"x":400,"y":140,"key":"tbilisi-build-1", "scrollFactor" : 0.04, "scale" : 0.25,"tint" : 16777215},
-        {"x":220,"y":10,"key":"tbilisi-build-10", "scrollFactor" : 0.04, "scale" : 0.4,"tint" : 16777215},
-        {"x":460,"y":300,"key":"tbilisi-build-2", "scrollFactor" : 0.04, "scale" : 0.3,"tint" : 16777215}, 
-        {"x":1300,"y":340,"key":"tbilisi-build-1", "scrollFactor" : 0.04, "scale" : 0.3,"tint" : 4210750}, 
-        {"x":1480,"y":200,"key":"tbilisi-build-2", "scrollFactor" : 0.04, "scale" : 0.25,"tint" : 12837741}, 
-        {"x":1600,"y":300,"key":"tbilisi-build-1", "scrollFactor" : 0.04, "scale" : 0.4,"tint" : 16777215}, 
-        {"x":1100,"y":450,"key":"tbilisi-build-4", "scrollFactor" : 0.04, "scale" : 0.3,"tint" : 16777215},
-        {"x":1360,"y":480,"key":"tbilisi-build-4", "scrollFactor" : 0.04, "scale" : 0.4,"tint" : 4210750},
-        {"x":1080,"y":300,"key":"tbilisi-build-2", "scrollFactor" : 0.04, "scale" : 0.25,"tint" : 16777215}, 
-        {"x":1700,"y":340,"key":"tbilisi-build-1", "scrollFactor" : 0.04, "scale" : 0.3,"tint" : 4210750}, 
-        {"x":860,"y":380,"key":"tbilisi-build-4", "scrollFactor" : 0.04, "scale" : 0.4,"tint" : 16777215},
-        {"x":560,"y":300,"key":"tbilisi-build-4", "scrollFactor" : 0.04, "scale" : 0.3,"tint" : 4210750},
-        {"x":480,"y":530,"key":"tbilisi-build-2", "scrollFactor" : 0.04, "scale" : 0.38,"tint" : 16777215}, 
-        {"x":200,"y":540,"key":"tbilisi-build-1", "scrollFactor" : 0.04, "scale" : 0.3,"tint" : 16777215},
-        {"x":-370,"y":580,"key":"tbilisi-build-2", "scrollFactor" : 0.04, "scale" : 0.34,"tint" : 16777215}, 
-        {"x":-1900,"y":520,"key":"tbilisi-build-1", "scrollFactor" : 0.04, "scale" : 0.40,"tint" : 12837741}, 
-        {"x":-1690,"y":340,"key":"tbilisi-build-11", "scrollFactor" : 0.04, "scale" : 0.35,"tint" : 16777215}, 
-        {"x":-1500,"y":490,"key":"tbilisi-build-2", "scrollFactor" : 0.04, "scale" : 0.3,"tint" : 16777215}, 
-        {"x":-1000,"y":370,"key":"tbilisi-build-4", "scrollFactor" : 0.04, "scale" : 0.25,"tint" : 4210750},
-        {"x":-1000,"y":480,"key":"tbilisi-build-7", "scrollFactor" : 0.04, "scale" : 0.35,"tint" : 16777215},
-        {"x":-1600,"y":720,"key":"tbilisi-build-2", "scrollFactor" : 0.04, "scale" : 0.40,"tint" : 12837741}, 
-        {"x":-1900,"y":820,"key":"tbilisi-build-2", "scrollFactor" : 0.04, "scale" : 0.30,"tint" : 7663600}, 
-        {"x":-900,"y":690,"key":"tbilisi-build-2", "scrollFactor" : 0.04, "scale" : 0.25,"tint" : 7663600}, 
-        {"x":-1500,"y":990,"key":"tbilisi-build-2", "scrollFactor" : 0.04, "scale" : 0.4,"tint" : 7663600}, 
-        {"x":-1200,"y":740,"key":"tbilisi-build-1", "scrollFactor" : 0.04, "scale" : 0.28,"tint" : 16777215},
-        {"x":-1800,"y":1200,"key":"tbilisi-build-1", "scrollFactor" : 0.04, "scale" : 0.48,"tint" : 16777215},
-        {"x":-2060,"y":1150,"key":"tbilisi-build-1", "scrollFactor" : 0.04, "scale" : 0.5,"tint" : 7663600},
-        {"x":-800,"y":840,"key":"tbilisi-build-2", "scrollFactor" : 0.04, "scale" : 0.35,"tint" : 12837741},
-        {"x":-1200,"y":1140,"key":"tbilisi-build-2", "scrollFactor" : 0.04, "scale" : 0.55,"tint" : 12837741} 
-    ],
-    "roadToGori" : [
-        {"x":-1600,"y":940,"key":"mountain-2", "scrollFactor" : 0.04, "scale" : 0.35,"tint" : 16777215},
-        {"x":-800,"y":740,"key":"mountain-1", "scrollFactor" : 0.04, "scale" : 0.5,"tint" :16777215},
-        {"x":0,"y":740,"key":"hill", "scrollFactor" : 0.04, "scale" : 0.8,"tint" : 7663600},
-        {"x":-1700,"y":1040,"key":"meadow", "scrollFactor" : 0.04, "scale" : 0.8,"tint" : 7663600},
-        {"x":0,"y":1040,"key":"meadow", "scrollFactor" : 0.04, "scale" : 0.8,"tint" : 7663600},
-        {"x":-1280,"y":1140,"key":"georgia-flag", "scrollFactor" : 0.04, "scale" : 0.25,"tint" : 16117175},
-        {"x":-1200,"y":1150,"key":"village-house-1", "scrollFactor" : 0.04, "scale" : 0.23,"tint" : 5273330},
-        {"x":-1140,"y":1190,"key":"village-house-1", "scrollFactor" : 0.04, "scale" : 0.2,"tint" : 5273330},
-        {"x":-1280,"y":1180,"key":"village-house-1", "scrollFactor" : 0.04, "scale" : 0.25,"tint" : 5273330}
-    ]
+  "tbilisi": [
+    {
+      "x": -700,
+      "y": -150,
+      "key": "tbilisi-build-9",
+      "scrollFactor": 0.04,
+      "scale": 1,
+      "tint": 16777215
+    },
+    {
+      "x": 1200,
+      "y": 100,
+      "key": "tbilisi-build-2",
+      "scrollFactor": 0.04,
+      "scale": 0.2,
+      "tint": 16777215
+    },
+    {
+      "x": 1000,
+      "y": 10,
+      "key": "tbilisi-build-6",
+      "scrollFactor": 0.04,
+      "scale": 0.4,
+      "tint": 16777215
+    },
+    {
+      "x": 1300,
+      "y": 110,
+      "key": "tbilisi-build-4",
+      "scrollFactor": 0.04,
+      "scale": 0.2,
+      "tint": 16777215
+    },
+    {
+      "x": 0,
+      "y": 260,
+      "key": "tbilisi-build-3",
+      "scrollFactor": 0.04,
+      "scale": 0.27,
+      "tint": 16777215
+    },
+    {
+      "x": -600,
+      "y": 440,
+      "key": "tbilisi-build-1",
+      "scrollFactor": 0.04,
+      "scale": 0.26,
+      "tint": 16777215
+    },
+    {
+      "x": -170,
+      "y": 380,
+      "key": "tbilisi-build-2",
+      "scrollFactor": 0.04,
+      "scale": 0.23,
+      "tint": 4210750
+    },
+    {
+      "x": 60,
+      "y": 580,
+      "key": "tbilisi-build-4",
+      "scrollFactor": 0.04,
+      "scale": 0.4,
+      "tint": 16777215
+    },
+    {
+      "x": 400,
+      "y": 140,
+      "key": "tbilisi-build-1",
+      "scrollFactor": 0.04,
+      "scale": 0.25,
+      "tint": 16777215
+    },
+    {
+      "x": 220,
+      "y": 10,
+      "key": "tbilisi-build-10",
+      "scrollFactor": 0.04,
+      "scale": 0.4,
+      "tint": 16777215
+    },
+    {
+      "x": 460,
+      "y": 300,
+      "key": "tbilisi-build-2",
+      "scrollFactor": 0.04,
+      "scale": 0.3,
+      "tint": 16777215
+    },
+    {
+      "x": 1300,
+      "y": 340,
+      "key": "tbilisi-build-1",
+      "scrollFactor": 0.04,
+      "scale": 0.3,
+      "tint": 4210750
+    },
+    {
+      "x": 1480,
+      "y": 200,
+      "key": "tbilisi-build-2",
+      "scrollFactor": 0.04,
+      "scale": 0.25,
+      "tint": 12837741
+    },
+    {
+      "x": 1600,
+      "y": 300,
+      "key": "tbilisi-build-1",
+      "scrollFactor": 0.04,
+      "scale": 0.4,
+      "tint": 16777215
+    },
+    {
+      "x": 1100,
+      "y": 450,
+      "key": "tbilisi-build-4",
+      "scrollFactor": 0.04,
+      "scale": 0.3,
+      "tint": 16777215
+    },
+    {
+      "x": 1360,
+      "y": 480,
+      "key": "tbilisi-build-4",
+      "scrollFactor": 0.04,
+      "scale": 0.4,
+      "tint": 4210750
+    },
+    {
+      "x": 1080,
+      "y": 300,
+      "key": "tbilisi-build-2",
+      "scrollFactor": 0.04,
+      "scale": 0.25,
+      "tint": 16777215
+    },
+    {
+      "x": 1700,
+      "y": 340,
+      "key": "tbilisi-build-1",
+      "scrollFactor": 0.04,
+      "scale": 0.3,
+      "tint": 4210750
+    },
+    {
+      "x": 860,
+      "y": 380,
+      "key": "tbilisi-build-4",
+      "scrollFactor": 0.04,
+      "scale": 0.4,
+      "tint": 16777215
+    },
+    {
+      "x": 560,
+      "y": 300,
+      "key": "tbilisi-build-4",
+      "scrollFactor": 0.04,
+      "scale": 0.3,
+      "tint": 4210750
+    },
+    {
+      "x": 480,
+      "y": 530,
+      "key": "tbilisi-build-2",
+      "scrollFactor": 0.04,
+      "scale": 0.38,
+      "tint": 16777215
+    },
+    {
+      "x": 200,
+      "y": 540,
+      "key": "tbilisi-build-1",
+      "scrollFactor": 0.04,
+      "scale": 0.3,
+      "tint": 16777215
+    },
+    {
+      "x": -370,
+      "y": 580,
+      "key": "tbilisi-build-2",
+      "scrollFactor": 0.04,
+      "scale": 0.34,
+      "tint": 16777215
+    },
+    {
+      "x": -1900,
+      "y": 520,
+      "key": "tbilisi-build-1",
+      "scrollFactor": 0.04,
+      "scale": 0.4,
+      "tint": 12837741
+    },
+    {
+      "x": -1690,
+      "y": 340,
+      "key": "tbilisi-build-11",
+      "scrollFactor": 0.04,
+      "scale": 0.35,
+      "tint": 16777215
+    },
+    {
+      "x": -1500,
+      "y": 490,
+      "key": "tbilisi-build-2",
+      "scrollFactor": 0.04,
+      "scale": 0.3,
+      "tint": 16777215
+    },
+    {
+      "x": -1000,
+      "y": 370,
+      "key": "tbilisi-build-4",
+      "scrollFactor": 0.04,
+      "scale": 0.25,
+      "tint": 4210750
+    },
+    {
+      "x": -1000,
+      "y": 480,
+      "key": "tbilisi-build-7",
+      "scrollFactor": 0.04,
+      "scale": 0.35,
+      "tint": 16777215
+    },
+    {
+      "x": -1600,
+      "y": 720,
+      "key": "tbilisi-build-2",
+      "scrollFactor": 0.04,
+      "scale": 0.4,
+      "tint": 12837741
+    },
+    {
+      "x": -1900,
+      "y": 820,
+      "key": "tbilisi-build-2",
+      "scrollFactor": 0.04,
+      "scale": 0.3,
+      "tint": 7663600
+    },
+    {
+      "x": -900,
+      "y": 690,
+      "key": "tbilisi-build-2",
+      "scrollFactor": 0.04,
+      "scale": 0.25,
+      "tint": 7663600
+    },
+    {
+      "x": -1500,
+      "y": 990,
+      "key": "tbilisi-build-2",
+      "scrollFactor": 0.04,
+      "scale": 0.4,
+      "tint": 7663600
+    },
+    {
+      "x": -1200,
+      "y": 740,
+      "key": "tbilisi-build-1",
+      "scrollFactor": 0.04,
+      "scale": 0.28,
+      "tint": 16777215
+    },
+    {
+      "x": -1800,
+      "y": 1200,
+      "key": "tbilisi-build-1",
+      "scrollFactor": 0.04,
+      "scale": 0.48,
+      "tint": 16777215
+    },
+    {
+      "x": -2060,
+      "y": 1150,
+      "key": "tbilisi-build-1",
+      "scrollFactor": 0.04,
+      "scale": 0.5,
+      "tint": 7663600
+    },
+    {
+      "x": -800,
+      "y": 840,
+      "key": "tbilisi-build-2",
+      "scrollFactor": 0.04,
+      "scale": 0.35,
+      "tint": 12837741
+    },
+    {
+      "x": -1200,
+      "y": 1140,
+      "key": "tbilisi-build-2",
+      "scrollFactor": 0.04,
+      "scale": 0.55,
+      "tint": 12837741
+    }
+  ],
+  "roadToGori": [
+    {
+      "x": -1600,
+      "y": 940,
+      "key": "mountain-2",
+      "scrollFactor": 0.04,
+      "scale": 0.35,
+      "tint": 16777215
+    },
+    {
+      "x": -800,
+      "y": 740,
+      "key": "mountain-1",
+      "scrollFactor": 0.04,
+      "scale": 0.5,
+      "tint": 16777215
+    },
+    {
+      "x": -890,
+      "y": 900,
+      "key": "mountain-2",
+      "scrollFactor": 0.03,
+      "scale": 0.8,
+      "tint": 7663600
+    },
+    {
+      "x": -2800,
+      "y": 700,
+      "key": "mountain-1",
+      "scrollFactor": 0.04,
+      "scale": 0.8,
+      "tint": 7663600
+    },
+    {
+      "x": -6000,
+      "y": 740,
+      "key": "mountain-1",
+      "scrollFactor": 0.06,
+      "scale": 0.8,
+      "tint": 7663600
+    },
+    {
+      "x": 0,
+      "y": 740,
+      "key": "hill",
+      "scrollFactor": 0.04,
+      "scale": 0.8,
+      "tint": 7663600
+    },
+    {
+      "x": -4000,
+      "y": 1100,
+      "key": "hill",
+      "scrollFactor": 0.04,
+      "scale": 0.8,
+      "tint": 7663600
+    },
+    {
+      "x": -1700,
+      "y": 1040,
+      "key": "meadow",
+      "scrollFactor": 0.04,
+      "scale": 0.8,
+      "tint": 7663600
+    },
+    {
+      "x": -3100,
+      "y": 1040,
+      "key": "meadow",
+      "scrollFactor": 0.04,
+      "scale": 0.6,
+      "tint": 7663600
+    },
+    {
+      "x": 0,
+      "y": 1040,
+      "key": "meadow",
+      "scrollFactor": 0.04,
+      "scale": 0.8,
+      "tint": 7663600
+    },
+    {
+      "x": -2480,
+      "y": 1140,
+      "key": "georgia-flag",
+      "scrollFactor": 0.04,
+      "scale": 0.25,
+      "tint": 16117175
+    },
+    {
+      "x": -2400,
+      "y": 1150,
+      "key": "village-house-1",
+      "scrollFactor": 0.04,
+      "scale": 0.23,
+      "tint": 5273330
+    },
+    {
+      "x": -2340,
+      "y": 1190,
+      "key": "village-house-1",
+      "scrollFactor": 0.04,
+      "scale": 0.2,
+      "tint": 5273330
+    },
+    {
+      "x": -2480,
+      "y": 1180,
+      "key": "village-house-1",
+      "scrollFactor": 0.04,
+      "scale": 0.25,
+      "tint": 5273330
+    },
+    {
+      "x": -1520,
+      "y": 1170,
+      "key": "mtskheta-build-2",
+      "scrollFactor": 0.04,
+      "scale": 0.45,
+      "tint": 16777215
+    },
+    {
+      "x": -1410,
+      "y": 1230,
+      "key": "mtskheta-build-1",
+      "scrollFactor": 0.04,
+      "scale": 0.24,
+      "tint": 7826631
+    },
+    {
+      "x": -2100,
+      "y": 1240,
+      "key": "mtskheta-build-1",
+      "scrollFactor": 0.04,
+      "scale": 0.21,
+      "tint": 2912893
+    },
+    {
+      "x": -2160,
+      "y": 1300,
+      "key": "mtskheta-build-3",
+      "scrollFactor": 0.04,
+      "scale": 1.1,
+      "tint": 7826631
+    },
+    {
+      "x": -1790,
+      "y": 1130,
+      "key": "svetitskhoveli",
+      "scrollFactor": 0.04,
+      "scale": 0.6,
+      "tint": 16777215
+    },
+    {
+      "x": -1710,
+      "y": 1330,
+      "key": "mtskheta-build-1",
+      "scrollFactor": 0.04,
+      "scale": 0.2,
+      "tint": 16777215
+    },
+    {
+      "x": -1310,
+      "y": 1300,
+      "key": "mtskheta-build-2",
+      "scrollFactor": 0.04,
+      "scale": 0.5,
+      "tint": 4634311
+    },
+    {
+      "x": -1910,
+      "y": 1300,
+      "key": "mtskheta-build-2",
+      "scrollFactor": 0.04,
+      "scale": 0.4,
+      "tint": 7663600
+    },
+    {
+      "x": -1520,
+      "y": 1320,
+      "key": "mtskheta-build-3",
+      "scrollFactor": 0.04,
+      "scale": 1,
+      "tint": 5273330
+    },
+    {
+      "x": -1820,
+      "y": 1370,
+      "key": "mtskheta-build-3",
+      "scrollFactor": 0.04,
+      "scale": 1.2,
+      "tint": 7826631
+    },
+    {
+      "x": -2040,
+      "y": 1380,
+      "key": "mtskheta-build-1",
+      "scrollFactor": 0.04,
+      "scale": 0.24,
+      "tint": 16777215
+    }
+  ]
 }

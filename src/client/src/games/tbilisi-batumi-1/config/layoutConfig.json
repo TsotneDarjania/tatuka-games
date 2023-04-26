@@ -11,6 +11,30 @@
           "y": 50
         },
         "scale": 0.5
+      },
+      "speedometer": {
+        "positions": {
+          "y": -150
+        }
+      },
+      "speedometerArrow": {
+        "positions": {
+          "y": -108
+        }
+      },
+      "radioLeftButtons": {
+        "positions": {
+          "x": -160,
+          "y": -46
+        },
+        "scale": 1.2
+      },
+      "radioRightButtons": {
+        "positions": {
+          "x": 160,
+          "y": -46
+        },
+        "scale": 1.2
       }
     },
     "menu": {

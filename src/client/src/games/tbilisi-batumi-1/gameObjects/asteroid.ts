@@ -7,9 +7,9 @@ export class Asteroid {
   x!: number;
   y!: number;
 
-  asteroid!: Phaser.Physics.Matter.Sprite;
+  update!: NodeJS.Timeout;
 
-  isFalling = false;
+  asteroid!: Phaser.Physics.Matter.Sprite;
 
   constructor(scene: Phaser.Scene, x: number, y: number) {
     this.scene = scene as GamePlay;
@@ -23,7 +23,7 @@ export class Asteroid {
 
     this.asteroid = this.scene.matter.add
       .sprite(this.x, this.y, "asteroid", undefined, {
-        gravityScale: new Phaser.Math.Vector2(0, 0.04),
+        gravityScale: new Phaser.Math.Vector2(0, 0.025),
         isStatic: true,
         collisionFilter: {
           category: 0x0003,
@@ -52,21 +52,30 @@ export class Asteroid {
     });
   }
 
-  startFalling() {
-    if (this.isFalling === false) return;
-
+  startFallingAsteroid() {
     const radnomX = this.scene.car.carBody.x + 700 - getRandomFloat(0, 2000);
     this.asteroid.setPosition(radnomX, -getRandomFloat(0, 300));
     this.asteroid.setRotation(0);
     this.asteroid.setStatic(false);
+  }
 
-    setTimeout(() => {
-      this.startFalling();
-    }, 4000);
+  startFalling() {
+    this.startFallingAsteroid();
+    this.update = setInterval(() => {
+      if (this.asteroid.y > this.scene.car.carBody.y + 1100) {
+        this.startFallingAsteroid();
+      }
+    }, 300);
+  }
+
+  stopFalling() {
+    clearInterval(this.update);
+    this.reset();
   }
 
   reset() {
-    this.asteroid.setPosition(this.x, this.y - 500);
+    this.asteroid.setPosition(this.x, this.y - 800);
+    if (this.asteroid.isStatic()) return;
     this.asteroid.setStatic(true);
   }
 }

@@ -18,7 +18,6 @@ import responsiveData from "./config/layoutConfig.json";
 export const TbilisiBatumi = () => {
   const canvasContainer = useRef(null);
   const size = useRef(20);
-  console.log(screenSize());
 
   useEffect(() => {
     if (!canvasContainer.current) return;

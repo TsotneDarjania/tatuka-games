@@ -1,24 +1,23 @@
 import { getRandomFloat } from "./helper/tatukaMath";
 import { GamePlay } from "./scenes/gamePlay";
 
-const radio_number = 1;
-
 export default class MusicPlayer {
   scene!: Phaser.Scene;
 
   georgianRadio: Array<Phaser.Sound.BaseSound> = [];
   americanRockRadio: Array<Phaser.Sound.BaseSound> = [];
 
+  radioNumber: number = 2;
   songIndex!: number;
   radioIndex: number = 0;
   radios!: [Phaser.Sound.BaseSound[]];
 
-  obstical_songs: Array<Phaser.Sound.BaseSound> = [];
+  specialSongs: Array<Phaser.Sound.BaseSound> = [];
 
   constructor(scene: Phaser.Scene) {
     this.scene = scene;
 
-    this.radioIndex = Math.floor(getRandomFloat(0, radio_number));
+    this.radioIndex = Math.floor(getRandomFloat(0, this.radioNumber - 1));
 
     this.init();
   }
@@ -26,21 +25,49 @@ export default class MusicPlayer {
   init() {
     this.addSongs();
     this.addRadios();
-    this.playSong();
   }
 
-  stopRadio() {
-    this.radios[this.radioIndex].forEach((song) => {
+  stopAllSong() {
+    this.georgianRadio.forEach((song) => {
+      song.stop();
+    });
+    this.americanRockRadio.forEach((song) => {
+      song.stop();
+    });
+    this.specialSongs.forEach((song) => {
       song.stop();
     });
   }
 
   addRadios() {
     this.radios = [this.georgianRadio];
+    this.radios.push(this.americanRockRadio);
+  }
+
+  addNewSong(song: string) {
+    if (song === "taxi-1") {
+      this.stopAllSong();
+      const newSong = this.scene.sound.add("taxi-1", { volume: 0.4 });
+      newSong.on("complete", () => {
+        this.nextSong();
+      });
+      this.americanRockRadio.push(newSong);
+      newSong.play();
+      this.radioIndex = 1;
+    }
+    if (song === "gulmartali") {
+      this.stopAllSong();
+      const newSong = this.scene.sound.add("gulmartali", { volume: 0.7 });
+      newSong.on("complete", () => {
+        this.nextSong();
+      });
+      this.georgianRadio.push(newSong);
+      newSong.play();
+      this.radioIndex = 0;
+    }
   }
 
   addSongs() {
-    //Georgian Radio
     const mtawmindaSong = this.scene.sound.add("mtawmindaSong", {
       volume: 0.1,
     });
@@ -48,29 +75,53 @@ export default class MusicPlayer {
       this.nextSong();
     });
 
-    //Obsticales Songs
-    const rock_1 = this.scene.sound.add("rock-1", { volume: 0.5 });
+    const mtawmindaSpecialSong = this.scene.sound.add("mtawmindaSong", {
+      volume: 0.1,
+    });
+    mtawmindaSpecialSong.on("complete", () => {
+      mtawmindaSpecialSong.play();
+    });
+
+    this.specialSongs.push(mtawmindaSpecialSong);
+
+    const rock_1 = this.scene.sound.add("rock-1", { volume: 0.25 });
     rock_1.on("complete", () => {
       rock_1.play();
     });
-    this.obstical_songs.push(rock_1);
+    this.specialSongs.push(rock_1);
 
+    const lexseni = this.scene.sound.add("lexseni", { volume: 0.2 });
+    lexseni.on("complete", () => {
+      this.nextSong();
+    });
+    this.specialSongs.push(lexseni);
+
+    this.georgianRadio.push(lexseni);
     this.georgianRadio.push(mtawmindaSong);
+
+    //American Rock Radio
+    const rock_1_radio = this.scene.sound.add("rock-1", { volume: 0.4 });
+    rock_1_radio.on("complete", () => {
+      this.nextSong();
+    });
+    this.americanRockRadio.push(rock_1_radio);
   }
 
-  playObstacleSong(index: number) {
-    if (this.obstical_songs[index].isPlaying === false) {
-      this.obstical_songs[index].play();
+  playSpecialSong(index: number) {
+    if (this.specialSongs[index].isPlaying === false) {
+      this.specialSongs[index].play();
     }
   }
 
   playSong() {
-    const index = Math.floor(
-      getRandomFloat(0, this.radios[this.radioIndex].length - 1)
+    const songIndex = Math.floor(
+      getRandomFloat(0, this.radios[this.radioIndex].length)
     );
-    this.radios[this.radioIndex][index].play();
 
-    this.songIndex = index;
+    if (this.radios[this.radioIndex][songIndex].isPlaying === true) return;
+    this.radios[this.radioIndex][songIndex].play();
+
+    this.songIndex = songIndex;
   }
 
   nextSong() {
@@ -84,8 +135,13 @@ export default class MusicPlayer {
   }
 
   changeRadioToUp() {
-    if (this.radioIndex + 1 > radio_number) {
+    if (this.radioIndex + 1 < this.radioNumber) {
       this.radioIndex += 1;
+      this.stopAllSong();
+      this.playSong();
+    } else {
+      this.radioIndex = 0;
+      this.stopAllSong();
       this.playSong();
     }
   }
@@ -95,8 +151,8 @@ export default class MusicPlayer {
       this.radioIndex -= 1;
       this.playSong();
     } else {
-      if (this.radioIndex + 1 > radio_number) {
-        this.radioIndex = radio_number;
+      if (this.radioIndex + 1 > this.radioNumber) {
+        this.radioIndex = this.radioNumber;
         this.playSong();
       }
     }

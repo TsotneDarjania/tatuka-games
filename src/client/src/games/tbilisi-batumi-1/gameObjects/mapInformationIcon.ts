@@ -2,7 +2,7 @@ import { GameMenu } from "../ui/menu/gameMenu";
 
 export class MapInformationIcon extends Phaser.GameObjects.Image {
   isShow: boolean = false;
-  gamePlayMenuScene!: Phaser.Scene;
+  gamePlayMenuScene!: GameMenu;
 
   showtext!: Array<string>;
 
@@ -63,7 +63,6 @@ export class MapInformationIcon extends Phaser.GameObjects.Image {
 
   showInformation() {
     this.gamePlayMenuScene = this.scene.scene.get("GameMenu") as GameMenu;
-    //@ts-ignore
     this.gamePlayMenuScene.showInformationOnMap(this.showtext);
     this.destroy(true);
   }

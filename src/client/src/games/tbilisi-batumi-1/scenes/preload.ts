@@ -26,6 +26,9 @@ export class Preload extends Phaser.Scene {
     //Songs
     this.load.audio("mtawmindaSong", ["music/songs/mtawminda.mp3"]);
     this.load.audio("rock-1", ["music/songs/rock-1.mp3"]);
+    this.load.audio("lexseni", ["music/songs/lexseni.mp3"]);
+    this.load.audio("taxi-1", ["music/songs/taxi-1.mp3"]);
+    this.load.audio("gulmartali", ["music/songs/gulmartali.mp3"]);
 
     //Sound Effects
     this.load.audio("monetSound", ["music/effects/monet.mp3"]);
@@ -75,8 +78,7 @@ export class Preload extends Phaser.Scene {
     this.load.image("radioGreenButton", `menu/gamePlay/radio-green-button.png`);
     this.load.image("radioRedButton", `menu/gamePlay/radio-red-button.png`);
     this.load.image("lariIcon", `menu/gamePlay/lari.png`);
-    this.load.image("modal", "map/assets/modal.png");
-    this.load.image("ok-button", "map/assets/ok-button.png");
+    this.load.image("veteran", `menu/gamePlay/veteran.png`);
 
     // Car
     this.load.svg("carBody", `car/body.svg`);
@@ -85,6 +87,10 @@ export class Preload extends Phaser.Scene {
     this.load.svg("carBoy", `car/boy.svg`);
 
     this.load.json("carMeshe", `car/car.json`);
+
+    //Rock
+    this.load.json("rockMeshe", "rock/rock.json");
+    this.load.image("rock", "rock/rock.png");
 
     //tbilisi builds
     this.load.image("tbilisi-build-1", `tbilisi/tbilisi-build-1.png`);
@@ -98,6 +104,12 @@ export class Preload extends Phaser.Scene {
     this.load.image("tbilisi-build-9", `tbilisi/build-9.png`);
     this.load.image("tbilisi-build-10", `tbilisi/build-10.png`);
     this.load.image("tbilisi-build-11", `tbilisi/build-11.png`);
+
+    //Mtscketa Builds
+    this.load.image("mtskheta-build-1", `roadToGori/mtskheta/build-1.png`);
+    this.load.image("mtskheta-build-2", `roadToGori/mtskheta/build-2.png`);
+    this.load.image("mtskheta-build-3", `roadToGori/mtskheta/build-3.png`);
+    this.load.image("svetitskhoveli", `roadToGori/mtskheta/svetitskhoveli.png`);
 
     //roadToGori
     this.load.image("meadow", "roadToGori/meadow.png");
@@ -120,6 +132,13 @@ export class Preload extends Phaser.Scene {
     this.load.image("grass-1", "map/assets/grass-1.png");
     this.load.image("tree-1", "map/assets/tree-1.png");
     this.load.image("small-traparet", "map/assets/small-traparet.png");
+    this.load.image("big-traparet", "map/assets/big-traparet.png");
+    this.load.image("musicIcon", "map/assets/musicIcon.png");
+    this.load.image("bombIcon", "map/assets/bombIcon.png");
+    this.load.image("modal", "map/assets/modal.png");
+    this.load.image("ok-button", "map/assets/ok-button.png");
+    this.load.image("star", "map/assets/star.png");
+    this.load.image("govermentStation", "map/assets/govermentStation.png");
 
     //Menu Scene
     this.load.image("menuBackground", "menu/menuScene/background.png");
@@ -130,6 +149,6 @@ export class Preload extends Phaser.Scene {
   }
 
   create() {
-    this.scene.start("Menu");
+    this.scene.start("GamePlay");
   }
 }
