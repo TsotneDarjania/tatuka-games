@@ -318,7 +318,7 @@
       "x": -890,
       "y": 900,
       "key": "mountain-2",
-      "scrollFactor": 0.03,
+      "scrollFactor": 0.04,
       "scale": 0.8,
       "tint": 7663600
     },
@@ -331,10 +331,18 @@
       "tint": 7663600
     },
     {
+      "x": -3200,
+      "y": 800,
+      "key": "mountain-2",
+      "scrollFactor": 0.04,
+      "scale": 0.6,
+      "tint": 7663600
+    },
+    {
       "x": -6000,
       "y": 740,
       "key": "mountain-1",
-      "scrollFactor": 0.06,
+      "scrollFactor": 0.04,
       "scale": 0.8,
       "tint": 7663600
     },
@@ -346,14 +354,7 @@
       "scale": 0.8,
       "tint": 7663600
     },
-    {
-      "x": -4000,
-      "y": 1100,
-      "key": "hill",
-      "scrollFactor": 0.04,
-      "scale": 0.8,
-      "tint": 7663600
-    },
+
     {
       "x": -1700,
       "y": 1040,
@@ -368,6 +369,14 @@
       "key": "meadow",
       "scrollFactor": 0.04,
       "scale": 0.6,
+      "tint": 7663600
+    },
+    {
+      "x": -3300,
+      "y": 900,
+      "key": "hill",
+      "scrollFactor": 0.04,
+      "scale": 0.8,
       "tint": 7663600
     },
     {

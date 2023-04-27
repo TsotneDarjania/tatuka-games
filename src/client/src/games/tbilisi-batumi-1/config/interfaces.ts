@@ -26,6 +26,11 @@ export interface MusicIconsData {
   text: Array<string>;
   musicKey: string;
 }
+export interface AngelsData {
+  x: number;
+  y: number;
+  text: Array<string>;
+}
 
 export interface Responsivedata {
   extraWidth: {

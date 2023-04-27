@@ -215,7 +215,7 @@ export class Car {
       {
         friction: 0,
         restitution: 0,
-        frictionAir: 0.003,
+        frictionAir: 0.006,
         shape: this.carMeshe.carBody,
         slop: 0, // increased slop value
         chamfer: {
@@ -230,8 +230,6 @@ export class Car {
       } as Phaser.Types.Physics.Matter.MatterBodyConfig
     );
     this.allObjects.push(this.carBody);
-
-    // this.carBody.setMass(6)
   }
 
   addCarTires() {

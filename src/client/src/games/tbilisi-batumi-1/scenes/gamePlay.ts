@@ -15,6 +15,7 @@ import bombsData from "../data/bombsData.json";
 import saveZonesData from "../data/saveZonesData.json";
 import starsData from "../data/starsData.json";
 import musicIconsData from "../data/musicIconsData.json";
+import angelsData from "../data/angelsData.json";
 
 import { GameMenu } from "../ui/menu/gameMenu";
 import { Angel } from "../gameObjects/angel";
@@ -30,12 +31,15 @@ import { Stars } from "../gameObjects/stars";
 import { MusicIcon } from "../gameObjects/musicIcon";
 import { GovermentStation } from "../gameObjects/govermentStation";
 import {
+  AngelsData,
   BombsData,
   MusicIconsData,
   SaveZonesData,
   StarsData,
 } from "../config/interfaces";
 import { Bomb } from "../gameObjects/bomb";
+import RussianTank from "../gameObjects/russianTank";
+import { RussianSoldier } from "../gameObjects/russialSoldier";
 
 export class GamePlay extends Phaser.Scene {
   gameMenu!: GameMenu;
@@ -82,32 +86,17 @@ export class GamePlay extends Phaser.Scene {
     this.gameMenu = this.scene.get("GameMenu") as GameMenu;
 
     this.gameManager = new GameManager(this);
-
     this.musicPlayer = new MusicPlayer(this);
 
-    new GovermentStation(this, -118880, 1160);
+    new GovermentStation(this, -118680, 1120);
+    // new RussianTank(this, -111730, 700);
+    new RussianSoldier(this, -123080, 875);
 
     this.addBombs();
-
     this.addStars();
-
     this.addMusicMapIcons();
-
     this.addSaveZones();
-
-    new Angel(this, -6200, 40, [
-      "Hello Player",
-      "May god watches over you",
-      "and keeps you safe on your travels",
-    ]);
-    new Angel(this, -62200, 600, [
-      "Praying for your strength",
-      "and resilience",
-    ]);
-    new Angel(this, -70100, 670, [
-      "Mtskheta is the city of God",
-      "you are safe here",
-    ]);
+    this.addAngels();
 
     new Demon(this, -46800, 290, [
       "This game is crap.",
@@ -128,7 +117,6 @@ export class GamePlay extends Phaser.Scene {
     new BonFire(this, -66000, 1380, 900, 700);
 
     this.addMapInformationIcons();
-
     this.addMonets();
 
     this.tbilisi = new MapBackground(this, 0, 500, buildsData.tbilisi).setScale(
@@ -143,8 +131,14 @@ export class GamePlay extends Phaser.Scene {
 
     this.setCameraSettings();
 
-    //Create UI Scene for Menu UI Elements
+    //Start UI Scene for Menu UI Elements
     this.scene.launch("GameMenu");
+  }
+
+  addAngels() {
+    Object.values(angelsData).forEach((data: AngelsData) => {
+      new Angel(this, data.x, data.y, data.text);
+    });
   }
 
   addMusicMapIcons() {

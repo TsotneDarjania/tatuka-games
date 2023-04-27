@@ -139,6 +139,7 @@ export class Preload extends Phaser.Scene {
     this.load.image("ok-button", "map/assets/ok-button.png");
     this.load.image("star", "map/assets/star.png");
     this.load.image("govermentStation", "map/assets/govermentStation.png");
+    this.load.image("russianTank", `map/assets/russian-tank.png`);
 
     //Menu Scene
     this.load.image("menuBackground", "menu/menuScene/background.png");
@@ -146,6 +147,16 @@ export class Preload extends Phaser.Scene {
     this.load.svg("menuCarTire", "menu/menuScene/tire.svg");
     this.load.image("plug", "menu/menuScene/plug.png");
     this.load.image("menuButton", "menu/menuScene/button.png");
+
+    //Russian Soldier
+    this.load.image("RSHead", "russianSoldier/head.png");
+    this.load.image("RSBody", "russianSoldier/body.png");
+    this.load.image("RSLeftLeg", "russianSoldier/leftLeg.png");
+    this.load.image("RSRightLeg", "russianSoldier/rightLeg.png");
+    this.load.image("RSLeftHand", "russianSoldier/leftHand.png");
+    this.load.image("RSRightHand", "russianSoldier/rightHand.png");
+
+    this.load.image("RSRightHand", "russianSoldier/bullet.png");
   }
 
   create() {

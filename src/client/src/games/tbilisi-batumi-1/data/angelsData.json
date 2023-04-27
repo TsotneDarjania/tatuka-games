@@ -1,0 +1,26 @@
+{
+  "1": {
+    "x": -6200,
+    "y": 40,
+    "text": [
+      "Hello Player",
+      "May god watches over you",
+      "and keeps you safe on your travels"
+    ]
+  },
+  "2": {
+    "x": -62200,
+    "y": 600,
+    "text": ["Praying for your strength", "and resilience"]
+  },
+  "3": {
+    "x": -62200,
+    "y": 600,
+    "text": ["Praying for your strength", "and resilience"]
+  },
+  "4": {
+    "x": -70100,
+    "y": 670,
+    "text": ["Mtskheta is the city of God", "you are safe here"]
+  }
+}
