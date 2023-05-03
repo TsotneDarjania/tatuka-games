@@ -43,4 +43,11 @@ export const gameZonesData = {
     height: 5200,
     id: 6,
   },
+  7: {
+    x: -131000,
+    y: 500,
+    width: 200,
+    height: 5200,
+    id: 7,
+  },
 };

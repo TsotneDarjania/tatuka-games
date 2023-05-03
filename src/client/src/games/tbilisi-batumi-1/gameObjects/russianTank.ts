@@ -1,3 +1,4 @@
+import { colliderCategories } from "../helper/colliderCategories";
 import { GamePlay } from "../scenes/gamePlay";
 
 const verticiesData = {
@@ -49,20 +50,38 @@ const verticiesData = {
 export default class RussianTank {
   tankBody!: Phaser.Physics.Matter.Sprite;
 
+  canMotion: boolean = false;
+
   constructor(public scene: GamePlay, public x: number, public y: number) {
     this.init();
   }
 
   init() {
     this.addTankBody();
-    this.startMotion();
+    this.addCollision();
+
+    this.scene.events.on("update", () => {
+      if (this.canMotion) {
+        let force = new Phaser.Math.Vector2(-0.005, 0);
+        if (this.tankBody.angle < -55 || this.tankBody.angle > 55) {
+          this.tankBody.setRotation(0);
+          force = new Phaser.Math.Vector2(0, 0);
+          this.tankBody.setVelocity(0, 0);
+        }
+        if (this.tankBody.body.velocity.x > -7.2)
+          this.tankBody.applyForce(force);
+      } else {
+        this.tankBody.setVelocity(0, this.tankBody.body.velocity.y);
+      }
+    });
   }
 
   addTankBody() {
     this.tankBody = this.scene.matter.add
       .sprite(this.x, this.y, "russianTank", undefined, {
+        gravityScale: new Phaser.Math.Vector2(0, 0.8),
         isStatic: false,
-        frictionAir: 0.003,
+        frictionAir: 0.006,
         friction: 0,
         restitution: 0,
         shape: {
@@ -70,22 +89,43 @@ export default class RussianTank {
           verts: verticiesData.russianTank,
           flagInternal: true,
         },
-        collisionFilter: {
-          category: 0x0001 | 0x0002,
-          mask: 0x0002 | 0x0001,
-        },
       } as Phaser.Types.Physics.Matter.MatterBodyConfig)
-      .setScale(1);
+      .setScale(0.6);
 
     this.tankBody.setOrigin(0.57, 0.69);
+
+    this.tankBody.setCollisionCategory(colliderCategories[1]);
+    this.tankBody.setCollidesWith(
+      colliderCategories[1] | colliderCategories[2]
+    );
+
+    this.tankBody.setFixedRotation();
   }
 
   startMotion() {
-    this.scene.events.on("update", () => {
-      const force = new Phaser.Math.Vector2(-0.005, 0);
-      this.tankBody.applyForce(force);
+    this.canMotion = true;
+  }
 
-      console.log(this.tankBody.rotation);
+  addCollision() {
+    this.scene.matter.world.on("collisionstart", (event: any) => {
+      event.pairs.forEach((pair: any) => {
+        if (
+          pair.bodyB.gameObject === this.tankBody &&
+          pair.bodyA.gameObject === this.scene.car.carBody
+        ) {
+          if (this.scene.car.carBody.visible === false) return;
+          this.canMotion = false;
+          this.scene.car.playExplosionAnimation(false);
+        }
+      });
     });
+  }
+
+  reset() {
+    this.canMotion = false;
+    this.tankBody.destroy(true);
+    this.scene.matter.world.remove(this.tankBody);
+
+    this.init();
   }
 }

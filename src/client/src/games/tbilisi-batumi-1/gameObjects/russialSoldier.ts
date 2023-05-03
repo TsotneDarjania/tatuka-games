@@ -1,3 +1,5 @@
+import { colliderCategories } from "../helper/colliderCategories";
+import { getRandomFloat } from "../helper/tatukaMath";
 import { GamePlay } from "../scenes/gamePlay";
 
 const verticiesData = {
@@ -170,26 +172,41 @@ const verticiesData = {
       { x: 598.3504322046315, y: 328.2251795845828 },
     ],
   ],
+  bullet: [
+    [
+      { x: 591.5458937198068, y: 379.0842872008325 },
+      { x: 600.4830917874397, y: 359.105098855359 },
+      { x: 608.9371980676328, y: 379.50052029136316 },
+      { x: 607.7294685990338, y: 443.6004162330905 },
+      { x: 590.3381642512077, y: 444.0166493236212 },
+    ],
+  ],
 };
 
 export class RussianSoldier {
-  soldierContainer!: Phaser.GameObjects.Container;
-
   head!: Phaser.Physics.Matter.Sprite;
   body!: Phaser.Physics.Matter.Sprite;
   leftLeg!: Phaser.Physics.Matter.Sprite;
   rightLeg!: Phaser.Physics.Matter.Sprite;
   leftHand!: Phaser.Physics.Matter.Sprite;
   rightHand!: Phaser.Physics.Matter.Sprite;
+
+  headAnimation!: Phaser.Tweens.Tween;
+  bodyHandAnimation!: Phaser.Tweens.Tween;
+
+  isdead: boolean = false;
+
+  shootInterval!: NodeJS.Timeout;
+
+  bullets: Array<Phaser.Physics.Matter.Sprite> = [];
+
+  allBodyObjects: Array<Phaser.Physics.Matter.Sprite> = [];
+
   constructor(public scene: GamePlay, public x: number, public y: number) {
     this.init();
   }
 
   init() {
-    this.soldierContainer = this.scene.add
-      .container(this.x, this.y)
-      .setScale(1);
-
     this.addRightHand();
     this.addRightLeg();
     this.addLeftLeg();
@@ -197,10 +214,35 @@ export class RussianSoldier {
     this.addHead();
     this.addLeftHand();
 
-    this.createBullet();
+    this.createBullets();
+    this.startShoot();
   }
 
-  createBullet() {}
+  createBullets() {
+    for (let i = 0; i < 8; i++) {
+      this.bullets.push(
+        new Bullet(
+          this.scene,
+          this.x + 55,
+          this.y - 11,
+          "RSBullet",
+          this
+        ).setVisible(false)
+      );
+    }
+  }
+
+  startShoot() {
+    this.shootInterval = setInterval(() => {
+      const bullet = this.bullets[this.bullets.length - 1] as Bullet;
+      bullet.setPosition(this.x + 38, this.y - 3);
+      bullet.shoot();
+    }, 1400);
+  }
+
+  stopShoot() {
+    clearInterval(this.shootInterval);
+  }
 
   addHead() {
     this.head = this.scene.matter.add
@@ -211,30 +253,23 @@ export class RussianSoldier {
           verts: verticiesData.head,
           flagInternal: true,
         },
-        collisionFilter: {
-          category: 0x0001,
-        },
       } as Phaser.Types.Physics.Matter.MatterBodyConfig)
       .setScale(0.3);
 
+    this.head.setCollisionCategory(colliderCategories[4]);
+    this.head.setCollidesWith(colliderCategories[1]);
     this.head.setOrigin(0.54, 0.49);
 
-    //Collision Detection
-    this.scene.matter.world.on("collisionstart", (event: any) => {
-      event.pairs.forEach((pair: any) => {
-        if (
-          pair.bodyB.gameObject !== null &&
-          pair.bodyB.gameObject !== undefined
-        ) {
-          if (
-            pair.bodyB.gameObject.frame.texture.key === "RSHead" &&
-            pair.bodyA.gameObject.frame.texture.key === "carBody"
-          ) {
-            this.dead();
-          }
-        }
-      });
+    //addAnimation
+    this.headAnimation = this.scene.tweens.add({
+      targets: this.head,
+      duration: 350,
+      yoyo: true,
+      repeat: -1,
+      y: this.head.y + 2,
     });
+
+    this.allBodyObjects.push(this.head);
   }
 
   addBody() {
@@ -246,79 +281,53 @@ export class RussianSoldier {
           verts: verticiesData.body,
           flagInternal: true,
         },
-        collisionFilter: {
-          category: 0x0003,
-          mask: 0x0002,
-        },
       } as Phaser.Types.Physics.Matter.MatterBodyConfig)
       .setScale(0.3);
 
-    this.body.setOrigin(0.51, 0.52);
+    this.body.setCollisionCategory(colliderCategories[4]);
+    this.body.setCollidesWith(colliderCategories[1]);
 
-    //Collision Detection
-    this.scene.matter.world.on("collisionstart", (event: any) => {
-      event.pairs.forEach((pair: any) => {
-        if (
-          pair.bodyB.gameObject !== null &&
-          pair.bodyB.gameObject !== undefined
-        ) {
-          if (
-            pair.bodyB.gameObject.frame.texture.key === "RSBody" &&
-            pair.bodyA.gameObject.frame.texture.key === "carBody"
-          ) {
-            this.dead();
-          }
-        }
-      });
+    this.bodyHandAnimation = this.scene.add.tween({
+      targets: this.body,
+      duration: 350,
+      scale: 0.31,
+      yoyo: true,
+      repeat: -1,
     });
+
+    this.body.setOrigin(0.51, 0.52);
+    this.allBodyObjects.push(this.body);
   }
 
   addLeftLeg() {
     this.leftLeg = this.scene.matter.add
-      .sprite(this.x + -3, this.y + 68, "RSLeftLeg", undefined, {
+      .sprite(this.x + -5, this.y + 75, "RSLeftLeg", undefined, {
         ignoreGravity: true,
         shape: {
           type: "fromVerts",
           verts: verticiesData.LeftLeg,
           flagInternal: true,
         },
-        collisionFilter: {
-          category: 0x0001,
-        },
+        isSensor: true,
       } as Phaser.Types.Physics.Matter.MatterBodyConfig)
       .setScale(0.3);
 
     this.leftLeg.setOrigin(0.51, 0.52);
 
-    //Collision Detection
-    this.scene.matter.world.on("collisionstart", (event: any) => {
-      event.pairs.forEach((pair: any) => {
-        if (
-          pair.bodyB.gameObject !== null &&
-          pair.bodyB.gameObject !== undefined
-        ) {
-          if (
-            pair.bodyB.gameObject.frame.texture.key === "RSLeftLeg" &&
-            pair.bodyA.gameObject.frame.texture.key === "carBody"
-          ) {
-            this.dead();
-          }
-        }
-      });
-    });
+    this.leftLeg.setCollisionCategory(colliderCategories[4]);
+    this.leftLeg.setCollidesWith(colliderCategories[1]);
+
+    this.allBodyObjects.push(this.leftLeg);
   }
 
   addRightLeg() {
     this.rightLeg = this.scene.matter.add
-      .sprite(this.x + 5, this.y + 71, "RSRightLeg", undefined, {
+      .sprite(this.x + 5, this.y + 80, "RSRightLeg", undefined, {
         ignoreGravity: true,
         shape: {
           type: "fromVerts",
           verts: verticiesData.RightLeg,
           flagInternal: true,
-        },
-        collisionFilter: {
-          category: 0x0001,
         },
         isSensor: true,
       } as Phaser.Types.Physics.Matter.MatterBodyConfig)
@@ -326,22 +335,21 @@ export class RussianSoldier {
 
     this.rightLeg.setOrigin(0.51, 0.52);
 
+    this.rightLeg.setCollisionCategory(colliderCategories[1]);
+    this.rightLeg.setCollidesWith(colliderCategories[2]);
+
     //Collision Detection
     this.scene.matter.world.on("collisionstart", (event: any) => {
       event.pairs.forEach((pair: any) => {
-        if (
-          pair.bodyB.gameObject !== null &&
-          pair.bodyB.gameObject !== undefined
-        ) {
-          if (
-            pair.bodyB.gameObject.frame.texture.key === "RSRightLeg" &&
-            pair.bodyA.gameObject.frame.texture.key === "carBody"
-          ) {
+        if (pair.bodyB.gameObject === this.rightLeg) {
+          if (this.isdead === false) {
             this.dead();
           }
         }
       });
     });
+
+    this.allBodyObjects.push(this.rightLeg);
   }
 
   addLeftHand() {
@@ -353,30 +361,15 @@ export class RussianSoldier {
           verts: verticiesData.leftHand,
           flagInternal: true,
         },
-        collisionFilter: {
-          category: 0x0001,
-        },
       } as Phaser.Types.Physics.Matter.MatterBodyConfig)
       .setScale(0.35);
 
     this.leftHand.setOrigin(0.51, 0.52);
 
-    //Collision Detection
-    this.scene.matter.world.on("collisionstart", (event: any) => {
-      event.pairs.forEach((pair: any) => {
-        if (
-          pair.bodyB.gameObject !== null &&
-          pair.bodyB.gameObject !== undefined
-        ) {
-          if (
-            pair.bodyB.gameObject.frame.texture.key === "RSRLeftHand" &&
-            pair.bodyA.gameObject.frame.texture.key === "carBody"
-          ) {
-            this.dead();
-          }
-        }
-      });
-    });
+    this.leftHand.setCollisionCategory(colliderCategories[4]);
+    this.leftHand.setCollidesWith(colliderCategories[1]);
+
+    this.allBodyObjects.push(this.leftHand);
   }
 
   addRightHand() {
@@ -388,53 +381,101 @@ export class RussianSoldier {
           verts: verticiesData.rightHand,
           flagInternal: true,
         },
-        collisionFilter: {
-          category: 0x0001,
-        },
+        isSensor: true,
       } as Phaser.Types.Physics.Matter.MatterBodyConfig)
       .setScale(0.3);
 
     this.rightHand.setOrigin(0.51, 0.52);
 
+    this.rightHand.setCollisionCategory(colliderCategories[1]);
+    this.rightHand.setCollidesWith(colliderCategories[2]);
+
+    //Collision Detection
+    this.scene.matter.world.on("collisionstart", (event: any) => {
+      event.pairs.forEach((pair: any) => {
+        if (pair.bodyB.gameObject === this.rightHand) {
+          if (this.isdead === false) {
+            this.dead();
+          }
+        }
+      });
+    });
+
+    this.allBodyObjects.push(this.rightHand);
+  }
+
+  dead() {
+    if (this.scene.car.carBody.visible === false) return;
+
+    this.allBodyObjects.forEach((bodyObject) => {
+      bodyObject.setIgnoreGravity(false);
+    });
+
+    this.isdead = true;
+    this.stopShoot();
+    this.scene.bodyFail.play();
+    this.bodyHandAnimation.remove();
+    this.headAnimation.remove();
+  }
+}
+
+class Bullet extends Phaser.Physics.Matter.Sprite {
+  constructor(
+    public scene: GamePlay,
+    x: number,
+    y: number,
+    texture: string,
+    public russianSoldier: RussianSoldier
+  ) {
+    //Init
+    super(scene.matter.world, x, y, texture, undefined, {
+      ignoreGravity: true,
+      gravityScale: new Phaser.Math.Vector2(0, 1.5),
+      shape: {
+        type: "fromVerts",
+        verts: verticiesData.bullet,
+        flagInternal: true,
+      },
+      isSensor: true,
+    } as Phaser.Types.Physics.Matter.MatterBodyConfig);
+    this.scene.add.existing(this);
+    this.setScale(0.2);
+    this.setRotation(1);
+
+    this.setCollisionCategory(colliderCategories[1]);
+    this.setCollidesWith(colliderCategories[1] | colliderCategories[2]);
+
     //Collision Detection
     this.scene.matter.world.on("collisionstart", (event: any) => {
       event.pairs.forEach((pair: any) => {
         if (
-          pair.bodyB.gameObject !== null &&
-          pair.bodyB.gameObject !== undefined
+          pair.bodyB.gameObject === this &&
+          pair.bodyA.gameObject === scene.car.carBody
         ) {
-          if (
-            pair.bodyB.gameObject.frame.texture.key === "RSRightHand" &&
-            pair.bodyA.gameObject.frame.texture.key === "carBody"
-          ) {
-            this.dead();
+          if (russianSoldier.isdead === false) {
+            scene.car.playExplosionAnimation(false);
           }
         }
       });
     });
   }
 
-  dead() {
-    this.head.setIgnoreGravity(false);
-    this.head.setCollisionCategory(0x0002);
+  shoot() {
+    this.setVisible(true);
+    this.setIgnoreGravity(false);
+    const forceX = getRandomFloat(0.0016, 0.003);
+    const forceY = getRandomFloat(0.0011, 0.0017);
+    this.applyForce(new Phaser.Math.Vector2(forceX, -forceY));
+    this.setAngularVelocity(0.023);
 
-    this.body.setIgnoreGravity(false);
-    this.body.setCollidesWith(0x0001);
+    this.russianSoldier.bullets.pop();
 
-    this.rightHand.setIgnoreGravity(false);
-    this.rightHand.setCollisionCategory(0x0002);
-    this.rightHand.setCollidesWith(0x0001);
-
-    this.leftHand.setIgnoreGravity(false);
-    this.leftHand.setCollisionCategory(0x0002);
-    this.leftHand.setCollidesWith(0x0001);
-
-    this.leftLeg.setIgnoreGravity(false);
-    this.leftLeg.setCollisionCategory(0x0002);
-    this.leftLeg.setCollidesWith(0x0001);
-
-    this.rightLeg.setIgnoreGravity(false);
-    this.rightLeg.setCollisionCategory(0x0002);
-    this.rightLeg.setCollidesWith(0x0001);
+    //Reset
+    setTimeout(() => {
+      this.setRotation(1);
+      this.setVisible(false);
+      this.setIgnoreGravity(true);
+      this.russianSoldier.bullets.push(this);
+    }, 2800);
   }
 }

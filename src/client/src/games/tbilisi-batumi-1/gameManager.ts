@@ -1,3 +1,4 @@
+import { Scene } from "phaser";
 import { gameZonesData } from "./data/gameZones";
 import { Asteroid } from "./gameObjects/asteroid";
 import { Car } from "./gameObjects/car";
@@ -32,7 +33,7 @@ export class GameManager {
   canRadioChange: boolean = false;
 
   saveZonesData: Array<SaveZoneData> = [];
-  saveZoneIndex = 0;
+  saveZoneIndex = 5;
 
   backgroundImage!: Phaser.GameObjects.Image;
 
@@ -87,8 +88,14 @@ export class GameManager {
       },
       {
         carPositions: {
-          x: -121790,
-          y: 1060,
+          x: -129000,
+          y: 730,
+        },
+      },
+      {
+        carPositions: {
+          x: -134000,
+          y: 790,
         },
       },
     ];
@@ -158,7 +165,10 @@ export class GameManager {
 
   cameraResetFinish() {
     this.gameMenu.gameIndicatorsContainer.setVisible(true);
+    this.gameMenu.speedometerContainer.setVisible(true);
     this.gameMenu.stopUpdateProcess = false;
+    this.gamePlay.russianTank.canMotion = false;
+    this.gamePlay.russianTank.reset();
   }
 
   emptyFunction() {}
@@ -229,6 +239,19 @@ export class GameManager {
           this.emptyFunction();
         },
       },
+      7: {
+        enter: () => {
+          this.startTankmotion();
+          if (this.gamePlay.musicPlayer.specialSongs[3].isPlaying === false) {
+            this.gamePlay.musicPlayer.stopAllSong();
+          }
+          this.gamePlay.musicPlayer.playSpecialSong(3);
+          this.gameMenu.radioOff();
+        },
+        exit: () => {
+          this.emptyFunction();
+        },
+      },
     };
 
     Object.values(gameZonesData).forEach((data) => {
@@ -242,6 +265,10 @@ export class GameManager {
         zoneCallBackFunctions[data.id].exit
       );
     });
+  }
+
+  startTankmotion() {
+    this.gamePlay.russianTank.startMotion();
   }
 
   showScreenText(index: number) {

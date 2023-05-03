@@ -1,3 +1,5 @@
+import { colliderCategories } from "../helper/colliderCategories";
+
 export interface roadData {
   image: string;
   x: number;
@@ -37,20 +39,17 @@ export class Road extends Phaser.GameObjects.GameObject {
     // console.log(JSON.stringify(verts));
     // console.timeEnd("calculatingVerts");
 
-    const collider = this.scene.matter.add.fromVertices(
+    let collider = this.scene.matter.add.fromVertices(
       this.x,
       this.y,
       this.roadData.path,
       {
         isStatic: true,
-        collisionFilter: {
-          category: 0x0001,
-          mask: 0x0002,
-        },
-        isSensor: false,
         slop: 0, // increased slop value
       }
     );
+
+    collider.collisionFilter.category = colliderCategories[1];
 
     const polygon = this.scene.add
       .polygon(

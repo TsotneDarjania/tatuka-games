@@ -29,6 +29,7 @@ export class Preload extends Phaser.Scene {
     this.load.audio("lexseni", ["music/songs/lexseni.mp3"]);
     this.load.audio("taxi-1", ["music/songs/taxi-1.mp3"]);
     this.load.audio("gulmartali", ["music/songs/gulmartali.mp3"]);
+    this.load.audio("russianSong", ["music/songs/russianSong.mp3"]);
 
     //Sound Effects
     this.load.audio("monetSound", ["music/effects/monet.mp3"]);
@@ -37,6 +38,8 @@ export class Preload extends Phaser.Scene {
     this.load.audio("carExplotionSound", ["music/effects/car-explotion.mp3"]);
     this.load.audio("applauseSound", ["music/effects/applause.mp3"]);
     this.load.audio("evilLaughSound", ["music/effects/evil-laugh.mp3"]);
+    this.load.audio("RSDeadScreamSound", ["music/effects/blyad.mp3"]);
+    this.load.audio("bodyFail", ["music/effects/bodyFail.mp3"]);
 
     //asteroid Animation
     this.load.spritesheet("asteroid", "spritesheets/asteroid.png", {
@@ -156,7 +159,7 @@ export class Preload extends Phaser.Scene {
     this.load.image("RSLeftHand", "russianSoldier/leftHand.png");
     this.load.image("RSRightHand", "russianSoldier/rightHand.png");
 
-    this.load.image("RSRightHand", "russianSoldier/bullet.png");
+    this.load.image("RSBullet", "russianSoldier/bullet.png");
   }
 
   create() {

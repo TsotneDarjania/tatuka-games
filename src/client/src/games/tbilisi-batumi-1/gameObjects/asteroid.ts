@@ -44,7 +44,7 @@ export class Asteroid {
       event.pairs.forEach((pair: any) => {
         if (pair.bodyB === this.asteroid.body) {
           if (pair.bodyA.label === "Body") {
-            this.scene.car.playExplosionAnimation();
+            this.scene.car.playExplosionAnimation(true);
             this.reset();
           }
         }

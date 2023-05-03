@@ -39,7 +39,7 @@ export class Bomb {
       event.pairs.forEach((pair: any) => {
         if (pair.bodyB === deadZone) {
           const scene = this.scene as GamePlay;
-          scene.car.playExplosionAnimation();
+          scene.car.playExplosionAnimation(true);
 
           this.bombImage.setVisible(false);
           setTimeout(() => {

@@ -1,3 +1,4 @@
+import { colliderCategories } from "../helper/colliderCategories";
 import { getRandomFloat } from "../helper/tatukaMath";
 import { GamePlay } from "../scenes/gamePlay";
 
@@ -66,16 +67,15 @@ export class Car {
           type: "circle",
           radius: 12,
         },
-        collisionFilter: {
-          category: 0x0002,
-          mask: 0x0001,
-        },
         isSensor: false,
         ignoreGravity: false, // Make the tire not be affected by gravity
       } as Phaser.Types.Physics.Matter.MatterBodyConfig)
       .setOrigin(0.5)
       .setFlip(true, false)
       .setDepth(-1);
+
+    charachter.setCollisionCategory(colliderCategories[2]);
+    charachter.setCollidesWith(colliderCategories[1]);
 
     this.allObjects.push(charachter);
 
@@ -168,6 +168,10 @@ export class Car {
         this.carBody.applyForce(force);
       }
     }
+
+    if (this.carBody.body.velocity.y < -8) {
+      this.carBody.setVelocity(this.carBody.body.velocity.x, 0);
+    }
   }
 
   addController() {
@@ -222,14 +226,12 @@ export class Car {
           quality: 30, // increased chamfer quality
           radius: 10,
         },
-        collisionFilter: {
-          category: 0x0002,
-          mask: 0x0001,
-        },
         sleepThreshold: 100,
       } as Phaser.Types.Physics.Matter.MatterBodyConfig
     );
     this.allObjects.push(this.carBody);
+    this.carBody.setCollisionCategory(colliderCategories[2]);
+    this.carBody.setCollidesWith(colliderCategories[1] | colliderCategories[3]);
   }
 
   addCarTires() {
@@ -241,15 +243,13 @@ export class Car {
           friction: 0,
           restitution: 0,
         },
-        collisionFilter: {
-          category: 0x0002,
-          mask: 0x0001,
-        },
         isSensor: false,
         ignoreGravity: false, // Make the tire not be affected by gravity
       } as Phaser.Types.Physics.Matter.MatterBodyConfig)
       .setOrigin(0.509, 0.49);
     this.allObjects.push(this.leftTire);
+    this.leftTire.setCollisionCategory(colliderCategories[2]);
+    this.leftTire.setCollidesWith(colliderCategories[1]);
 
     // Connect left tire to car body using a constraint
     const leftTireConstraint = this.scene.matter.add.constraint(
@@ -284,15 +284,13 @@ export class Car {
           friction: 0,
           restitution: 0,
         },
-        collisionFilter: {
-          category: 0x0002,
-          mask: 0x0001,
-        },
         isSensor: false, // Make the tire not generate collision responses
         ignoreGravity: false, // Make the tire not be affected by gravity
       } as Phaser.Types.Physics.Matter.MatterBodyConfig)
       .setOrigin(0.509, 0.49);
     this.allObjects.push(this.rightTire);
+    this.rightTire.setCollisionCategory(colliderCategories[2]);
+    this.rightTire.setCollidesWith(colliderCategories[1]);
 
     // Connect right tire to car body using a constraint
     const rightTireConstraint = this.scene.matter.add.constraint(
@@ -363,17 +361,25 @@ export class Car {
       .setScale(1.1)
       .setDepth(-1);
     this.allObjects.push(this.bags[2]);
+
+    //Set collision Group
+    this.bags.forEach((bag) => {
+      bag.setCollisionCategory(colliderCategories[3]);
+      bag.setCollidesWith(colliderCategories[2] | colliderCategories[3]);
+    });
   }
 
-  playExplosionAnimation() {
+  playExplosionAnimation(withEvilsound: boolean) {
     if (this.stopUpdateProcess === false) {
       //Hide Car objects
       this.allObjects.forEach((object) => {
         object.setVisible(false);
       });
 
+      this.scene.gameMenu.speedometerContainer.setVisible(false);
+
       this.explosionSound.play();
-      this.evilLaughSound.play();
+      if (withEvilsound) this.evilLaughSound.play();
 
       this.stopUpdateProcess = true;
 
@@ -382,7 +388,6 @@ export class Car {
       for (let i = 0; i < 5; i++) {
         let x = this.carBody.x;
         let y = this.carBody.y;
-        let time = 0;
         const explotion = this.scene.add
           .sprite(
             x + getRandomFloat(-80, 80),

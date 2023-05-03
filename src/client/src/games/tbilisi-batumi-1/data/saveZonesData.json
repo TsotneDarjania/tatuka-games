@@ -26,5 +26,12 @@
     "icon": "small-traparet",
     "text": ["Nigoza"],
     "index": 4
+  },
+  "5": {
+    "x": -129000,
+    "y": 700,
+    "icon": "small-traparet",
+    "text": ["Kaspi"],
+    "index": 5
   }
 }

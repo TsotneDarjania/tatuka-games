@@ -82,6 +82,13 @@ export default class MusicPlayer {
       mtawmindaSpecialSong.play();
     });
 
+    const rusianSpecialSong = this.scene.sound.add("russianSong", {
+      volume: 0.4,
+    });
+    rusianSpecialSong.on("complete", () => {
+      rusianSpecialSong.play();
+    });
+
     this.specialSongs.push(mtawmindaSpecialSong);
 
     const rock_1 = this.scene.sound.add("rock-1", { volume: 0.25 });
@@ -95,6 +102,7 @@ export default class MusicPlayer {
       this.nextSong();
     });
     this.specialSongs.push(lexseni);
+    this.specialSongs.push(rusianSpecialSong);
 
     this.georgianRadio.push(lexseni);
     this.georgianRadio.push(mtawmindaSong);

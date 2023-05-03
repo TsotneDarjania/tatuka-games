@@ -74,6 +74,10 @@ export class GamePlay extends Phaser.Scene {
 
   buttonSound!: Phaser.Sound.BaseSound;
   applause!: Phaser.Sound.BaseSound;
+  russianSoldierDeadScream!: Phaser.Sound.BaseSound;
+  bodyFail!: Phaser.Sound.BaseSound;
+
+  russianTank!: RussianTank;
 
   constructor() {
     super("GamePlay");
@@ -89,8 +93,11 @@ export class GamePlay extends Phaser.Scene {
     this.musicPlayer = new MusicPlayer(this);
 
     new GovermentStation(this, -118680, 1120);
-    // new RussianTank(this, -111730, 700);
     new RussianSoldier(this, -123080, 875);
+    new RussianSoldier(this, -126220, 954);
+    new RussianSoldier(this, -128720, 720);
+
+    this.russianTank = new RussianTank(this, -130700, 1100);
 
     this.addBombs();
     this.addStars();
@@ -186,6 +193,12 @@ export class GamePlay extends Phaser.Scene {
     this.applause = this.sound.add("applauseSound", {
       volume: 1,
     });
+    this.russianSoldierDeadScream = this.sound.add("RSDeadScreamSound", {
+      volume: 1,
+    });
+    this.bodyFail = this.sound.add("bodyFail", {
+      volume: 1,
+    });
   }
 
   addRoads() {
@@ -199,7 +212,7 @@ export class GamePlay extends Phaser.Scene {
       });
     });
 
-    // new Road(this, roadJson.roadToGori[3]);
+    // new Road(this, roadJson.roadToGori[5]);
   }
 
   addFlowers() {
