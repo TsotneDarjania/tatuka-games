@@ -94,8 +94,8 @@ export class GameManager {
       },
       {
         carPositions: {
-          x: -134000,
-          y: 790,
+          x: -147000,
+          y: 300,
         },
       },
     ];
@@ -241,12 +241,20 @@ export class GameManager {
       },
       7: {
         enter: () => {
-          this.startTankmotion();
+          this.gamePlay.russianTank.canMotion = true;
           if (this.gamePlay.musicPlayer.specialSongs[3].isPlaying === false) {
             this.gamePlay.musicPlayer.stopAllSong();
           }
           this.gamePlay.musicPlayer.playSpecialSong(3);
           this.gameMenu.radioOff();
+        },
+        exit: () => {
+          this.emptyFunction();
+        },
+      },
+      8: {
+        enter: () => {
+          this.gamePlay.russianTank.canMotion = false;
         },
         exit: () => {
           this.emptyFunction();
@@ -265,10 +273,6 @@ export class GameManager {
         zoneCallBackFunctions[data.id].exit
       );
     });
-  }
-
-  startTankmotion() {
-    this.gamePlay.russianTank.startMotion();
   }
 
   showScreenText(index: number) {

@@ -1,8 +1,10 @@
 import { GameMenu } from "../ui/menu/gameMenu";
 
 export class Monet extends Phaser.GameObjects.Image {
-  gamePlayMenuScene!: Phaser.Scene;
+  gamePlayMenuScene!: GameMenu;
   value!: number;
+
+  isUsed: boolean = false;
 
   soundEffect!: Phaser.Sound.BaseSound;
 
@@ -57,16 +59,12 @@ export class Monet extends Phaser.GameObjects.Image {
     this.scene.matter.world.on("collisionstart", (event: any) => {
       event.pairs.forEach((pair: any) => {
         if (pair.bodyB === zone) {
-          this.soundEffect.play();
-          //@ts-ignore
-          this.gamePlayMenuScene.increaseMoney(this.value);
-
-          if (this.scene === undefined) return;
-          if (this.scene.matter === undefined) return;
-          if (this.scene.matter.world.remove(zone) === undefined) return;
-
-          this.scene.matter.world.remove(zone);
-          this.destroy(true);
+          if (this.isUsed === false) {
+            this.soundEffect.play();
+            this.gamePlayMenuScene.increaseMoney(this.value);
+            this.isUsed = true;
+          }
+          this.setVisible(false);
         }
       });
     });

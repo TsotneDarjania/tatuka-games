@@ -1,3 +1,4 @@
+import { colliderCategories } from "../helper/colliderCategories";
 import { GamePlay } from "../scenes/gamePlay";
 
 export class Bomb {
@@ -28,12 +29,11 @@ export class Bomb {
   addCollider() {
     const deadZone = this.scene.matter.add.circle(this.x, this.y, 22, {
       ignoreGravity: true,
-      collisionFilter: {
-        category: 0x0001,
-        mask: 0x0002,
-      },
       isSensor: true,
     });
+    deadZone.collisionFilter.category = colliderCategories[1];
+    deadZone.collisionFilter.mask =
+      colliderCategories[1] | colliderCategories[2];
 
     this.scene.matter.world.on("collisionstart", (event: any) => {
       event.pairs.forEach((pair: any) => {

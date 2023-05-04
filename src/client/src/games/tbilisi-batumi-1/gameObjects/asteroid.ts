@@ -1,6 +1,7 @@
 import Matter from "matter-js";
 import { GamePlay } from "../scenes/gamePlay";
 import { getRandomFloat } from "../helper/tatukaMath";
+import { colliderCategories } from "../helper/colliderCategories";
 
 export class Asteroid {
   scene!: GamePlay;
@@ -25,17 +26,17 @@ export class Asteroid {
       .sprite(this.x, this.y, "asteroid", undefined, {
         gravityScale: new Phaser.Math.Vector2(0, 0.025),
         isStatic: true,
-        collisionFilter: {
-          category: 0x0003,
-          mask: 0x0003,
-        },
         isSensor: true,
       } as Phaser.Types.Physics.Matter.MatterBodyConfig)
       .setDepth(-1);
     this.asteroid.play("asteroid_idle");
 
+    this.asteroid.setCollisionCategory(colliderCategories[1]);
+    this.asteroid.setCollidesWith(colliderCategories[2]);
+
     this.asteroid.setRectangle(35, 70, {
       isStatic: true,
+      isSensor: true,
     });
     this.asteroid.setOrigin(0.5, 0.72);
 

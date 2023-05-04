@@ -22,5 +22,13 @@
     "x": -70100,
     "y": 670,
     "text": ["Mtskheta is the city of God", "you are safe here"]
+  },
+  "5": {
+    "x": -149400,
+    "y": 620,
+    "text": [
+      "You need to reach that location",
+      " before the Russian tank arrives!"
+    ]
   }
 }

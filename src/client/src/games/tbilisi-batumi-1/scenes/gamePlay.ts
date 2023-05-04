@@ -212,7 +212,7 @@ export class GamePlay extends Phaser.Scene {
       });
     });
 
-    // new Road(this, roadJson.roadToGori[5]);
+    // new Road(this, roadJson.roadToGori[6]);
   }
 
   addFlowers() {

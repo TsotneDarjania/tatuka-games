@@ -347,6 +347,14 @@
       "tint": 7663600
     },
     {
+      "x": -4000,
+      "y": 680,
+      "key": "mountain-1",
+      "scrollFactor": 0.04,
+      "scale": 0.8,
+      "tint": 7663600
+    },
+    {
       "x": 0,
       "y": 740,
       "key": "hill",
@@ -381,6 +389,14 @@
     },
     {
       "x": 0,
+      "y": 1040,
+      "key": "meadow",
+      "scrollFactor": 0.04,
+      "scale": 0.8,
+      "tint": 7663600
+    },
+    {
+      "x": -4500,
       "y": 1040,
       "key": "meadow",
       "scrollFactor": 0.04,
