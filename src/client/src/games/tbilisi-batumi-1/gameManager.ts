@@ -23,6 +23,10 @@ const showScreenTexts: Record<number, { title: string; text: string }> = {
     title: "Mission Complete",
     text: "Road to Gori",
   },
+  3: {
+    title: "Rikoti Section",
+    text: "New Stage",
+  },
 };
 
 export class GameManager {
@@ -33,7 +37,7 @@ export class GameManager {
   canRadioChange: boolean = false;
 
   saveZonesData: Array<SaveZoneData> = [];
-  saveZoneIndex = 5;
+  saveZoneIndex = 6;
 
   backgroundImage!: Phaser.GameObjects.Image;
 
@@ -94,8 +98,8 @@ export class GameManager {
       },
       {
         carPositions: {
-          x: -147000,
-          y: 300,
+          x: -156600,
+          y: 1150,
         },
       },
     ];
@@ -260,6 +264,14 @@ export class GameManager {
           this.emptyFunction();
         },
       },
+      9: {
+        enter: () => {
+          this.showScreenText(3);
+        },
+        exit: () => {
+          this.emptyFunction();
+        },
+      },
     };
 
     Object.values(gameZonesData).forEach((data) => {
@@ -342,6 +354,14 @@ export class GameManager {
     this.asteroids.forEach((asteroid) => {
       asteroid.stopFalling();
     });
+  }
+
+  startTrainMotion() {
+    this.gamePlay.car.stopUpdateProcess = true;
+    this.gamePlay.car.carBody.setVelocity(0, 0);
+    this.gamePlay.car.carBody.applyForce(new Phaser.Math.Vector2(0, 0));
+
+    this.gameMenu.speedometerContainer.setVisible(false);
   }
 }
 

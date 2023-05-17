@@ -380,6 +380,14 @@
       "tint": 7663600
     },
     {
+      "x": -6140,
+      "y": 1030,
+      "key": "meadow",
+      "scrollFactor": 0.04,
+      "scale": 0.6,
+      "tint": 7663600
+    },
+    {
       "x": -3300,
       "y": 900,
       "key": "hill",
@@ -522,6 +530,70 @@
       "scrollFactor": 0.04,
       "scale": 0.24,
       "tint": 16777215
+    },
+    {
+      "x": -4840,
+      "y": 1190,
+      "key": "gori-castle",
+      "scrollFactor": 0.04,
+      "scale": 0.12,
+      "tint": 16777215
+    },
+    {
+      "x": -5120,
+      "y": 1310,
+      "key": "tbilisi-build-2",
+      "scrollFactor": 0.04,
+      "scale": 0.29,
+      "tint": 16777215
+    },
+    {
+      "x": -5290,
+      "y": 1400,
+      "key": "tbilisi-build-2",
+      "scrollFactor": 0.04,
+      "scale": 0.3,
+      "tint": 240243252
+    },
+    {
+      "x": -4420,
+      "y": 1300,
+      "key": "tbilisi-build-2",
+      "scrollFactor": 0.04,
+      "scale": 0.2,
+      "tint": 16777215
+    },
+    {
+      "x": -4790,
+      "y": 1370,
+      "key": "tbilisi-build-2",
+      "scrollFactor": 0.04,
+      "scale": 0.3,
+      "tint": 22417963
+    },
+    {
+      "x": -4990,
+      "y": 1410,
+      "key": "tbilisi-build-2",
+      "scrollFactor": 0.04,
+      "scale": 0.25,
+      "tint": 240243252
+    },
+    {
+      "x": -4590,
+      "y": 1390,
+      "key": "tbilisi-build-2",
+      "scrollFactor": 0.04,
+      "scale": 0.2,
+      "tint": 145147153
+    },
+    {
+      "x": -4290,
+      "y": 1480,
+      "key": "tbilisi-build-2",
+      "scrollFactor": 0.04,
+      "scale": 0.3,
+      "tint": 145147153
     }
   ]
 }

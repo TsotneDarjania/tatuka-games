@@ -68,7 +68,7 @@ export default class RussianTank {
           force = new Phaser.Math.Vector2(0, 0);
           this.tankBody.setVelocity(0, 0);
         }
-        if (this.tankBody.body.velocity.x > -7.2)
+        if (this.tankBody.body.velocity.x > -6.7)
           this.tankBody.applyForce(force);
       } else {
         this.tankBody.setVelocity(0, this.tankBody.body.velocity.y);

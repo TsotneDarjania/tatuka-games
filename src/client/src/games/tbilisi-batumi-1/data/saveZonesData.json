@@ -33,5 +33,12 @@
     "icon": "small-traparet",
     "text": ["Kaspi"],
     "index": 5
+  },
+  "6": {
+    "x": -154000,
+    "y": 1170,
+    "icon": "big-traparet",
+    "text": ["Gori"],
+    "index": 6
   }
 }

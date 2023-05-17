@@ -40,6 +40,8 @@ import {
 import { Bomb } from "../gameObjects/bomb";
 import RussianTank from "../gameObjects/russianTank";
 import { RussianSoldier } from "../gameObjects/russialSoldier";
+import { Rail } from "../gameObjects/rail";
+import { Train } from "../gameObjects/train";
 
 export class GamePlay extends Phaser.Scene {
   gameMenu!: GameMenu;
@@ -71,6 +73,7 @@ export class GamePlay extends Phaser.Scene {
   flowers: Array<Flower> = [];
   monets: Array<Monet> = [];
   mapInformationIcons: Array<MapInformationIcon> = [];
+  rails: Array<Rail> = [];
 
   buttonSound!: Phaser.Sound.BaseSound;
   applause!: Phaser.Sound.BaseSound;
@@ -118,6 +121,9 @@ export class GamePlay extends Phaser.Scene {
     this.addRoads();
     this.addFlowers();
 
+    new Train(this, -157890, 1108);
+    this.addRails();
+
     new BonFire(this, -58100, 1230, 900, 700);
     new BonFire(this, -60400, 1340, 900, 700);
     new BonFire(this, -63400, 1340, 900, 700);
@@ -140,6 +146,20 @@ export class GamePlay extends Phaser.Scene {
 
     //Start UI Scene for Menu UI Elements
     this.scene.launch("GameMenu");
+  }
+
+  addRails() {
+    let posX = 157040;
+    for (let i = 0; i < 100; i++) {
+      const rail = new Rail(this, -posX, 1304.5);
+      this.rails.push(rail);
+      posX += 754;
+    }
+
+    this.matter.add.rectangle(-257000, 1324.5, 200000, 40, {
+      isStatic: true,
+      slop: 0,
+    });
   }
 
   addAngels() {
