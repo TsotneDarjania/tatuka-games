@@ -380,6 +380,14 @@
       "tint": 7663600
     },
     {
+      "x": -7800,
+      "y": 960,
+      "key": "meadow",
+      "scrollFactor": 0.04,
+      "scale": 0.8,
+      "tint": 7663600
+    },
+    {
       "x": -6140,
       "y": 1030,
       "key": "meadow",
@@ -588,11 +596,67 @@
       "tint": 145147153
     },
     {
+      "x": -7740,
+      "y": 1310,
+      "key": "khashuri-build-2",
+      "scrollFactor": 0.04,
+      "scale": 0.2,
+      "tint": 16777215
+    },
+    {
       "x": -4290,
       "y": 1480,
       "key": "tbilisi-build-2",
       "scrollFactor": 0.04,
       "scale": 0.3,
+      "tint": 145147153
+    },
+    {
+      "x": -6870,
+      "y": 1110,
+      "key": "khashuri-traparet",
+      "scrollFactor": 0.04,
+      "scale": 0.7,
+      "tint": 16777215
+    },
+    {
+      "x": -7290,
+      "y": 1180,
+      "key": "khashuri-build-1",
+      "scrollFactor": 0.04,
+      "scale": 0.11,
+      "tint": 16777215
+    },
+    {
+      "x": -7340,
+      "y": 1340,
+      "key": "khashuri-build-1",
+      "scrollFactor": 0.04,
+      "scale": 0.12,
+      "tint": 16777215
+    },
+    {
+      "x": -6890,
+      "y": 1280,
+      "key": "khashuri-build-1",
+      "scrollFactor": 0.04,
+      "scale": 0.14,
+      "tint": 145147153
+    },
+    {
+      "x": -6740,
+      "y": 1400,
+      "key": "khashuri-build-1",
+      "scrollFactor": 0.04,
+      "scale": 0.12,
+      "tint": 16777215
+    },
+    {
+      "x": -7040,
+      "y": 1500,
+      "key": "khashuri-build-1",
+      "scrollFactor": 0.04,
+      "scale": 0.13,
       "tint": 145147153
     }
   ]

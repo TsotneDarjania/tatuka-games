@@ -31,6 +31,10 @@ export interface AngelsData {
   y: number;
   text: Array<string>;
 }
+export interface RussianSoldierData {
+  x: number;
+  y: number;
+}
 
 export interface Responsivedata {
   extraWidth: {

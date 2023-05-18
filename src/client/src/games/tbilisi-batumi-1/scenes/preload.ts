@@ -85,6 +85,7 @@ export class Preload extends Phaser.Scene {
 
     // Car
     this.load.svg("carBody", `car/body.svg`);
+
     this.load.svg("carTire", `car/tire.svg`);
     this.load.svg("carBag", `car/bag.svg`);
     this.load.svg("carBoy", `car/boy.svg`);
@@ -116,6 +117,12 @@ export class Preload extends Phaser.Scene {
 
     //Gori Buils
     this.load.image("gori-castle", "roadToGori/gori/gori-castle.png");
+    this.load.image("khashuri-build-1", "roadToGori/gori/khashuri-build-1.png");
+    this.load.image("khashuri-build-2", "roadToGori/gori/khashuri-build-2.png");
+    this.load.image(
+      "khashuri-traparet",
+      "roadToGori/gori/khashuri-traparet.png"
+    );
 
     //roadToGori
     this.load.image("meadow", "roadToGori/meadow.png");

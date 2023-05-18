@@ -16,6 +16,7 @@ import saveZonesData from "../data/saveZonesData.json";
 import starsData from "../data/starsData.json";
 import musicIconsData from "../data/musicIconsData.json";
 import angelsData from "../data/angelsData.json";
+import russianSoldiersData from "../data/russianSoldiers.json";
 
 import { GameMenu } from "../ui/menu/gameMenu";
 import { Angel } from "../gameObjects/angel";
@@ -34,6 +35,7 @@ import {
   AngelsData,
   BombsData,
   MusicIconsData,
+  RussianSoldierData,
   SaveZonesData,
   StarsData,
 } from "../config/interfaces";
@@ -42,12 +44,14 @@ import RussianTank from "../gameObjects/russianTank";
 import { RussianSoldier } from "../gameObjects/russialSoldier";
 import { Rail } from "../gameObjects/rail";
 import { Train } from "../gameObjects/train";
+import { OptimizationManager } from "../optimizationManager";
 
 export class GamePlay extends Phaser.Scene {
   gameMenu!: GameMenu;
 
   // GameObjects
   car!: Car;
+  train!: Train;
 
   // Camera
   camera_z_index: number = 1.3;
@@ -70,10 +74,14 @@ export class GamePlay extends Phaser.Scene {
   stopUpdateProcess = false;
 
   roads: Array<Road> = [];
+  stars: Array<Stars> = [];
+  bombs: Array<Bomb> = [];
   flowers: Array<Flower> = [];
   monets: Array<Monet> = [];
   mapInformationIcons: Array<MapInformationIcon> = [];
   rails: Array<Rail> = [];
+  angels: Array<Angel> = [];
+  russianSoldiers: Array<RussianSoldier> = [];
 
   buttonSound!: Phaser.Sound.BaseSound;
   applause!: Phaser.Sound.BaseSound;
@@ -96,9 +104,8 @@ export class GamePlay extends Phaser.Scene {
     this.musicPlayer = new MusicPlayer(this);
 
     new GovermentStation(this, -118680, 1120);
-    new RussianSoldier(this, -123080, 875);
-    new RussianSoldier(this, -126220, 954);
-    new RussianSoldier(this, -128720, 720);
+
+    this.addRussianSoldiers();
 
     this.russianTank = new RussianTank(this, -130700, 1100);
 
@@ -121,7 +128,7 @@ export class GamePlay extends Phaser.Scene {
     this.addRoads();
     this.addFlowers();
 
-    new Train(this, -157890, 1108);
+    this.train = new Train(this, -157890, 1108);
     this.addRails();
 
     new BonFire(this, -58100, 1230, 900, 700);
@@ -144,8 +151,16 @@ export class GamePlay extends Phaser.Scene {
 
     this.setCameraSettings();
 
+    new OptimizationManager(this, this.gameManager);
+
     //Start UI Scene for Menu UI Elements
     this.scene.launch("GameMenu");
+  }
+
+  addRussianSoldiers() {
+    Object.values(russianSoldiersData).forEach((data: RussianSoldierData) => {
+      this.russianSoldiers.push(new RussianSoldier(this, data.x, data.y));
+    });
   }
 
   addRails() {
@@ -164,7 +179,7 @@ export class GamePlay extends Phaser.Scene {
 
   addAngels() {
     Object.values(angelsData).forEach((data: AngelsData) => {
-      new Angel(this, data.x, data.y, data.text);
+      this.angels.push(new Angel(this, data.x, data.y, data.text));
     });
   }
 
@@ -176,13 +191,13 @@ export class GamePlay extends Phaser.Scene {
 
   addStars() {
     Object.values(starsData).forEach((data: StarsData) => {
-      new Stars(this, data.x, data.y, data.count);
+      this.stars.push(new Stars(this, data.x, data.y, data.count));
     });
   }
 
   addBombs() {
     Object.values(bombsData).forEach((data: BombsData) => {
-      new Bomb(this, data.x, data.y);
+      this.bombs.push(new Bomb(this, data.x, data.y));
     });
   }
 

@@ -3,6 +3,7 @@ import { GamePlay } from "../scenes/gamePlay";
 
 export class Bomb {
   bombImage!: Phaser.GameObjects.Image;
+  deadZone!: MatterJS.BodyType;
 
   constructor(public scene: GamePlay, public x: number, public y: number) {
     this.addImage();
@@ -27,17 +28,17 @@ export class Bomb {
   }
 
   addCollider() {
-    const deadZone = this.scene.matter.add.circle(this.x, this.y, 22, {
+    this.deadZone = this.scene.matter.add.circle(this.x, this.y, 22, {
       ignoreGravity: true,
       isSensor: true,
     });
-    deadZone.collisionFilter.category = colliderCategories[1];
-    deadZone.collisionFilter.mask =
+    this.deadZone.collisionFilter.category = colliderCategories[1];
+    this.deadZone.collisionFilter.mask =
       colliderCategories[1] | colliderCategories[2];
 
     this.scene.matter.world.on("collisionstart", (event: any) => {
       event.pairs.forEach((pair: any) => {
-        if (pair.bodyB === deadZone) {
+        if (pair.bodyB === this.deadZone) {
           const scene = this.scene as GamePlay;
           scene.car.playExplosionAnimation(true);
 

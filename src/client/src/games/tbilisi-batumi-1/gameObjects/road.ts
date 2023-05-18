@@ -12,6 +12,9 @@ export class Road extends Phaser.GameObjects.GameObject {
   x!: number;
   y!: number;
 
+  collider!: MatterJS.BodyType;
+  polygon!: Phaser.GameObjects.Polygon;
+
   constructor(scene: Phaser.Scene, roadData: object) {
     super(scene, "road");
 
@@ -39,7 +42,7 @@ export class Road extends Phaser.GameObjects.GameObject {
     // console.log(JSON.stringify(verts));
     // console.timeEnd("calculatingVerts");
 
-    let collider = this.scene.matter.add.fromVertices(
+    this.collider = this.scene.matter.add.fromVertices(
       this.x,
       this.y,
       this.roadData.path,
@@ -49,12 +52,12 @@ export class Road extends Phaser.GameObjects.GameObject {
       }
     );
 
-    collider.collisionFilter.category = colliderCategories[1];
+    this.collider.collisionFilter.category = colliderCategories[1];
 
-    const polygon = this.scene.add
+    this.polygon = this.scene.add
       .polygon(
-        this.x - collider.centerOffset.x,
-        this.y - collider.centerOffset.y + 4,
+        this.x - this.collider.centerOffset.x,
+        this.y - this.collider.centerOffset.y + 4,
         this.roadData.path,
         0x0a1024
       )

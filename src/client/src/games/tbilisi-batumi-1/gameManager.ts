@@ -37,7 +37,7 @@ export class GameManager {
   canRadioChange: boolean = false;
 
   saveZonesData: Array<SaveZoneData> = [];
-  saveZoneIndex = 6;
+  saveZoneIndex = 5;
 
   backgroundImage!: Phaser.GameObjects.Image;
 

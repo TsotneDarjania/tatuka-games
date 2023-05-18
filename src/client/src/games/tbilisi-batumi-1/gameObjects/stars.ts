@@ -1,6 +1,8 @@
 import { getRandomFloat } from "../helper/tatukaMath";
 
 export class Stars {
+  stars: Array<Phaser.GameObjects.Image> = [];
+
   constructor(
     public scene: Phaser.Scene,
     public x: number,
@@ -25,6 +27,8 @@ export class Stars {
         yoyo: true,
         repeat: -1,
       });
+
+      this.stars.push(star);
     }
   }
 }

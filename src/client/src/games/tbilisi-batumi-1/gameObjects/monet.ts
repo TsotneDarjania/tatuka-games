@@ -4,6 +4,8 @@ export class Monet extends Phaser.GameObjects.Image {
   gamePlayMenuScene!: GameMenu;
   value!: number;
 
+  zone!: MatterJS.BodyType;
+
   isUsed: boolean = false;
 
   soundEffect!: Phaser.Sound.BaseSound;
@@ -47,7 +49,7 @@ export class Monet extends Phaser.GameObjects.Image {
   }
 
   addZone() {
-    const zone = this.scene.matter.add.circle(this.x, this.y, 20, {
+    this.zone = this.scene.matter.add.circle(this.x, this.y, 20, {
       ignoreGravity: true,
       collisionFilter: {
         category: 0x0001,
@@ -58,7 +60,7 @@ export class Monet extends Phaser.GameObjects.Image {
 
     this.scene.matter.world.on("collisionstart", (event: any) => {
       event.pairs.forEach((pair: any) => {
-        if (pair.bodyB === zone) {
+        if (pair.bodyB === this.zone) {
           if (this.isUsed === false) {
             this.soundEffect.play();
             this.gamePlayMenuScene.increaseMoney(this.value);
