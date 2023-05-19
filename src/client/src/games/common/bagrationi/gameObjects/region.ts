@@ -37,7 +37,7 @@ export default class Region {
     }
 
     init(){
-        this.addRegionImage();
+       // this.addRegionImage();
         this.addColider();
         this.addEvents();
     }
@@ -55,15 +55,18 @@ export default class Region {
             this.data.mapImage.x,
             this.data.mapImage.y,
             this.data.collider.jsonData,
-            { isStatic: true }
+            { isStatic: true}
         );
+        
         //fit collider position to image
-        this.scene.matter.alignBody(
-            this.collider,
-            this.data.mapImage.x,
-            this.data.mapImage.y,
-            Phaser.Display.Align.CENTER
-        );
+        // this.scene.matter.alignBody(
+        //     this.collider,
+        //     this.data.mapImage.x,
+        //     this.data.mapImage.y,
+        //     Phaser.Display.Align.CENTER
+        // );
+        // create a graphics object
+
     }
 
     addEvents(){

@@ -57,7 +57,7 @@ export const regionsData = {
           color : 0xbd30ff
         },
         collider:{
-          jsonData : regionsCollidersData.Kakheti
+          jsonData : regionsCollidersData["Kvemo Kartli"]
         },
         data : {
           name : "kvemokartli",
