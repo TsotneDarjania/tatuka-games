@@ -68,6 +68,7 @@ export class GamePlay extends Phaser.Scene {
   menu!: GameMenu;
 
   gameManager!: GameManager;
+  optimizationManager!: OptimizationManager;
 
   musicPlayer!: MusicPlayer;
 
@@ -151,7 +152,7 @@ export class GamePlay extends Phaser.Scene {
 
     this.setCameraSettings();
 
-    new OptimizationManager(this, this.gameManager);
+    this.optimizationManager = new OptimizationManager(this, this.gameManager);
 
     //Start UI Scene for Menu UI Elements
     this.scene.launch("GameMenu");

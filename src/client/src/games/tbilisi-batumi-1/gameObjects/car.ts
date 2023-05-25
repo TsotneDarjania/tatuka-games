@@ -175,8 +175,8 @@ export class Car {
   }
 
   addController() {
-    let accelerationRate = 0.004;
-    let maxSpeed = 25;
+    let accelerationRate = 0.005;
+    let maxSpeed = 30;
 
     this.scene.input.keyboard.on("keydown-LEFT", () => {
       this.isAcceleratingLeft = true;

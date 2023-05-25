@@ -37,7 +37,7 @@ export class GameManager {
   canRadioChange: boolean = false;
 
   saveZonesData: Array<SaveZoneData> = [];
-  saveZoneIndex = 5;
+  saveZoneIndex = 6;
 
   backgroundImage!: Phaser.GameObjects.Image;
 
@@ -339,6 +339,7 @@ export class GameManager {
   startFallingRocks() {
     if (this.isSkyRocksAlreadyFalling) return;
     this.skyRocks.forEach((rock) => {
+      console.log("skyrokks");
       rock.rockImage.setStatic(false);
     });
     this.isSkyRocksAlreadyFalling = true;

@@ -60,6 +60,7 @@ export class SaveZone {
             return;
 
           //Save Data
+          this.scene.optimizationManager.checkGameZone(this.saveZoneIndex);
           this.scene.applause.play();
           this.scene.gameManager.saveGame(this.saveZoneIndex);
           this.scene.gameMenu.showScreenTexts(

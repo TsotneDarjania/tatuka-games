@@ -29,7 +29,7 @@ export const TbilisiBatumi = () => {
         matter: {
           debug: false,
           gravity: {
-            y: 0.27,
+            y: 0.3,
           },
         },
       },
